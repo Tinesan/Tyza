@@ -1,6 +1,6 @@
 import React from "react";
 import styled, { css } from "styled-components";
-import { colors } from "../../ui/colors";
+import { colors } from "ui/colors";
 
 type Props = {
   text: string;
@@ -36,6 +36,10 @@ const StyledButton = styled.button<{ color: ButtonColor; size: ButtonSize }>`
   transition-duration: 0.3s;
   color: ${colors.coffee};
 
+  &:focus {
+    outline: none;
+  }
+
   ${({ color }) => {
     switch (color) {
       case ButtonColor.TRANSPARENT:
@@ -47,6 +51,10 @@ const StyledButton = styled.button<{ color: ButtonColor; size: ButtonSize }>`
             background-color: ${colors.white};
             text-shadow: 0 0 0.65px ${colors.coffee},
               0 0 0.65px ${colors.coffee};
+          }
+
+          &:active {
+            box-shadow: 0 0 8px 1px ${colors.white};
           }
         `;
       case ButtonColor.WHITE:
@@ -79,6 +87,10 @@ const StyledButton = styled.button<{ color: ButtonColor; size: ButtonSize }>`
             &:after {
               opacity: 1;
             }
+          }
+
+          &:active {
+            box-shadow: 0 0 4px 0px #c1b3a8;
           }
         `;
       default:
@@ -119,7 +131,3 @@ const Button = ({ color, size, text, className, onClick }: Props) => {
 };
 
 export default Button;
-
-const categories = [{ id: "1" }, { id: "2" }];
-
-const products = [{ catId: "1" }, { catId: "2" }];
