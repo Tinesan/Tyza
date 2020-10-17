@@ -8,7 +8,6 @@ import LineWithCircleLT from "images/icons/lineWithCircleLT.svg";
 import LineWithCircleRT from "images/icons/lineWithCircleRT.svg";
 import LineWithCircleLB from "images/icons/lineWithCircleLB.svg";
 import LineWithCircleRB from "images/icons/lineWithCircleRB.svg";
-import { url } from "inspector";
 
 const ProductAdvantagesWrapper = styled.section`
   padding-bottom: 80px;

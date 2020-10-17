@@ -1,10 +1,10 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import AdminPage from "./pages/AdminPage";
-import HomePage from "./pages/HomePage";
+
 import "bootstrap/dist/css/bootstrap.min.css";
 import { ApolloProvider, ApolloClient, InMemoryCache } from "@apollo/client";
 import DataProvider from "./providers/DataProvider";
+import Routes from "./routes";
+import AuthContext from "providers/AuthProvider";
 
 const client = new ApolloClient({
   uri: "http://localhost:5003/graphql/",
@@ -14,14 +14,11 @@ const client = new ApolloClient({
 function App() {
   return (
     <ApolloProvider client={client}>
-      <DataProvider>
-        <Router>
-          <Switch>
-            <Route component={HomePage} exact path="/"></Route>
-            <Route path="/admin" exact component={AdminPage}></Route>
-          </Switch>
-        </Router>
-      </DataProvider>
+      <AuthContext>
+        <DataProvider>
+          <Routes />
+        </DataProvider>
+      </AuthContext>
     </ApolloProvider>
   );
 }

@@ -85,8 +85,8 @@ const Advantages = () => {
           {ADVANTAGES.map((advantage, inx) => {
             const key: string = inx + advantage.title;
             return (
-              <Col>
-                <Advantage key={key} {...advantage} />
+              <Col key={key}>
+                <Advantage {...advantage} />
               </Col>
             );
           })}
