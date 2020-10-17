@@ -12,6 +12,7 @@ const ColdProductionWrapper = styled.section`
 const ColdProductionBg = styled.div`
   height: 220px;
   background: url(${ColdProd}) no-repeat;
+  background-size: contain;
 `;
 
 const CurveLineBg = styled.div`

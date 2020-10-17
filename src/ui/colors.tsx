@@ -5,12 +5,16 @@ export const colors: { [key in COLORS]: string } = {
   white: "#fff",
   wafer: "#DECCC0",
   thatch: "#B9A698",
+  dawnPink: "#F0E9E3",
+  black: "#000000",
 };
 
 type COLORS =
   | "silk"
-  | "seashellPeach"
-  | "coffee"
+  | "black"
   | "white"
   | "wafer"
-  | "thatch";
+  | "coffee"
+  | "thatch"
+  | "dawnPink"
+  | "seashellPeach";
