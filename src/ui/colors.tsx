@@ -7,9 +7,11 @@ export const colors: { [key in COLORS]: string } = {
   thatch: "#B9A698",
   dawnPink: "#F0E9E3",
   black: "#000000",
+  gray: "#808080",
 };
 
 type COLORS =
+  | "gray"
   | "silk"
   | "black"
   | "white"

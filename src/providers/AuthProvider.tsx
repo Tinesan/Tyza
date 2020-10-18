@@ -13,7 +13,7 @@ export const AuthContext = React.createContext<{
 });
 
 const AuthProvider = ({ children }: Props) => {
-  const [isAuth, setIsAuth] = useState<boolean>(false);
+  const [isAuth, setIsAuth] = useState<boolean>(true);
   return (
     <AuthContext.Provider
       value={{

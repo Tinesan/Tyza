@@ -14,184 +14,212 @@ export type Scalars = {
   Upload: any;
 };
 
-export type BeefFeedDto = {
-  __typename?: 'BeefFeedDTO';
-  id?: Maybe<Scalars['String']>;
+
+export type CategoryDto = {
+  __typename?: 'CategoryDTO';
+  id: Scalars['String'];
   name: Scalars['String'];
-  price: Scalars['BigDecimal'];
-  images?: Maybe<Array<Maybe<FeedImageDto>>>;
+  description?: Maybe<Scalars['String']>;
 };
 
-export type BeefFeedInputDto = {
+export type CategoryInputDto = {
   id?: Maybe<Scalars['String']>;
   name: Scalars['String'];
-  price: Scalars['BigDecimal'];
+  description?: Maybe<Scalars['String']>;
 };
-
 
 export type DeletePayload = {
   __typename?: 'DeletePayload';
   status: Scalars['Int'];
 };
 
-export type FeedImageDto = {
-  __typename?: 'FeedImageDTO';
-  id?: Maybe<Scalars['String']>;
-  name?: Maybe<Scalars['String']>;
-  main?: Maybe<Scalars['Boolean']>;
-  image?: Maybe<Scalars['String']>;
-  feedId?: Maybe<Scalars['String']>;
-};
-
 export type Mutation = {
   __typename?: 'Mutation';
-  /** beefFeed */
-  saveNewBeefFeed?: Maybe<BeefFeedDto>;
-  updateBeefFeed?: Maybe<BeefFeedDto>;
-  deleteBeefFeed: DeletePayload;
-  /** readyMadeFeed */
-  saveNewReadyMadeFeed?: Maybe<ReadyMadeFeedDto>;
-  updateReadyMadeFeed?: Maybe<ReadyMadeFeedDto>;
-  deleteReadyMadeFeed: DeletePayload;
-  /** feedImage */
-  updateFeedImageById?: Maybe<FeedImageDto>;
+  /** product */
+  saveNewProduct?: Maybe<ProductDto>;
+  updateProduct?: Maybe<ProductDto>;
+  deleteProduct: DeletePayload;
+  /** productImage */
+  updateProductImageById?: Maybe<ProductImageDto>;
+  /** category */
+  saveNewCategory: CategoryDto;
+  updateCategory: CategoryDto;
+  deleteCategory: DeletePayload;
 };
 
 
-export type MutationSaveNewBeefFeedArgs = {
-  beefFeedInputDTO: BeefFeedInputDto;
+export type MutationSaveNewProductArgs = {
+  productInputDTO: ProductInputDto;
 };
 
 
-export type MutationUpdateBeefFeedArgs = {
-  beefFeedId: Scalars['String'];
-  beefFeedInputDTO: BeefFeedInputDto;
+export type MutationUpdateProductArgs = {
+  productId: Scalars['String'];
+  productInputDTO: ProductInputDto;
 };
 
 
-export type MutationDeleteBeefFeedArgs = {
-  beefFeedId: Scalars['String'];
+export type MutationDeleteProductArgs = {
+  productId: Scalars['String'];
 };
 
 
-export type MutationSaveNewReadyMadeFeedArgs = {
-  readyMadeFeedInputDTO: ReadyMadeFeedInputDto;
-};
-
-
-export type MutationUpdateReadyMadeFeedArgs = {
-  readyMadeFeedId: Scalars['String'];
-  readyMadeFeedInputDTO: ReadyMadeFeedInputDto;
-};
-
-
-export type MutationDeleteReadyMadeFeedArgs = {
-  readyMadeFeedId: Scalars['String'];
-};
-
-
-export type MutationUpdateFeedImageByIdArgs = {
+export type MutationUpdateProductImageByIdArgs = {
   avatar?: Maybe<Array<Scalars['Upload']>>;
+};
+
+
+export type MutationSaveNewCategoryArgs = {
+  categoryInputDTO: CategoryInputDto;
+};
+
+
+export type MutationUpdateCategoryArgs = {
+  categoryId: Scalars['String'];
+  categoryInputDTO: CategoryInputDto;
+};
+
+
+export type MutationDeleteCategoryArgs = {
+  categoryId: Scalars['String'];
+};
+
+export type ProductDto = {
+  __typename?: 'ProductDTO';
+  id: Scalars['String'];
+  name: Scalars['String'];
+  price: Scalars['BigDecimal'];
+  description?: Maybe<Scalars['String']>;
+  stock: Scalars['Boolean'];
+  categoryId: Scalars['String'];
+  images: Array<ProductImageDto>;
+};
+
+export type ProductImageDto = {
+  __typename?: 'ProductImageDTO';
+  id: Scalars['String'];
+  name: Scalars['String'];
+  main: Scalars['Boolean'];
+  image?: Maybe<Scalars['String']>;
+  productId: Scalars['String'];
+};
+
+export type ProductInputDto = {
+  name: Scalars['String'];
+  price: Scalars['BigDecimal'];
+  description?: Maybe<Scalars['String']>;
+  stock: Scalars['Boolean'];
+  categoryId: Scalars['String'];
 };
 
 export type Query = {
   __typename?: 'Query';
-  /** beefFeed */
-  listBeefFeed: Array<BeefFeedDto>;
-  beefFeedById?: Maybe<BeefFeedDto>;
-  /** readyMadeFeed */
-  listReadyMadeFeed?: Maybe<Array<Maybe<ReadyMadeFeedDto>>>;
-  readyMadeFeedById?: Maybe<ReadyMadeFeedDto>;
+  /** product */
+  listProduct: Array<ProductDto>;
+  productById?: Maybe<ProductDto>;
+  /** category */
+  listCategory: Array<CategoryDto>;
+  categoryById: CategoryDto;
 };
 
 
-export type QueryBeefFeedByIdArgs = {
-  beefFeedId?: Maybe<Scalars['String']>;
+export type QueryProductByIdArgs = {
+  productId?: Maybe<Scalars['String']>;
 };
 
 
-export type QueryReadyMadeFeedByIdArgs = {
-  readyMadeFeedId?: Maybe<Scalars['String']>;
-};
-
-/**
- * input BeefFeedInputDTO {
- *     id: String
- *     name: String!
- *     price: BigDecimal!
- * }
- */
-export type ReadyMadeFeedDto = {
-  __typename?: 'ReadyMadeFeedDTO';
-  id?: Maybe<Scalars['String']>;
-  name: Scalars['String'];
-  price: Scalars['BigDecimal'];
-  composition?: Maybe<Scalars['String']>;
-  images?: Maybe<Array<Maybe<FeedImageDto>>>;
-};
-
-export type ReadyMadeFeedInputDto = {
-  id?: Maybe<Scalars['String']>;
-  name: Scalars['String'];
-  price: Scalars['BigDecimal'];
-  composition?: Maybe<Scalars['String']>;
+export type QueryCategoryByIdArgs = {
+  categoryId: Scalars['String'];
 };
 
 
-export type ProductsQueryVariables = Exact<{ [key: string]: never; }>;
+export type CategoriesQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type ProductsQuery = (
+export type CategoriesQuery = (
   { __typename?: 'Query' }
-  & { listBeefFeed: Array<(
-    { __typename?: 'BeefFeedDTO' }
-    & Pick<BeefFeedDto, 'id' | 'name' | 'price'>
-    & { images?: Maybe<Array<Maybe<(
-      { __typename?: 'FeedImageDTO' }
-      & Pick<FeedImageDto, 'id' | 'name' | 'main' | 'image' | 'feedId'>
-    )>>> }
+  & { listCategory: Array<(
+    { __typename?: 'CategoryDTO' }
+    & Pick<CategoryDto, 'id' | 'name'>
   )> }
 );
 
+export type AddNewCategoryMutationVariables = Exact<{
+  name: Scalars['String'];
+}>;
 
-export const ProductsDocument = gql`
-    query Products {
-  listBeefFeed {
+
+export type AddNewCategoryMutation = (
+  { __typename?: 'Mutation' }
+  & { saveNewCategory: (
+    { __typename?: 'CategoryDTO' }
+    & Pick<CategoryDto, 'id'>
+  ) }
+);
+
+
+export const CategoriesDocument = gql`
+    query Categories {
+  listCategory {
     id
     name
-    price
-    images {
-      id
-      name
-      main
-      image
-      feedId
-    }
   }
 }
     `;
 
 /**
- * __useProductsQuery__
+ * __useCategoriesQuery__
  *
- * To run a query within a React component, call `useProductsQuery` and pass it any options that fit your needs.
- * When your component renders, `useProductsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * To run a query within a React component, call `useCategoriesQuery` and pass it any options that fit your needs.
+ * When your component renders, `useCategoriesQuery` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
- * const { data, loading, error } = useProductsQuery({
+ * const { data, loading, error } = useCategoriesQuery({
  *   variables: {
  *   },
  * });
  */
-export function useProductsQuery(baseOptions?: Apollo.QueryHookOptions<ProductsQuery, ProductsQueryVariables>) {
-        return Apollo.useQuery<ProductsQuery, ProductsQueryVariables>(ProductsDocument, baseOptions);
+export function useCategoriesQuery(baseOptions?: Apollo.QueryHookOptions<CategoriesQuery, CategoriesQueryVariables>) {
+        return Apollo.useQuery<CategoriesQuery, CategoriesQueryVariables>(CategoriesDocument, baseOptions);
       }
-export function useProductsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<ProductsQuery, ProductsQueryVariables>) {
-          return Apollo.useLazyQuery<ProductsQuery, ProductsQueryVariables>(ProductsDocument, baseOptions);
+export function useCategoriesLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<CategoriesQuery, CategoriesQueryVariables>) {
+          return Apollo.useLazyQuery<CategoriesQuery, CategoriesQueryVariables>(CategoriesDocument, baseOptions);
         }
-export type ProductsQueryHookResult = ReturnType<typeof useProductsQuery>;
-export type ProductsLazyQueryHookResult = ReturnType<typeof useProductsLazyQuery>;
-export type ProductsQueryResult = Apollo.QueryResult<ProductsQuery, ProductsQueryVariables>;
+export type CategoriesQueryHookResult = ReturnType<typeof useCategoriesQuery>;
+export type CategoriesLazyQueryHookResult = ReturnType<typeof useCategoriesLazyQuery>;
+export type CategoriesQueryResult = Apollo.QueryResult<CategoriesQuery, CategoriesQueryVariables>;
+export const AddNewCategoryDocument = gql`
+    mutation addNewCategory($name: String!) {
+  saveNewCategory(categoryInputDTO: {name: $name}) {
+    id
+  }
+}
+    `;
+export type AddNewCategoryMutationFn = Apollo.MutationFunction<AddNewCategoryMutation, AddNewCategoryMutationVariables>;
+
+/**
+ * __useAddNewCategoryMutation__
+ *
+ * To run a mutation, you first call `useAddNewCategoryMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useAddNewCategoryMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [addNewCategoryMutation, { data, loading, error }] = useAddNewCategoryMutation({
+ *   variables: {
+ *      name: // value for 'name'
+ *   },
+ * });
+ */
+export function useAddNewCategoryMutation(baseOptions?: Apollo.MutationHookOptions<AddNewCategoryMutation, AddNewCategoryMutationVariables>) {
+        return Apollo.useMutation<AddNewCategoryMutation, AddNewCategoryMutationVariables>(AddNewCategoryDocument, baseOptions);
+      }
+export type AddNewCategoryMutationHookResult = ReturnType<typeof useAddNewCategoryMutation>;
+export type AddNewCategoryMutationResult = Apollo.MutationResult<AddNewCategoryMutation>;
+export type AddNewCategoryMutationOptions = Apollo.BaseMutationOptions<AddNewCategoryMutation, AddNewCategoryMutationVariables>;
