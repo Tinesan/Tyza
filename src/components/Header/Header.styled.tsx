@@ -1,8 +1,8 @@
-import styled from "styled-components";
 import { ListGroup } from "react-bootstrap";
-import Dog from "images/dog.png";
-import Cat from "images/cat.png";
+import styled from "styled-components";
 
+import Cat from "images/cat.png";
+import Dog from "images/dog.png";
 import { colors } from "ui/colors";
 
 const { Item } = ListGroup;

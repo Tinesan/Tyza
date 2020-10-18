@@ -1,8 +1,9 @@
 import React from "react";
 import { Button, Card, Col, Container, Row } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
-import Categories from "../../images/categories.png";
 import styled from "styled-components";
+
+import Categories from "../../images/categories.png";
 
 const AdminPageWrapper = styled.section`
   padding-top: 40px;

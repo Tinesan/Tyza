@@ -1,9 +1,11 @@
 import React, { useContext } from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import LoginPage from "../pages/LoginPage";
-import HomePage from "../pages/HomePage";
-import PrivateRoute from "./PrivateRoute";
+import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
+
 import { AuthContext } from "providers/AuthProvider";
+
+import HomePage from "../pages/HomePage";
+import LoginPage from "../pages/LoginPage";
+import PrivateRoute from "./PrivateRoute";
 
 const AllRoutes = () => {
   const { isAuth } = useContext(AuthContext);

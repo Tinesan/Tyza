@@ -1,7 +1,8 @@
+import React from "react";
+import { Route, RouteComponentProps, Switch } from "react-router-dom";
+
 import AdminPage from "pages/AdminPage";
 import ProductsPage from "pages/Products";
-import React from "react";
-import { Route, Switch, RouteComponentProps } from "react-router-dom";
 
 const PrivateRoutes = (props: RouteComponentProps<any>) => {
   console.log("props", props);

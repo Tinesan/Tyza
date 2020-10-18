@@ -1,7 +1,8 @@
-import { AuthContext } from "providers/AuthProvider";
 import React, { useCallback, useContext, useEffect, useState } from "react";
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
+
+import { AuthContext } from "providers/AuthProvider";
 
 const LoginPage = () => {
   const { setIsAuth } = useContext(AuthContext);

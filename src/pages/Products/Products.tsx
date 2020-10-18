@@ -1,7 +1,8 @@
-import Categories from "components/Categories";
 import React, { useState } from "react";
 import { Col, Container, Row, Tab, Tabs } from "react-bootstrap";
 import styled from "styled-components";
+
+import Categories from "components/Categories";
 
 const ProductsPageWrapper = styled.section`
   padding-top: 40px;

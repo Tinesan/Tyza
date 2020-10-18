@@ -1,8 +1,10 @@
 import React from "react";
 import { Col, Container, ListGroup, Row } from "react-bootstrap";
-import * as Styled from "./Header.styled";
+
 import Logo from "images/icons/logo.svg";
-import Button, { ButtonSize, ButtonColor } from "../Button";
+
+import Button, { ButtonColor, ButtonSize } from "../Button";
+import * as Styled from "./Header.styled";
 
 const Header = () => {
   return (

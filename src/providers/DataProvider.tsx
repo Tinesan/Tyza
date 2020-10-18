@@ -1,5 +1,6 @@
-import { BeefFeedDto, useProductsQuery } from "generated/graphql";
 import React, { ReactNode } from "react";
+
+import { BeefFeedDto, useProductsQuery } from "generated/graphql";
 
 type Props = {
   children: ReactNode;
