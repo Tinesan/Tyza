@@ -21,9 +21,10 @@
     "react-dom": "^16.13.1",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.3",
+    "react-scroll": "^1.8.1",
+    "react-yandex-maps": "^4.4.0",
     "styled-components": "^5.2.0",
-    "typescript": "3.8",
-    "react-scroll": "^1.8.1"
+    "typescript": "3.8"
   },
   "scripts": {
     "start": "react-scripts start",

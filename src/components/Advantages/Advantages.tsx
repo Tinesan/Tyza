@@ -60,9 +60,7 @@ export const H2 = styled.h2`
   font-weight: 700;
 `;
 
-export const AdvantagesWrapper = styled.section`
-  padding: 80px 0 100px 0;
-`;
+export const AdvantagesWrapper = styled.section``;
 
 export const TitleWrapper = styled.div`
   margin-bottom: 40px;

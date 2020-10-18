@@ -5,9 +5,7 @@ import styled from "styled-components";
 import ColdProd from "images/coldProd.png";
 import CurveLine from "images/icons/curveLine.svg";
 
-const ColdProductionWrapper = styled.section`
-  margin-top: 100px;
-`;
+const ColdProductionWrapper = styled.section``;
 
 const ColdProductionBg = styled.div`
   height: 220px;
@@ -23,7 +21,6 @@ const CurveLineBg = styled.div`
 
 const CurveLineBgWrapper = styled.div`
   margin-top: 70px;
-  margin-bottom: 100px;
 `;
 
 const ColdProduction = () => {
