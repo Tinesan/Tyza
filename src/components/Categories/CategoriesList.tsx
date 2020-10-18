@@ -7,9 +7,10 @@ type Props = {
     name: string;
   }[];
   onEdit: (id: ID) => void;
+  onDelete: (id: ID) => void;
 };
 
-const CategoriesList = ({ categories, onEdit }: Props) => {
+const CategoriesList = ({ categories, onEdit, onDelete }: Props) => {
   return (
     <ListGroup>
       {categories.map(({ id, name }) => {
@@ -24,7 +25,9 @@ const CategoriesList = ({ categories, onEdit }: Props) => {
                   </Button>
                 </div>
                 <div>
-                  <Button variant="danger">Удалить</Button>
+                  <Button variant="danger" onClick={() => onDelete(id)}>
+                    Удалить
+                  </Button>
                 </div>
               </Col>
             </Row>

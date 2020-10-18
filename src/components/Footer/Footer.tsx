@@ -5,7 +5,6 @@ import styled from "styled-components";
 import Logo from "images/icons/logo.svg";
 import { H3 } from "ui/Title";
 import { colors } from "ui/colors";
-import Button from "components/Button";
 
 const FooterWrapper = styled.section``;
 
