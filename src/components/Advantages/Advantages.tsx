@@ -1,12 +1,15 @@
 import React, { ReactNode } from "react";
 import { Col, Container, Row } from "react-bootstrap";
+import styled from "styled-components";
+
 import Box from "images/icons/box.svg";
 import Truck from "images/icons/delivery-truck.svg";
 import Like from "images/icons/like.svg";
 import Store from "images/icons/store.svg";
-import Advantage from "./Advantage";
-import styled from "styled-components";
 import { colors } from "ui/colors";
+import { H2 } from "ui/Title";
+
+import Advantage from "./Advantage";
 
 const UnderlinedText = styled.p`
   margin-bottom: 0;
@@ -54,11 +57,6 @@ const ADVANTAGES: {
     description: StoreDescription,
   },
 ];
-
-export const H2 = styled.h2`
-  font-size: 50px;
-  font-weight: 700;
-`;
 
 export const AdvantagesWrapper = styled.section``;
 

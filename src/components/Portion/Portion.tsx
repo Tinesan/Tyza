@@ -1,9 +1,9 @@
 import React from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import styled from "styled-components";
-import { H2 } from "components/Advantages/Advantages";
 import { colors } from "ui/colors";
 import DogOnFoot from "images/dogOnFoot.png";
+import { H2 } from "ui/Title";
 
 const PortionWrapper = styled.section`
   position: relative;

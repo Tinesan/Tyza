@@ -1,8 +1,9 @@
 import React from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import styled from "styled-components";
-import { colors } from "ui/colors";
+
 import CooperationIcon from "images/icons/cooperation.svg";
+import { colors } from "ui/colors";
 
 const CooperationWrapper = styled.section`
   background-color: ${colors.silk};

@@ -1,13 +1,14 @@
-import { H2 } from "components/Advantages/Advantages";
 import React from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import styled from "styled-components";
-import { colors } from "ui/colors";
-import ProductAdvantageBg from "images/productAdvantageBg.png";
-import LineWithCircleLT from "images/icons/lineWithCircleLT.svg";
-import LineWithCircleRT from "images/icons/lineWithCircleRT.svg";
+
 import LineWithCircleLB from "images/icons/lineWithCircleLB.svg";
+import LineWithCircleLT from "images/icons/lineWithCircleLT.svg";
 import LineWithCircleRB from "images/icons/lineWithCircleRB.svg";
+import LineWithCircleRT from "images/icons/lineWithCircleRT.svg";
+import ProductAdvantageBg from "images/productAdvantageBg.png";
+import { colors } from "ui/colors";
+import { H2 } from "ui/Title";
 
 const ProductAdvantagesWrapper = styled.section`
   padding-bottom: 80px;

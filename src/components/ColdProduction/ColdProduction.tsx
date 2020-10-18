@@ -1,9 +1,10 @@
-import { H2 } from "components/Advantages/Advantages";
 import React from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import styled from "styled-components";
+
 import ColdProd from "images/coldProd.png";
 import CurveLine from "images/icons/curveLine.svg";
+import { H2 } from "ui/Title";
 
 const ColdProductionWrapper = styled.section``;
 

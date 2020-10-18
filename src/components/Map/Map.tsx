@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { YMaps, Map as YMap } from "react-yandex-maps";
 import { Col, Container, Row } from "react-bootstrap";
-import { H2 } from "components/Advantages/Advantages";
+import { H2 } from "ui/Title";
 
 const MapWrapper = styled.section``;
 

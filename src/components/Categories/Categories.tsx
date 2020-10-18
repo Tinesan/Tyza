@@ -1,6 +1,8 @@
-import Modal from "components/Modal";
 import React, { useState } from "react";
 import { Button, Col, Row } from "react-bootstrap";
+
+import Modal from "components/Modal";
+
 import CategoryModal, { CategoryModalData } from "./CategoryModal";
 
 type Props = {};

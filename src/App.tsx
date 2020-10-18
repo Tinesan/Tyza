@@ -1,10 +1,12 @@
+import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
 import React from "react";
 
-import "bootstrap/dist/css/bootstrap.min.css";
-import { ApolloProvider, ApolloClient, InMemoryCache } from "@apollo/client";
+import AuthContext from "providers/AuthProvider";
+
 import DataProvider from "./providers/DataProvider";
 import Routes from "./routes";
-import AuthContext from "providers/AuthProvider";
+
+import "bootstrap/dist/css/bootstrap.min.css";
 
 const client = new ApolloClient({
   uri: "http://localhost:5003/graphql/",

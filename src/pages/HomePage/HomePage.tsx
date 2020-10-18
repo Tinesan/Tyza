@@ -1,12 +1,13 @@
 import React from "react";
 import Map from "components/Map";
+import Footer from "components/Footer";
 import Header from "components/Header";
+import Divider from "components/Divider";
 import Portion from "components/Portion";
 import Advantages from "components/Advantages";
 import Cooperation from "components/Сooperation";
 import ColdProduction from "components/ColdProduction";
 import ProductAdvantages from "components/ProductAdvantages";
-import Divider from "components/Divider";
 
 const HomePage = () => {
   return (
@@ -23,6 +24,9 @@ const HomePage = () => {
       <Cooperation />
       <Divider size={80} />
       <Map />
+      <Divider size={50} />
+      <Footer />
+      <Divider size={25} />
     </div>
   );
 };

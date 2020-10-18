@@ -1,7 +1,5 @@
 import React, { useState } from "react";
-import { Form } from "react-bootstrap";
-import { Col } from "react-bootstrap";
-import { Row } from "react-bootstrap";
+import { Col, Form, Row } from "react-bootstrap";
 
 type Props = {
   id: ID;
