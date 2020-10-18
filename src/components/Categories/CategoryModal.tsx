@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useCategoryQuery } from "generated/graphql";
 import { Col, Form, Row } from "react-bootstrap";
 
 type Props = {
-  id: ID;
+  id?: ID;
   children: (value: {
     form: JSX.Element;
     isSaveButtonDisabled: boolean;
@@ -11,12 +12,23 @@ type Props = {
 };
 
 export type CategoryModalData = {
-  id: ID;
+  id?: ID;
   categoryName: string;
 };
 
 const CategoryModal = ({ id, children }: Props) => {
   const [categoryName, setCategoryName] = useState<string>("");
+  const { data } = useCategoryQuery({
+    skip: !id,
+    variables: { id: id as string },
+  });
+
+  useEffect(() => {
+    if (data?.categoryById.name) {
+      setCategoryName(data.categoryById.name);
+    }
+  }, [data]);
+
   const form = (
     <Row className="justify-content-center">
       <Col>

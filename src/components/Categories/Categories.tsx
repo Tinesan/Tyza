@@ -1,35 +1,50 @@
 import React, { useState } from "react";
-import { Button, Col, ListGroup, Row, Spinner } from "react-bootstrap";
+import { Button, Col, Row, Spinner } from "react-bootstrap";
 
 import Modal from "components/Modal";
 
 import CategoryModal, { CategoryModalData } from "./CategoryModal";
 import {
-  useAddNewCategoryMutation,
   useCategoriesQuery,
+  useAddNewCategoryMutation,
+  useUpdateCategoryMutation,
 } from "generated/graphql";
 import CategoriesList from "./CategoriesList";
 
 type Props = {};
 
+type EditableCategotyId = string | null | undefined;
+
 const Categories = () => {
   const { data, refetch } = useCategoriesQuery();
-  const [addNewCategoryMutation] = useAddNewCategoryMutation();
-  const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
+  const [addNewCategory] = useAddNewCategoryMutation();
+  const [updateCategory] = useUpdateCategoryMutation();
+  const [editableCategotyId, setEditableCategotyId] = useState<
+    EditableCategotyId
+  >(null);
 
   const onModalSave = async (data: CategoryModalData) => {
-    await addNewCategoryMutation({
-      variables: { name: data.categoryName },
-    });
+    const { id, categoryName: name } = data;
+    if (id) {
+      await updateCategory({ variables: { id, name } });
+    } else {
+      await addNewCategory({
+        variables: { name },
+      });
+    }
     await refetch();
-    setIsModalVisible(false);
+    setEditableCategotyId(null);
+  };
+
+  const onCategoryEditButtonClick = (id: ID) => {
+    setEditableCategotyId(id);
   };
 
   return (
     <>
       <Row className="mt-3">
         <Col>
-          <Button onClick={() => setIsModalVisible(true)}>
+          <Button onClick={() => setEditableCategotyId(undefined)}>
             Добавить категорию
           </Button>
         </Col>
@@ -37,21 +52,28 @@ const Categories = () => {
       <Row className="mt-3">
         <Col>
           {data?.listCategory ? (
-            <CategoriesList categories={data?.listCategory} />
+            <CategoriesList
+              categories={data?.listCategory}
+              onEdit={onCategoryEditButtonClick}
+            />
           ) : (
             <Spinner animation="border" variant="primary" />
           )}
         </Col>
       </Row>
-      {isModalVisible && (
-        <CategoryModal id="11">
+      {editableCategotyId !== null && (
+        <CategoryModal id={editableCategotyId}>
           {({ form, isSaveButtonDisabled, categoryModalData }) => {
+            const isNewCategory = editableCategotyId === undefined;
+            const title = isNewCategory
+              ? "Добавить категорию"
+              : "Редактировать категорию";
             return (
               <Modal
                 body={form}
-                title="Добавить категорию"
+                title={title}
                 onSave={() => onModalSave(categoryModalData)}
-                onCancel={() => setIsModalVisible(false)}
+                onCancel={() => setEditableCategotyId(null)}
                 saveButtonDisabled={isSaveButtonDisabled}
               />
             );

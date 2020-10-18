@@ -9,8 +9,25 @@ export const Categories = gql`
   }
 `;
 
+export const Category = gql`
+  query Category($id: String!) {
+    categoryById(categoryId: $id) {
+      id
+      name
+    }
+  }
+`;
+
+export const UpdateCategoty = gql`
+  mutation UpdateCategory($id: String!, $name: String!) {
+    updateCategory(categoryId: $id, categoryInputDTO: { name: $name }) {
+      id
+    }
+  }
+`;
+
 export const AddNewCategory = gql`
-  mutation addNewCategory($name: String!) {
+  mutation AddNewCategory($name: String!) {
     saveNewCategory(categoryInputDTO: { name: $name }) {
       id
     }

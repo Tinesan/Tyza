@@ -1,18 +1,35 @@
 import React from "react";
-import { ListGroup } from "react-bootstrap";
+import { Button, Col, ListGroup, Row } from "react-bootstrap";
 
 type Props = {
   categories: {
     id: ID;
     name: string;
   }[];
+  onEdit: (id: ID) => void;
 };
 
-const CategoriesList = ({ categories }: Props) => {
+const CategoriesList = ({ categories, onEdit }: Props) => {
   return (
     <ListGroup>
       {categories.map(({ id, name }) => {
-        return <ListGroup.Item key={id}>{name}</ListGroup.Item>;
+        return (
+          <ListGroup.Item action key={id}>
+            <Row className="align-items-center">
+              <Col md={8}>{name}</Col>
+              <Col className="justify-content-end d-flex">
+                <div className="mr-3">
+                  <Button variant="primary" onClick={() => onEdit(id)}>
+                    Редактировать
+                  </Button>
+                </div>
+                <div>
+                  <Button variant="danger">Удалить</Button>
+                </div>
+              </Col>
+            </Row>
+          </ListGroup.Item>
+        );
       })}
     </ListGroup>
   );
