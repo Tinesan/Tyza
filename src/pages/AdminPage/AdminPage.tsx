@@ -18,23 +18,7 @@ const CardWrapper = styled.div`
 
 const AdminPage = () => {
   const history = useHistory();
-  const [updateProductImageByIdMutation] = useUpdateProductImageByIdMutation();
-
-  const onInputChange = ({
-    target: { validity, files },
-  }: React.ChangeEvent<HTMLInputElement>) => {
-    validity.valid && uploadFile(files);
-  };
-
-  const uploadFile = (files: FileList | null) => {
-    if (files?.length) {
-      updateProductImageByIdMutation({
-        variables: { file: files[0], main: true },
-      })
-        .then(console.log)
-        .catch(console.log);
-    }
-  };
+  
   return (
     <AdminPageWrapper>
       <Container>
@@ -55,11 +39,6 @@ const AdminPage = () => {
                 </Card.Body>
               </Card>
             </CardWrapper>
-          </Col>
-        </Row>
-        <Row>
-          <Col>
-            <input type="file" onChange={onInputChange} />
           </Col>
         </Row>
       </Container>
