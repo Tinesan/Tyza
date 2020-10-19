@@ -30,7 +30,9 @@ const AdminPage = () => {
     if (files?.length) {
       updateProductImageByIdMutation({
         variables: { file: files[0], main: true },
-      });
+      })
+        .then(console.log)
+        .catch(console.log);
     }
   };
   return (
