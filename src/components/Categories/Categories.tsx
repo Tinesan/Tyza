@@ -2,15 +2,10 @@ import React, { useMemo, useState } from "react";
 import { Button, Col, Row, Spinner } from "react-bootstrap";
 
 import { ConfirmModal, FormModal } from "components/Modal";
+import { useAddNewCategoryMutation, useCategoriesQuery, useDeleteCategoryMutation, useUpdateCategoryMutation } from "generated/graphql";
 
-import CategoryModal, { CategoryModalData } from "./CategoryModal";
-import {
-  useCategoriesQuery,
-  useAddNewCategoryMutation,
-  useUpdateCategoryMutation,
-  useDeleteCategoryMutation,
-} from "generated/graphql";
 import CategoriesList from "./CategoriesList";
+import CategoryModal, { CategoryModalData } from "./CategoryModal";
 
 type Props = {};
 
@@ -68,7 +63,7 @@ const Categories = () => {
       try {
         await deleteCategory({ variables: { id: deletedСategoryId } });
         await refetchCategories();
-        setEditableCategotyId(undefined);
+        setDeletedСategoryId(undefined);
       } catch (error) {
         console.log(error);
       }
