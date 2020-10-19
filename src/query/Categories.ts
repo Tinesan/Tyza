@@ -41,5 +41,3 @@ export const DeleteCategory = gql`
     }
   }
 `;
-
-

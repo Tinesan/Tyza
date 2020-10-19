@@ -9,3 +9,8 @@ export const H3 = styled.h2`
   font-size: 36px;
   font-weight: 700;
 `;
+
+export const H5 = styled.h5`
+  font-size: 18px;
+  font-weight: 800;
+`;

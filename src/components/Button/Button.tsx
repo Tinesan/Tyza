@@ -12,12 +12,13 @@ type Props = {
 };
 
 export const ButtonColor = {
-  TRANSPARENT: "TRANSPARENT",
-  WHITE: "WHITE",
-  LIGHT: "LIGHT",
+  TRANSPARENT: "transparent",
+  WHITE: "white",
+  LIGHT: "loght",
+  WHITE_WITH_BORDER: "whiteWithBorder",
 } as const;
 
-type ButtonColor = keyof typeof ButtonColor;
+type ButtonColor = typeof ButtonColor[keyof typeof ButtonColor];
 
 export const ButtonSize = {
   SMALL: "SMALL",
@@ -52,6 +53,21 @@ const StyledButton = styled.button<{ color: ButtonColor; size: ButtonSize }>`
             background-color: ${colors.white};
             text-shadow: 0 0 0.65px ${colors.coffee},
               0 0 0.65px ${colors.coffee};
+          }
+
+          &:active {
+            box-shadow: 0 0 8px 1px ${colors.white};
+          }
+        `;
+      case ButtonColor.WHITE_WITH_BORDER:
+        return css`
+          background-color: ${colors.white};
+          border: 1px solid ${colors.silk};
+
+          &:hover {
+            background-color: ${colors.silk};
+            color: ${colors.white};
+            text-shadow: 0 0 0.65px ${colors.white}, 0 0 0.65px ${colors.white};
           }
 
           &:active {
@@ -110,7 +126,11 @@ const StyledButton = styled.button<{ color: ButtonColor; size: ButtonSize }>`
         `;
       case ButtonSize.SMALL:
         return css`
-          padding: 10px 25px;
+          width: 170px;
+          height: 40px;
+          font-weight: 500;
+          font-size: 14px;
+          line-height: 14px;
         `;
       default:
         break;

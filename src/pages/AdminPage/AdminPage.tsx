@@ -3,8 +3,6 @@ import { Button, Card, Col, Container, Row } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 
-import { useUpdateProductImageByIdMutation } from "generated/graphql";
-
 import Categories from "../../images/categories.png";
 
 const AdminPageWrapper = styled.section`
@@ -18,7 +16,7 @@ const CardWrapper = styled.div`
 
 const AdminPage = () => {
   const history = useHistory();
-  
+
   return (
     <AdminPageWrapper>
       <Container>

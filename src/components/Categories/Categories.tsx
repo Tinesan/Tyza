@@ -2,7 +2,12 @@ import React, { useMemo, useState } from "react";
 import { Button, Col, Row, Spinner } from "react-bootstrap";
 
 import { ConfirmModal, FormModal } from "components/Modal";
-import { useAddNewCategoryMutation, useCategoriesQuery, useDeleteCategoryMutation, useUpdateCategoryMutation } from "generated/graphql";
+import {
+  useCategoriesQuery,
+  useAddNewCategoryMutation,
+  useDeleteCategoryMutation,
+  useUpdateCategoryMutation,
+} from "generated/graphql";
 
 import CategoriesList from "./CategoriesList";
 import CategoryModal, { CategoryModalData } from "./CategoryModal";

@@ -2,9 +2,11 @@ import React from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import styled from "styled-components";
 
+import Button, { BasketIcon, ButtonColor, ButtonSize } from "components/Button";
+import Social from "components/Social";
 import Logo from "images/icons/logo.svg";
-import { H3 } from "ui/Title";
 import { colors } from "ui/colors";
+import { H3 } from "ui/Title";
 
 const FooterWrapper = styled.section``;
 
@@ -12,6 +14,12 @@ const FooterText = styled.p`
   margin: 0;
   color: ${colors.gray};
   font-size: 16px;
+`;
+
+const OrderCallWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  margin-top: 60px;
 `;
 
 const Footer = () => {
@@ -42,10 +50,20 @@ const Footer = () => {
           </Col>
           <Col>
             <H3 className="amatic  mb-4">Наши соцсети</H3>
+            <div>
+              <Social className="pt-1" />
+            </div>
           </Col>
           <Col>
-            <H3 className="amatic  mb-4"></H3>
-            <div>{/* <Button text="ЗАКАЗАТЬ ЗВОНОК" /> */}</div>
+            <OrderCallWrapper>
+              <BasketIcon className="mr-5" />
+              <Button
+                text="ЗАКАЗАТЬ ЗВОНОК"
+                size={ButtonSize.LARGE}
+                color={ButtonColor.WHITE_WITH_BORDER}
+                onClick={console.log}
+              />
+            </OrderCallWrapper>
           </Col>
         </Row>
       </Container>

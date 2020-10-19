@@ -198,17 +198,17 @@ export type DeleteCategoryMutation = (
   ) }
 );
 
-export type UpdateProductImageByIdMutationVariables = Exact<{
-  main: Scalars['Boolean'];
-  file: Scalars['Upload'];
-}>;
+export type CategoriesAndProductsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type UpdateProductImageByIdMutation = (
-  { __typename?: 'Mutation' }
-  & { updateProductImageById?: Maybe<(
-    { __typename?: 'ProductImageDTO' }
-    & Pick<ProductImageDto, 'id'>
+export type CategoriesAndProductsQuery = (
+  { __typename?: 'Query' }
+  & { listCategory: Array<(
+    { __typename?: 'CategoryDTO' }
+    & Pick<CategoryDto, 'id' | 'name'>
+  )>, listProduct: Array<(
+    { __typename?: 'ProductDTO' }
+    & Pick<ProductDto, 'id' | 'name'>
   )> }
 );
 
@@ -377,36 +377,40 @@ export function useDeleteCategoryMutation(baseOptions?: Apollo.MutationHookOptio
 export type DeleteCategoryMutationHookResult = ReturnType<typeof useDeleteCategoryMutation>;
 export type DeleteCategoryMutationResult = Apollo.MutationResult<DeleteCategoryMutation>;
 export type DeleteCategoryMutationOptions = Apollo.BaseMutationOptions<DeleteCategoryMutation, DeleteCategoryMutationVariables>;
-export const UpdateProductImageByIdDocument = gql`
-    mutation updateProductImageById($main: Boolean!, $file: Upload!) {
-  updateProductImageById(main: $main, file: $file) {
+export const CategoriesAndProductsDocument = gql`
+    query CategoriesAndProducts {
+  listCategory {
     id
+    name
+  }
+  listProduct {
+    id
+    name
   }
 }
     `;
-export type UpdateProductImageByIdMutationFn = Apollo.MutationFunction<UpdateProductImageByIdMutation, UpdateProductImageByIdMutationVariables>;
 
 /**
- * __useUpdateProductImageByIdMutation__
+ * __useCategoriesAndProductsQuery__
  *
- * To run a mutation, you first call `useUpdateProductImageByIdMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useUpdateProductImageByIdMutation` returns a tuple that includes:
- * - A mutate function that you can call at any time to execute the mutation
- * - An object with fields that represent the current status of the mutation's execution
+ * To run a query within a React component, call `useCategoriesAndProductsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useCategoriesAndProductsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
  *
- * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
- * const [updateProductImageByIdMutation, { data, loading, error }] = useUpdateProductImageByIdMutation({
+ * const { data, loading, error } = useCategoriesAndProductsQuery({
  *   variables: {
- *      main: // value for 'main'
- *      file: // value for 'file'
  *   },
  * });
  */
-export function useUpdateProductImageByIdMutation(baseOptions?: Apollo.MutationHookOptions<UpdateProductImageByIdMutation, UpdateProductImageByIdMutationVariables>) {
-        return Apollo.useMutation<UpdateProductImageByIdMutation, UpdateProductImageByIdMutationVariables>(UpdateProductImageByIdDocument, baseOptions);
+export function useCategoriesAndProductsQuery(baseOptions?: Apollo.QueryHookOptions<CategoriesAndProductsQuery, CategoriesAndProductsQueryVariables>) {
+        return Apollo.useQuery<CategoriesAndProductsQuery, CategoriesAndProductsQueryVariables>(CategoriesAndProductsDocument, baseOptions);
       }
-export type UpdateProductImageByIdMutationHookResult = ReturnType<typeof useUpdateProductImageByIdMutation>;
-export type UpdateProductImageByIdMutationResult = Apollo.MutationResult<UpdateProductImageByIdMutation>;
-export type UpdateProductImageByIdMutationOptions = Apollo.BaseMutationOptions<UpdateProductImageByIdMutation, UpdateProductImageByIdMutationVariables>;
+export function useCategoriesAndProductsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<CategoriesAndProductsQuery, CategoriesAndProductsQueryVariables>) {
+          return Apollo.useLazyQuery<CategoriesAndProductsQuery, CategoriesAndProductsQueryVariables>(CategoriesAndProductsDocument, baseOptions);
+        }
+export type CategoriesAndProductsQueryHookResult = ReturnType<typeof useCategoriesAndProductsQuery>;
+export type CategoriesAndProductsLazyQueryHookResult = ReturnType<typeof useCategoriesAndProductsLazyQuery>;
+export type CategoriesAndProductsQueryResult = Apollo.QueryResult<CategoriesAndProductsQuery, CategoriesAndProductsQueryVariables>;

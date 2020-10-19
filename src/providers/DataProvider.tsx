@@ -1,6 +1,6 @@
-import React, { ReactNode } from "react";
+import React, { ReactNode, useMemo } from "react";
 
-import { useCategoriesQuery } from "generated/graphql";
+import { useCategoriesAndProductsQuery } from "generated/graphql";
 
 type Props = {
   children: ReactNode;
@@ -11,14 +11,15 @@ export const DataContext = React.createContext<{ products: any[] }>({
 });
 
 const DataProvider = ({ children }: Props) => {
-  const { data } = useCategoriesQuery();
-  console.log(data);
-  //const products = data?.listBeefFeed || [];
+  //const { data } = useCategoriesAndProductsQuery();
+  const products = useMemo(() => {
+    return [];
+  }, []);
 
   return (
     <DataContext.Provider
       value={{
-        products: [],
+        products,
       }}
     >
       {children}
