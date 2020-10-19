@@ -65,7 +65,8 @@ export type MutationDeleteProductArgs = {
 
 
 export type MutationUpdateProductImageByIdArgs = {
-  avatar?: Maybe<Array<Scalars['Upload']>>;
+  main: Scalars['Boolean'];
+  file: Scalars['Upload'];
 };
 
 
@@ -195,6 +196,20 @@ export type DeleteCategoryMutation = (
     { __typename?: 'DeletePayload' }
     & Pick<DeletePayload, 'status'>
   ) }
+);
+
+export type UpdateProductImageByIdMutationVariables = Exact<{
+  main: Scalars['Boolean'];
+  file: Scalars['Upload'];
+}>;
+
+
+export type UpdateProductImageByIdMutation = (
+  { __typename?: 'Mutation' }
+  & { updateProductImageById?: Maybe<(
+    { __typename?: 'ProductImageDTO' }
+    & Pick<ProductImageDto, 'id'>
+  )> }
 );
 
 
@@ -362,3 +377,36 @@ export function useDeleteCategoryMutation(baseOptions?: Apollo.MutationHookOptio
 export type DeleteCategoryMutationHookResult = ReturnType<typeof useDeleteCategoryMutation>;
 export type DeleteCategoryMutationResult = Apollo.MutationResult<DeleteCategoryMutation>;
 export type DeleteCategoryMutationOptions = Apollo.BaseMutationOptions<DeleteCategoryMutation, DeleteCategoryMutationVariables>;
+export const UpdateProductImageByIdDocument = gql`
+    mutation updateProductImageById($main: Boolean!, $file: Upload!) {
+  updateProductImageById(main: $main, file: $file) {
+    id
+  }
+}
+    `;
+export type UpdateProductImageByIdMutationFn = Apollo.MutationFunction<UpdateProductImageByIdMutation, UpdateProductImageByIdMutationVariables>;
+
+/**
+ * __useUpdateProductImageByIdMutation__
+ *
+ * To run a mutation, you first call `useUpdateProductImageByIdMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateProductImageByIdMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updateProductImageByIdMutation, { data, loading, error }] = useUpdateProductImageByIdMutation({
+ *   variables: {
+ *      main: // value for 'main'
+ *      file: // value for 'file'
+ *   },
+ * });
+ */
+export function useUpdateProductImageByIdMutation(baseOptions?: Apollo.MutationHookOptions<UpdateProductImageByIdMutation, UpdateProductImageByIdMutationVariables>) {
+        return Apollo.useMutation<UpdateProductImageByIdMutation, UpdateProductImageByIdMutationVariables>(UpdateProductImageByIdDocument, baseOptions);
+      }
+export type UpdateProductImageByIdMutationHookResult = ReturnType<typeof useUpdateProductImageByIdMutation>;
+export type UpdateProductImageByIdMutationResult = Apollo.MutationResult<UpdateProductImageByIdMutation>;
+export type UpdateProductImageByIdMutationOptions = Apollo.BaseMutationOptions<UpdateProductImageByIdMutation, UpdateProductImageByIdMutationVariables>;

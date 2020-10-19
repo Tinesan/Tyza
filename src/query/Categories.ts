@@ -41,3 +41,11 @@ export const DeleteCategory = gql`
     }
   }
 `;
+
+export const updateProductImageById = gql`
+  mutation updateProductImageById($main: Boolean!, $file: Upload!) {
+    updateProductImageById(main: $main, file: $file) {
+      id
+    }
+  }
+`;
