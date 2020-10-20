@@ -19,7 +19,7 @@ const HomePage = () => {
       <ProductAdvantages />
       <Divider size={100} />
       <ColdProduction />
-      <Divider size={100} />
+      <Divider size={50} />
       <Products />
       <Divider size={100} />
       <Portion />
