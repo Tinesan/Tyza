@@ -3,16 +3,14 @@ import { Button, Col, Row, Spinner } from "react-bootstrap";
 
 import { ConfirmModal, FormModal } from "components/Modal";
 import {
-  useCategoriesQuery,
   useAddNewCategoryMutation,
+  useCategoriesQuery,
   useDeleteCategoryMutation,
   useUpdateCategoryMutation,
 } from "generated/graphql";
 
 import CategoriesList from "./CategoriesList";
 import CategoryModal, { CategoryModalData } from "./CategoryModal";
-
-type Props = {};
 
 type EditableCategotyId = string | null | undefined;
 
@@ -86,6 +84,8 @@ const Categories = () => {
     }
     return "";
   }, [data, deletedСategoryId]);
+
+  console.log("data", data);
 
   const isLoading =
     addNewCategoryLoading || updateCategoryLoading || categoriesLoading;

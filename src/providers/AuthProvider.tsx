@@ -13,11 +13,14 @@ export const AuthContext = React.createContext<{
 });
 
 const AuthProvider = ({ children }: Props) => {
-  const [isAuth, setIsAuth] = useState<boolean>(true);
+  const [isAuth, setIsAuth] = useState<boolean>(false);
+  const isAuthLocalStorage = window.localStorage.getItem("isAuth");
+  const isAuthCommon = isAuth || !!isAuthLocalStorage;
+
   return (
     <AuthContext.Provider
       value={{
-        isAuth,
+        isAuth: isAuthCommon,
         setIsAuth,
       }}
     >

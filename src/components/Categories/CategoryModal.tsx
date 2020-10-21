@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { useCategoryQuery } from "generated/graphql";
 import { Col, Form, Row } from "react-bootstrap";
+
+import { useCategoryQuery } from "generated/graphql";
 
 type Props = {
   id?: ID;

@@ -1,20 +1,15 @@
 import React from "react";
 import { Redirect, Route } from "react-router-dom";
 
-import PrivateRoutes from "./PrivateRoutes";
-
 type Props = {
   isAuth: boolean;
   path: string;
+  children: JSX.Element;
 };
 
-const PrivateRoute = ({ isAuth }: Props) => {
+const PrivateRoute = ({ isAuth, children, ...rest }: Props) => {
   return (
-    <Route
-      render={(props) =>
-        isAuth ? <PrivateRoutes {...props} /> : <Redirect to="/" />
-      }
-    />
+    <Route {...rest} render={() => (isAuth ? children : <Redirect to="/" />)} />
   );
 };
 export default PrivateRoute;

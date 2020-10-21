@@ -270,9 +270,23 @@
             "deprecationReason": null
           },
           {
-            "name": "updateProductImageById",
+            "name": "updateMainImageById",
             "description": "productImage",
             "args": [
+              {
+                "name": "imageId",
+                "description": null,
+                "type": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "String",
+                    "ofType": null
+                  }
+                },
+                "defaultValue": null
+              },
               {
                 "name": "main",
                 "description": null,
@@ -286,16 +300,51 @@
                   }
                 },
                 "defaultValue": null
+              }
+            ],
+            "type": {
+              "kind": "OBJECT",
+              "name": "ProductDTO",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "addNewImages",
+            "description": "",
+            "args": [
+              {
+                "name": "images",
+                "description": null,
+                "type": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "LIST",
+                    "name": null,
+                    "ofType": {
+                      "kind": "NON_NULL",
+                      "name": null,
+                      "ofType": {
+                        "kind": "SCALAR",
+                        "name": "Upload",
+                        "ofType": null
+                      }
+                    }
+                  }
+                },
+                "defaultValue": null
               },
               {
-                "name": "file",
+                "name": "productId",
                 "description": null,
                 "type": {
                   "kind": "NON_NULL",
                   "name": null,
                   "ofType": {
                     "kind": "SCALAR",
-                    "name": "Upload",
+                    "name": "String",
                     "ofType": null
                   }
                 },
@@ -304,7 +353,7 @@
             ],
             "type": {
               "kind": "OBJECT",
-              "name": "ProductImageDTO",
+              "name": "ProductDTO",
               "ofType": null
             },
             "isDeprecated": false,
@@ -531,6 +580,22 @@
             "deprecationReason": null
           },
           {
+            "name": "costPer",
+            "description": "",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "images",
             "description": "",
             "args": [],
@@ -654,6 +719,16 @@
         "fields": null,
         "inputFields": [
           {
+            "name": "id",
+            "description": "",
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
             "name": "name",
             "description": "",
             "type": {
@@ -685,9 +760,13 @@
             "name": "description",
             "description": "",
             "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
             },
             "defaultValue": null
           },
@@ -707,6 +786,20 @@
           },
           {
             "name": "categoryId",
+            "description": "",
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "costPer",
             "description": "",
             "type": {
               "kind": "NON_NULL",

@@ -1,18 +1,10 @@
 import React from "react";
-import { Route, RouteComponentProps, Switch } from "react-router-dom";
+import { Route, RouteComponentProps } from "react-router-dom";
 
 import AdminPage from "pages/AdminPage";
-import ProductsPage from "pages/Products";
 
 const PrivateRoutes = (props: RouteComponentProps<any>) => {
-  console.log("props", props);
-  return (
-    <Switch {...props}>
-      <Route component={AdminPage} exact path="/admin"></Route>
-      <Route path="/products" exact component={ProductsPage}></Route>
-      <Route path="/products" exact component={ProductsPage}></Route>
-    </Switch>
-  );
+  return <Route component={AdminPage} exact path="/admin" {...props}></Route>;
 };
 
 export default PrivateRoutes;

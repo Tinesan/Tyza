@@ -2,6 +2,7 @@
   "name": "tyza",
   "version": "0.1.0",
   "private": true,
+  "homepage": ".",
   "dependencies": {
     "@apollo/client": "^3.2.4",
     "@testing-library/jest-dom": "^4.2.4",
@@ -23,6 +24,7 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.3",
     "react-scroll": "^1.8.1",
+    "react-toast-notifications": "^2.4.0",
     "react-yandex-maps": "^4.4.0",
     "styled-components": "^5.2.0",
     "typescript": "3.8"

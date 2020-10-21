@@ -40,7 +40,8 @@ export type Mutation = {
   updateProduct?: Maybe<ProductDto>;
   deleteProduct: DeletePayload;
   /** productImage */
-  updateProductImageById?: Maybe<ProductImageDto>;
+  updateMainImageById?: Maybe<ProductDto>;
+  addNewImages?: Maybe<ProductDto>;
   /** category */
   saveNewCategory: CategoryDto;
   updateCategory: CategoryDto;
@@ -64,9 +65,15 @@ export type MutationDeleteProductArgs = {
 };
 
 
-export type MutationUpdateProductImageByIdArgs = {
+export type MutationUpdateMainImageByIdArgs = {
+  imageId: Scalars['String'];
   main: Scalars['Boolean'];
-  file: Scalars['Upload'];
+};
+
+
+export type MutationAddNewImagesArgs = {
+  images: Array<Scalars['Upload']>;
+  productId: Scalars['String'];
 };
 
 
@@ -93,6 +100,7 @@ export type ProductDto = {
   description?: Maybe<Scalars['String']>;
   stock: Scalars['Boolean'];
   categoryId: Scalars['String'];
+  costPer: Scalars['String'];
   images: Array<ProductImageDto>;
 };
 
@@ -106,11 +114,13 @@ export type ProductImageDto = {
 };
 
 export type ProductInputDto = {
+  id?: Maybe<Scalars['String']>;
   name: Scalars['String'];
   price: Scalars['BigDecimal'];
-  description?: Maybe<Scalars['String']>;
+  description: Scalars['String'];
   stock: Scalars['Boolean'];
   categoryId: Scalars['String'];
+  costPer: Scalars['String'];
 };
 
 export type Query = {
@@ -209,6 +219,53 @@ export type CategoriesAndProductsQuery = (
   )>, listProduct: Array<(
     { __typename?: 'ProductDTO' }
     & Pick<ProductDto, 'id' | 'name'>
+  )> }
+);
+
+export type AddNewProductMutationVariables = Exact<{
+  name: Scalars['String'];
+  description: Scalars['String'];
+  stock: Scalars['Boolean'];
+  categoryId: Scalars['String'];
+  costPer: Scalars['String'];
+  price: Scalars['BigDecimal'];
+}>;
+
+
+export type AddNewProductMutation = (
+  { __typename?: 'Mutation' }
+  & { saveNewProduct?: Maybe<(
+    { __typename?: 'ProductDTO' }
+    & Pick<ProductDto, 'id'>
+  )> }
+);
+
+export type ProductsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type ProductsQuery = (
+  { __typename?: 'Query' }
+  & { listProduct: Array<(
+    { __typename?: 'ProductDTO' }
+    & Pick<ProductDto, 'id' | 'name' | 'price' | 'description' | 'stock' | 'categoryId' | 'costPer'>
+    & { images: Array<(
+      { __typename?: 'ProductImageDTO' }
+      & Pick<ProductImageDto, 'id'>
+    )> }
+  )> }
+);
+
+export type AddNewImagesMutationVariables = Exact<{
+  images: Array<Scalars['Upload']>;
+  productId: Scalars['String'];
+}>;
+
+
+export type AddNewImagesMutation = (
+  { __typename?: 'Mutation' }
+  & { addNewImages?: Maybe<(
+    { __typename?: 'ProductDTO' }
+    & Pick<ProductDto, 'id'>
   )> }
 );
 
@@ -414,3 +471,114 @@ export function useCategoriesAndProductsLazyQuery(baseOptions?: Apollo.LazyQuery
 export type CategoriesAndProductsQueryHookResult = ReturnType<typeof useCategoriesAndProductsQuery>;
 export type CategoriesAndProductsLazyQueryHookResult = ReturnType<typeof useCategoriesAndProductsLazyQuery>;
 export type CategoriesAndProductsQueryResult = Apollo.QueryResult<CategoriesAndProductsQuery, CategoriesAndProductsQueryVariables>;
+export const AddNewProductDocument = gql`
+    mutation AddNewProduct($name: String!, $description: String!, $stock: Boolean!, $categoryId: String!, $costPer: String!, $price: BigDecimal!) {
+  saveNewProduct(productInputDTO: {name: $name, description: $description, stock: $stock, categoryId: $categoryId, costPer: $costPer, price: $price}) {
+    id
+  }
+}
+    `;
+export type AddNewProductMutationFn = Apollo.MutationFunction<AddNewProductMutation, AddNewProductMutationVariables>;
+
+/**
+ * __useAddNewProductMutation__
+ *
+ * To run a mutation, you first call `useAddNewProductMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useAddNewProductMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [addNewProductMutation, { data, loading, error }] = useAddNewProductMutation({
+ *   variables: {
+ *      name: // value for 'name'
+ *      description: // value for 'description'
+ *      stock: // value for 'stock'
+ *      categoryId: // value for 'categoryId'
+ *      costPer: // value for 'costPer'
+ *      price: // value for 'price'
+ *   },
+ * });
+ */
+export function useAddNewProductMutation(baseOptions?: Apollo.MutationHookOptions<AddNewProductMutation, AddNewProductMutationVariables>) {
+        return Apollo.useMutation<AddNewProductMutation, AddNewProductMutationVariables>(AddNewProductDocument, baseOptions);
+      }
+export type AddNewProductMutationHookResult = ReturnType<typeof useAddNewProductMutation>;
+export type AddNewProductMutationResult = Apollo.MutationResult<AddNewProductMutation>;
+export type AddNewProductMutationOptions = Apollo.BaseMutationOptions<AddNewProductMutation, AddNewProductMutationVariables>;
+export const ProductsDocument = gql`
+    query Products {
+  listProduct {
+    id
+    name
+    price
+    description
+    stock
+    categoryId
+    costPer
+    images {
+      id
+    }
+  }
+}
+    `;
+
+/**
+ * __useProductsQuery__
+ *
+ * To run a query within a React component, call `useProductsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useProductsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useProductsQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useProductsQuery(baseOptions?: Apollo.QueryHookOptions<ProductsQuery, ProductsQueryVariables>) {
+        return Apollo.useQuery<ProductsQuery, ProductsQueryVariables>(ProductsDocument, baseOptions);
+      }
+export function useProductsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<ProductsQuery, ProductsQueryVariables>) {
+          return Apollo.useLazyQuery<ProductsQuery, ProductsQueryVariables>(ProductsDocument, baseOptions);
+        }
+export type ProductsQueryHookResult = ReturnType<typeof useProductsQuery>;
+export type ProductsLazyQueryHookResult = ReturnType<typeof useProductsLazyQuery>;
+export type ProductsQueryResult = Apollo.QueryResult<ProductsQuery, ProductsQueryVariables>;
+export const AddNewImagesDocument = gql`
+    mutation AddNewImages($images: [Upload!]!, $productId: String!) {
+  addNewImages(images: $images, productId: $productId) {
+    id
+  }
+}
+    `;
+export type AddNewImagesMutationFn = Apollo.MutationFunction<AddNewImagesMutation, AddNewImagesMutationVariables>;
+
+/**
+ * __useAddNewImagesMutation__
+ *
+ * To run a mutation, you first call `useAddNewImagesMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useAddNewImagesMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [addNewImagesMutation, { data, loading, error }] = useAddNewImagesMutation({
+ *   variables: {
+ *      images: // value for 'images'
+ *      productId: // value for 'productId'
+ *   },
+ * });
+ */
+export function useAddNewImagesMutation(baseOptions?: Apollo.MutationHookOptions<AddNewImagesMutation, AddNewImagesMutationVariables>) {
+        return Apollo.useMutation<AddNewImagesMutation, AddNewImagesMutationVariables>(AddNewImagesDocument, baseOptions);
+      }
+export type AddNewImagesMutationHookResult = ReturnType<typeof useAddNewImagesMutation>;
+export type AddNewImagesMutationResult = Apollo.MutationResult<AddNewImagesMutation>;
+export type AddNewImagesMutationOptions = Apollo.BaseMutationOptions<AddNewImagesMutation, AddNewImagesMutationVariables>;

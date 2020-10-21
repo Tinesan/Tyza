@@ -9,6 +9,7 @@ import Cooperation from "components/Сooperation";
 import ColdProduction from "components/ColdProduction";
 import Footer, { CompanyInfo } from "components/Footer";
 import ProductAdvantages from "components/ProductAdvantages";
+
 const HomePage = () => {
   return (
     <div>

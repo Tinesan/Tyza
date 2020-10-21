@@ -17,6 +17,7 @@ const LoginPage = () => {
   const onSubmit = useCallback(() => {
     if (isValidUser()) {
       setIsAuth(true);
+      window.localStorage.setItem("isAuth", "true");
       history.push("/admin");
     }
   }, [isValidUser, history, setIsAuth]);
