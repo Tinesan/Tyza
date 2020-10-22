@@ -2,10 +2,10 @@ import React, { useContext } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 
 import { ProductItemFragment } from "generated/graphql";
+import { DataContext } from "providers/DataProvider";
 import { H2 } from "ui/Title";
 
 import Product from "./Product";
-import { DataContext } from "providers/DataProvider";
 
 const Products = () => {
   const { products } = useContext(DataContext);
@@ -20,9 +20,13 @@ const Products = () => {
           </Col>
         </Row>
         <Row>
-          {products.map((product: ProductItemFragment) => {
+          {products.map((product: ProductItemFragment, inx) => {
             return (
-              <Col md="3" key={product.id}>
+              <Col
+                md="3"
+                className={inx > 3 ? "mt-4" : undefined}
+                key={product.id}
+              >
                 <Product product={product} />
               </Col>
             );

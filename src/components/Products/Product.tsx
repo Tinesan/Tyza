@@ -1,7 +1,7 @@
 import React from "react";
 
 import { ProductItemFragment } from "generated/graphql";
-import TestImage from "images/test.png";
+import TestImage from "images/icons/logo.svg";
 import { H5 } from "ui/Title";
 
 import ProductControls from "./ProductControls";
@@ -12,11 +12,16 @@ type Props = {
 };
 
 const Product = ({ product }: Props) => {
-  const { name, description, costPer, price } = product;
+  const { name, description, costPer, price, images } = product;
+  const hasImage = images[0]?.name;
+  const productImage = hasImage
+    ? `data:image/jpeg;base64,${images[0]?.image}`
+    : TestImage;
+
   return (
     <Styled.ProductWrapper>
       <Styled.ProductImage className="mb-2">
-        <img src={TestImage} alt="test" />
+        <img src={productImage} alt="test" />
       </Styled.ProductImage>
       <Styled.ProductTitle>
         <H5>{name}</H5>

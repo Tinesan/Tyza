@@ -1,16 +1,17 @@
-import React, { useContext, useState, useMemo } from "react";
-import { Button, Col, Row, Spinner } from "react-bootstrap";
+import React, { useContext, useMemo, useState } from "react";
+import { Button, Col, ListGroup, Row, Spinner } from "react-bootstrap";
 
 import { ConfirmModal, FormModal } from "components/Modal";
 import {
+  useAddNewImagesMutation,
   useAddNewProductMutation,
   useDeleteProductMutation,
   useUpdateProductMutation,
 } from "generated/graphql";
-
-import ProductList from "./ProductList";
-import ProductModal, { ProductModalData } from "./ProductModal";
 import { DataContext } from "providers/DataProvider";
+
+import ProductItem from "./ProductItem";
+import ProductModal, { ProductModalData } from "./ProductModal";
 
 const Products = () => {
   const {
@@ -18,6 +19,8 @@ const Products = () => {
     dataProviderLoading,
     refetchCategoriesAndProducts,
   } = useContext(DataContext);
+
+  const [addNewImage] = useAddNewImagesMutation();
   const [addNewProduct] = useAddNewProductMutation();
   const [updateProduct] = useUpdateProductMutation();
   const [deleteProduct] = useDeleteProductMutation();
@@ -73,6 +76,24 @@ const Products = () => {
     }
   };
 
+  const handleChangeIcon = (id: ID) => async (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    if (e.target.files) {
+      try {
+        await addNewImage({
+          variables: {
+            productId: id,
+            images: [e.target.files[0]],
+          },
+        });
+        await refetchCategoriesAndProducts();
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  };
+
   return (
     <>
       <Row className="mt-3">
@@ -85,11 +106,20 @@ const Products = () => {
       <Row className="mt-3">
         <Col>
           {!dataProviderLoading ? (
-            <ProductList
-              products={products}
-              onDeleteButtonClick={prepareProductForDelete}
-              onEditButtonClick={setEditableProductId}
-            />
+            <ListGroup>
+              {products.map((product) => {
+                const { id } = product;
+                return (
+                  <ProductItem
+                    key={id}
+                    product={product}
+                    onChangeIcon={handleChangeIcon(id)}
+                    onEditButtonClick={() => setEditableProductId(id)}
+                    onDeleteButtonClick={() => prepareProductForDelete(id)}
+                  />
+                );
+              })}
+            </ListGroup>
           ) : (
             <div className="d-flex justify-content-center">
               <Spinner animation="border" variant="primary" />
