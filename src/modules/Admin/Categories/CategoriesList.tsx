@@ -1,23 +1,23 @@
 import React from "react";
-import { Col } from "react-bootstrap";
-import { Button } from "react-bootstrap";
-import { Row } from "react-bootstrap";
-import { ListGroup } from "react-bootstrap";
-
-import { ProductDto } from "generated/graphql";
+import { Button, Col, ListGroup, Row } from "react-bootstrap";
 
 type Props = {
-  onEditButtonClick: (id: string) => void;
-  products: Pick<
-    ProductDto,
-    "id" | "name" | "price" | "description" | "stock" | "categoryId" | "costPer"
-  >[];
+  categories: {
+    id: ID;
+    name: string;
+  }[];
+  onEditButtonClick: (id: ID) => void;
+  onDeleteButtonClick: (id: ID) => void;
 };
 
-const ProductList = ({ products, onEditButtonClick }: Props) => {
+const CategoriesList = ({
+  categories,
+  onEditButtonClick,
+  onDeleteButtonClick,
+}: Props) => {
   return (
     <ListGroup>
-      {products.map(({ id, name }) => {
+      {categories.map(({ id, name }) => {
         return (
           <ListGroup.Item action key={id}>
             <Row className="align-items-center">
@@ -31,6 +31,14 @@ const ProductList = ({ products, onEditButtonClick }: Props) => {
                     Редактировать
                   </Button>
                 </div>
+                <div>
+                  <Button
+                    variant="danger"
+                    onClick={() => onDeleteButtonClick(id)}
+                  >
+                    Удалить
+                  </Button>
+                </div>
               </Col>
             </Row>
           </ListGroup.Item>
@@ -40,4 +48,4 @@ const ProductList = ({ products, onEditButtonClick }: Props) => {
   );
 };
 
-export default ProductList;
+export default CategoriesList;

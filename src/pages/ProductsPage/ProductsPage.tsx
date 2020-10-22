@@ -2,7 +2,7 @@ import React from "react";
 import { Container } from "react-bootstrap";
 import styled from "styled-components";
 
-import AdminProducts from "components/AdminProducts";
+import Products from "modules/Admin/Products";
 
 const ProductsPageWrapper = styled.section`
   padding-top: 40px;
@@ -12,7 +12,7 @@ const ProductsPage = () => {
   return (
     <ProductsPageWrapper>
       <Container>
-        <AdminProducts />
+        <Products />
       </Container>
     </ProductsPageWrapper>
   );

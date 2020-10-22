@@ -1,11 +1,9 @@
 import gql from "graphql-tag";
 
-export const Categories = gql`
-  query Categories {
-    listCategory {
-      id
-      name
-    }
+gql`
+  fragment CategoryItem on CategoryDTO {
+    id
+    name
   }
 `;
 

@@ -1,13 +1,13 @@
-import React, { useMemo, useState } from "react";
+import React, { useContext, useMemo, useState } from "react";
 import { Button, Col, Row, Spinner } from "react-bootstrap";
 
 import { ConfirmModal, FormModal } from "components/Modal";
 import {
   useAddNewCategoryMutation,
-  useCategoriesQuery,
   useDeleteCategoryMutation,
   useUpdateCategoryMutation,
 } from "generated/graphql";
+import { DataContext } from "providers/DataProvider";
 
 import CategoriesList from "./CategoriesList";
 import CategoryModal, { CategoryModalData } from "./CategoryModal";
@@ -15,6 +15,11 @@ import CategoryModal, { CategoryModalData } from "./CategoryModal";
 type EditableCategotyId = string | null | undefined;
 
 const Categories = () => {
+  const {
+    categories,
+    dataProviderLoading,
+    refetchCategoriesAndProducts,
+  } = useContext(DataContext);
   const [editableCategotyId, setEditableCategotyId] = useState<
     EditableCategotyId
   >(null);
@@ -22,11 +27,6 @@ const Categories = () => {
     undefined
   );
 
-  const {
-    data,
-    refetch: refetchCategories,
-    loading: categoriesLoading,
-  } = useCategoriesQuery();
   const [
     addNewCategory,
     { loading: addNewCategoryLoading },
@@ -49,7 +49,7 @@ const Categories = () => {
         variables: { name },
       });
     }
-    await refetchCategories();
+    await refetchCategoriesAndProducts();
     setEditableCategotyId(null);
   };
 
@@ -65,7 +65,7 @@ const Categories = () => {
     if (deletedСategoryId) {
       try {
         await deleteCategory({ variables: { id: deletedСategoryId } });
-        await refetchCategories();
+        await refetchCategoriesAndProducts();
         setDeletedСategoryId(undefined);
       } catch (error) {
         console.log(error);
@@ -74,8 +74,8 @@ const Categories = () => {
   };
 
   const deletedCategoryName: string = useMemo(() => {
-    if (deletedСategoryId && data?.listCategory) {
-      const deletedCategory = data.listCategory.find(
+    if (deletedСategoryId) {
+      const deletedCategory = categories.find(
         (item) => item.id === deletedСategoryId
       );
       if (deletedCategory) {
@@ -83,12 +83,10 @@ const Categories = () => {
       }
     }
     return "";
-  }, [data, deletedСategoryId]);
-
-  console.log("data", data);
+  }, [categories, deletedСategoryId]);
 
   const isLoading =
-    addNewCategoryLoading || updateCategoryLoading || categoriesLoading;
+    addNewCategoryLoading || updateCategoryLoading || dataProviderLoading;
 
   return (
     <>
@@ -101,11 +99,11 @@ const Categories = () => {
       </Row>
       <Row className="mt-3">
         <Col>
-          {data?.listCategory && !categoriesLoading ? (
+          {!dataProviderLoading ? (
             <CategoriesList
-              categories={data?.listCategory}
-              onEdit={onCategoryEditButtonClick}
-              onDelete={onCategoryDeleteButtonClick}
+              categories={categories}
+              onEditButtonClick={onCategoryEditButtonClick}
+              onDeleteButtonClick={onCategoryDeleteButtonClick}
             />
           ) : (
             <div className="d-flex justify-content-center">
