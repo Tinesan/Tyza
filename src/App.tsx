@@ -1,19 +1,15 @@
-import {
-  ApolloClient,
-  ApolloProvider,
-  InMemoryCache,
-  from,
-} from "@apollo/client";
+import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
 import { createUploadLink } from "apollo-upload-client";
 import React from "react";
+import { BrowserRouter as Router } from "react-router-dom";
 
+import ErrorBoundary from "pages/ErrorBoundary";
 import AuthContext from "providers/AuthProvider";
 
 import DataProvider from "./providers/DataProvider";
 import Routes from "./routes";
 
 import "bootstrap/dist/css/bootstrap.min.css";
-import ErrorBoundary from "pages/ErrorBoundary";
 
 const client = new ApolloClient({
   link: createUploadLink({ uri: "http://localhost:5003/graphql/" }),
@@ -26,7 +22,9 @@ function App() {
       <ApolloProvider client={client}>
         <AuthContext>
           <DataProvider>
-            <Routes />
+            <Router>
+              <Routes />
+            </Router>
           </DataProvider>
         </AuthContext>
       </ApolloProvider>

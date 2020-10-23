@@ -34,7 +34,7 @@ const ProductItem = ({
   onEditButtonClick,
   onDeleteButtonClick,
 }: Props) => {
-  const { id, name, images } = product;
+  const { name, images } = product;
   const productImage = images[0]?.image;
 
   return (
