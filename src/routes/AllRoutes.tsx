@@ -22,7 +22,7 @@ const AllRoutes = () => {
         <PrivateRoute path="/admin" isAuth={isAuth}>
           <AdminPage />
         </PrivateRoute>
-        {isModal ? null : <Route render={() => <Redirect to="/" />} />}
+        <Route render={() => <Redirect to="/" />} />
       </Switch>
       {isModal ? <Route path="/" component={ModalRouter} /> : null}
     </>
