@@ -1,8 +1,10 @@
 import React from "react";
 import { Col, Container, Row } from "react-bootstrap";
+import { Element } from "react-scroll";
 import styled from "styled-components";
-import { colors } from "ui/colors";
+
 import DogOnFoot from "images/dogOnFoot.png";
+import { colors } from "ui/colors";
 import { H2 } from "ui/Title";
 
 const PortionWrapper = styled.section`
@@ -38,32 +40,34 @@ const PortionSecondaryDescription = styled.p`
 
 const Portion = () => {
   return (
-    <PortionWrapper>
-      <PortionContent>
-        <Container>
-          <Row>
-            <Col md={6}>
-              <H2 className="amatic  mb-5">Порция взрослой собаки</H2>
-              <PortionMainDescription>
-                Вес взрослой собаки * на <b>0,035</b>
-              </PortionMainDescription>
-              <PortionSecondaryDescription>
-                Пример: собака 10 кг * 0,035 = 350 гр.)
-              </PortionSecondaryDescription>
-            </Col>
-            <Col md={{ span: 4, offset: 2 }}>
-              <H2 className="amatic white-color mb-5">Порция щенка</H2>
-              <PortionMainDescription>
-                Вес щенка * на <b>0,065</b>
-              </PortionMainDescription>
-              <PortionSecondaryDescription>
-                Пример: щенок 5 кг * 0,065 = 325 гр.)
-              </PortionSecondaryDescription>
-            </Col>
-          </Row>
-        </Container>
-      </PortionContent>
-    </PortionWrapper>
+    <Element name="info">
+      <PortionWrapper>
+        <PortionContent>
+          <Container>
+            <Row>
+              <Col md={6}>
+                <H2 className="amatic  mb-5">Порция взрослой собаки</H2>
+                <PortionMainDescription>
+                  Вес взрослой собаки * на <b>0,035</b>
+                </PortionMainDescription>
+                <PortionSecondaryDescription>
+                  Пример: собака 10 кг * 0,035 = 350 гр.)
+                </PortionSecondaryDescription>
+              </Col>
+              <Col md={{ span: 4, offset: 2 }}>
+                <H2 className="amatic white-color mb-5">Порция щенка</H2>
+                <PortionMainDescription>
+                  Вес щенка * на <b>0,065</b>
+                </PortionMainDescription>
+                <PortionSecondaryDescription>
+                  Пример: щенок 5 кг * 0,065 = 325 гр.)
+                </PortionSecondaryDescription>
+              </Col>
+            </Row>
+          </Container>
+        </PortionContent>
+      </PortionWrapper>
+    </Element>
   );
 };
 

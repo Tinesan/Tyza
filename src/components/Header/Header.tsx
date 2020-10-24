@@ -1,10 +1,18 @@
 import React from "react";
 import { Col, Container, ListGroup, Row } from "react-bootstrap";
+import { Link } from "react-scroll";
 
 import Logo from "images/icons/logo.svg";
 
 import Button, { ButtonColor, ButtonSize } from "../Button";
 import * as Styled from "./Header.styled";
+
+const scrollDefaultProps = {
+  spy: true,
+  smooth: true,
+  duration: 1000,
+  offset: -20,
+};
 
 const Header = () => {
   return (
@@ -16,9 +24,21 @@ const Header = () => {
           </Col>
           <Col xs={6}>
             <ListGroup horizontal className="justify-content-between">
-              <Styled.ListGroupItem>Каталог</Styled.ListGroupItem>
-              <Styled.ListGroupItem>Информация</Styled.ListGroupItem>
-              <Styled.ListGroupItem>Контакты</Styled.ListGroupItem>
+              <Styled.ListGroupItem>
+                <Link to="products" {...scrollDefaultProps}>
+                  Каталог
+                </Link>
+              </Styled.ListGroupItem>
+              <Styled.ListGroupItem>
+                <Link to="info" {...scrollDefaultProps}>
+                  Информация
+                </Link>
+              </Styled.ListGroupItem>
+              <Styled.ListGroupItem>
+                <Link to="contacts" {...scrollDefaultProps}>
+                  Контакты
+                </Link>
+              </Styled.ListGroupItem>
             </ListGroup>
           </Col>
           <Col>

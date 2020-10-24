@@ -1,14 +1,13 @@
 import React from "react";
-import styled from "styled-components";
-import { YMaps, Map as YMap } from "react-yandex-maps";
 import { Col, Container, Row } from "react-bootstrap";
-import { H2 } from "ui/Title";
+import { Element } from "react-scroll";
+import { Map as YMap, YMaps } from "react-yandex-maps";
 
-const MapWrapper = styled.section``;
+import { H2 } from "ui/Title";
 
 const Map = () => {
   return (
-    <MapWrapper>
+    <Element name="contacts">
       <Container>
         <Row>
           <Col>
@@ -26,7 +25,7 @@ const Map = () => {
           />
         </YMaps>
       </div>
-    </MapWrapper>
+    </Element>
   );
 };
 

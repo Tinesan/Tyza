@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import { Col, Container, Row } from "react-bootstrap";
+import { Element } from "react-scroll";
 
 import { ProductItemFragment } from "generated/graphql";
 import { DataContext } from "providers/DataProvider";
@@ -10,7 +11,7 @@ import Product from "./Product";
 const Products = () => {
   const { products } = useContext(DataContext);
   return (
-    <div>
+    <Element name="products">
       <Container>
         <Row>
           <Col>
@@ -33,7 +34,7 @@ const Products = () => {
           })}
         </Row>
       </Container>
-    </div>
+    </Element>
   );
 };
 
