@@ -10,6 +10,7 @@ import Portion from "components/Portion";
 import ProductAdvantages from "components/ProductAdvantages";
 import Products from "components/Products";
 import Cooperation from "components/Сooperation";
+import Reviews from "components/Reviews";
 
 const HomePage = () => {
   return (
@@ -25,6 +26,9 @@ const HomePage = () => {
       <Products />
       <Divider size={100} />
       <Portion />
+      <Divider size={40} />
+      <Reviews />
+      <Divider size={80} />
       <Cooperation />
       <Divider size={80} />
       <Map />

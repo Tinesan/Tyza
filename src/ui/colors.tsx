@@ -8,6 +8,7 @@ export const colors: { [key in COLORS]: string } = {
   dawnPink: "#F0E9E3",
   black: "#000000",
   gray: "#808080",
+  mercury: "#E6E6E6",
 };
 
 type COLORS =
@@ -18,5 +19,6 @@ type COLORS =
   | "wafer"
   | "coffee"
   | "thatch"
+  | "mercury"
   | "dawnPink"
   | "seashellPeach";

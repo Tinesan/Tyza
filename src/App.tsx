@@ -11,6 +11,8 @@ import DataProvider from "./providers/DataProvider";
 import Routes from "./routes";
 
 import "bootstrap/dist/css/bootstrap.min.css";
+import "slick-carousel/slick/slick-theme.css";
+import "slick-carousel/slick/slick.css";
 
 const client = new ApolloClient({
   link: createUploadLink({ uri: "http://localhost:5003/graphql/" }),

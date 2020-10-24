@@ -37,3 +37,7 @@ code {
 .montserrat {
   font-family: "Montserrat", sans-serif;
 }
+
+.slick-list {
+  overflow: visible !important;
+}
