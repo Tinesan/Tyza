@@ -12,7 +12,7 @@ type Props = {
 };
 
 const Product = ({ product }: Props) => {
-  const { name, description, costPer, price, images } = product;
+  const { id, name, description, costPer, price, images } = product;
   const hasImage = images[0]?.name;
   const productImage = hasImage
     ? `data:image/jpeg;base64,${images[0]?.image}`
@@ -31,7 +31,7 @@ const Product = ({ product }: Props) => {
         Стоимость за {costPer}
       </Styled.ProductText>
       <Styled.ProductPrice className="mb-2">{price} руб.</Styled.ProductPrice>
-      <ProductControls id="1" />
+      <ProductControls id={id} />
     </Styled.ProductWrapper>
   );
 };

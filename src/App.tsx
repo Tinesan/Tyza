@@ -5,6 +5,7 @@ import { BrowserRouter as Router } from "react-router-dom";
 
 import ErrorBoundary from "pages/ErrorBoundary";
 import AuthContext from "providers/AuthProvider";
+import BasketProvider from "providers/BasketProvider";
 
 import DataProvider from "./providers/DataProvider";
 import Routes from "./routes";
@@ -22,9 +23,11 @@ function App() {
       <ApolloProvider client={client}>
         <AuthContext>
           <DataProvider>
-            <Router>
-              <Routes />
-            </Router>
+            <BasketProvider>
+              <Router>
+                <Routes />
+              </Router>
+            </BasketProvider>
           </DataProvider>
         </AuthContext>
       </ApolloProvider>

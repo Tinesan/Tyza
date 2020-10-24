@@ -1,6 +1,8 @@
-import Button, { ButtonColor, ButtonSize } from "components/Button";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import styled from "styled-components";
+
+import Button, { ButtonColor, ButtonSize } from "components/Button";
+import { BasketContext } from "providers/BasketProvider";
 import { colors } from "ui/colors";
 
 type Props = {
@@ -54,6 +56,11 @@ const Counter = styled.div`
 
 const ProductControls = ({ id }: Props) => {
   const [orderCount, setOrderCount] = useState<number>(1);
+  const { addBasketValue } = useContext(BasketContext);
+  const addToBasket = () => {
+    addBasketValue({ [id]: orderCount });
+  };
+
   return (
     <ProductControlsWrapper>
       <CounterWrapper>
@@ -77,7 +84,7 @@ const ProductControls = ({ id }: Props) => {
       <Button
         text="В КОРЗИНУ"
         size={ButtonSize.SMALL}
-        onClick={console.log}
+        onClick={addToBasket}
         color={ButtonColor.WHITE_WITH_BORDER}
       />
     </ProductControlsWrapper>
