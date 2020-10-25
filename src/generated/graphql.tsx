@@ -292,6 +292,21 @@ export type CategoriesAndProductsQuery = (
   )> }
 );
 
+export type PlaceOrderMutationVariables = Exact<{
+  customer: CustomerInputDto;
+  productOrderLines: Array<ProductOrderLineInputDto>;
+  deliveryTime: Scalars['String'];
+}>;
+
+
+export type PlaceOrderMutation = (
+  { __typename?: 'Mutation' }
+  & { placeOrder: (
+    { __typename?: 'ProductOrderDTO' }
+    & Pick<ProductOrderDto, 'id'>
+  ) }
+);
+
 export type ProductItemFragment = (
   { __typename?: 'ProductDTO' }
   & Pick<ProductDto, 'id' | 'name' | 'stock' | 'price' | 'costPer' | 'categoryId' | 'description'>
@@ -573,6 +588,40 @@ export function useCategoriesAndProductsLazyQuery(baseOptions?: Apollo.LazyQuery
 export type CategoriesAndProductsQueryHookResult = ReturnType<typeof useCategoriesAndProductsQuery>;
 export type CategoriesAndProductsLazyQueryHookResult = ReturnType<typeof useCategoriesAndProductsLazyQuery>;
 export type CategoriesAndProductsQueryResult = Apollo.QueryResult<CategoriesAndProductsQuery, CategoriesAndProductsQueryVariables>;
+export const PlaceOrderDocument = gql`
+    mutation PlaceOrder($customer: CustomerInputDTO!, $productOrderLines: [ProductOrderLineInputDTO!]!, $deliveryTime: String!) {
+  placeOrder(productOrderInputDTO: {customer: $customer, productOrderLines: $productOrderLines, deliveryTime: $deliveryTime}) {
+    id
+  }
+}
+    `;
+export type PlaceOrderMutationFn = Apollo.MutationFunction<PlaceOrderMutation, PlaceOrderMutationVariables>;
+
+/**
+ * __usePlaceOrderMutation__
+ *
+ * To run a mutation, you first call `usePlaceOrderMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `usePlaceOrderMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [placeOrderMutation, { data, loading, error }] = usePlaceOrderMutation({
+ *   variables: {
+ *      customer: // value for 'customer'
+ *      productOrderLines: // value for 'productOrderLines'
+ *      deliveryTime: // value for 'deliveryTime'
+ *   },
+ * });
+ */
+export function usePlaceOrderMutation(baseOptions?: Apollo.MutationHookOptions<PlaceOrderMutation, PlaceOrderMutationVariables>) {
+        return Apollo.useMutation<PlaceOrderMutation, PlaceOrderMutationVariables>(PlaceOrderDocument, baseOptions);
+      }
+export type PlaceOrderMutationHookResult = ReturnType<typeof usePlaceOrderMutation>;
+export type PlaceOrderMutationResult = Apollo.MutationResult<PlaceOrderMutation>;
+export type PlaceOrderMutationOptions = Apollo.BaseMutationOptions<PlaceOrderMutation, PlaceOrderMutationVariables>;
 export const AddNewProductDocument = gql`
     mutation AddNewProduct($name: String!, $stock: Boolean!, $costPer: String!, $price: BigDecimal!, $categoryId: String!, $description: String!) {
   saveNewProduct(productInputDTO: {name: $name, price: $price, stock: $stock, costPer: $costPer, categoryId: $categoryId, description: $description}) {

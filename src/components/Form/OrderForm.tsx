@@ -1,10 +1,19 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Col, Row } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import Input from "./Input";
 import styled from "styled-components";
 import { colors } from "ui/colors";
-import Radio from "./Radio";
+import TimeRadio, { RADIO_VALUES } from "./TimeRadio";
+import Textarea from "./Textarea";
+import Button, { ButtonColor, ButtonSize } from "components/Button";
+import { BasketContext } from "providers/BasketProvider";
+import useModal from "modals/hooks";
+import {
+  ProductOrderLineInputDto,
+  usePlaceOrderMutation,
+} from "generated/graphql";
+import useBasketProduct, { BasketProduct } from "hooks/useBasketProduct";
 
 const TextBold = styled.p`
   margin: 0;
@@ -17,6 +26,13 @@ const Text = styled.p`
   margin: 0;
   font-size: 14px;
   color: ${colors.coffee};
+`;
+
+const TotalPriceWrapper = styled.div`
+  display: flex;
+  font-size: 24px;
+  font-weight: 700;
+  color: rgba(0, 0, 0, 0.5);
 `;
 
 export type RefReturn =
@@ -35,7 +51,8 @@ type Inputs = {
   flat: string;
   floor: string;
   frontDoor: string;
-  time: string;
+  deliveryTime: string;
+  comment: string;
 };
 
 export const InputKeys = {
@@ -47,25 +64,55 @@ export const InputKeys = {
   flat: "flat",
   floor: "floor",
   frontDoor: "frontDoor",
-  time: "time",
+  deliveryTime: "time",
+  comment: "comment",
 } as const;
 
+const getProductOrderLines = (
+  basketProducts: BasketProduct[]
+): ProductOrderLineInputDto[] => {
+  return basketProducts.map((product) => {
+    const { id, name, price, description, costPer, orderQuantity } = product;
+    const ProductOrderLine: ProductOrderLineInputDto = {
+      productId: id,
+      name,
+      price,
+      description: description || "",
+      costPer,
+      orderQuantity,
+    };
+    return ProductOrderLine;
+  });
+};
+
 const OrderForm = () => {
-  const { register, handleSubmit, watch, errors } = useForm<Inputs>({
+  const [placeOrder, { data, loading, error }] = usePlaceOrderMutation();
+  const { openModal } = useModal();
+  const { basketProducts } = useBasketProduct();
+  const { totalPrice } = useContext(BasketContext);
+  const { register, handleSubmit, errors } = useForm<Inputs>({
     defaultValues: {
-      time: "12.00-18.00",
+      deliveryTime: RADIO_VALUES.firstValue,
     },
   });
-  const onSubmit = (data: Inputs) => {
-    console.log(data);
+  const onSubmit = async (data: Inputs) => {
+    const { deliveryTime, ...customer } = data;
+    const productOrderLines = getProductOrderLines(basketProducts);
+    try {
+      await placeOrder({
+        variables: {
+          customer,
+          deliveryTime,
+          productOrderLines,
+        },
+      });
+    } catch (error) {
+      console.log(error);
+    }
   };
 
-  const currentTime = watch("time");
-
-  console.log("currentTime", currentTime);
-
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form onSubmit={(e) => e.preventDefault()}>
       <Row className="mb-4">
         <Col>
           <Input
@@ -142,13 +189,46 @@ const OrderForm = () => {
       </Row>
       <Row className="mb-4">
         <Col>
-          <TextBold>Время доставки*</TextBold>
-          <Radio value={currentTime} register={register} />
+          <TextBold className="mb-2">Время доставки*</TextBold>
+          <TimeRadio register={register} />
         </Col>
       </Row>
-
       <Row className="mb-4">
-        <input type="submit" />
+        <Col>
+          <TextBold className="mb-2">Добавьте комментарий к заказу</TextBold>
+          <Textarea
+            rows={2}
+            style={{ resize: "none" }}
+            name={InputKeys.comment}
+            register={register}
+          />
+        </Col>
+      </Row>
+      <Row className="mb-4">
+        <Col className="d-flex justify-content-end">
+          <TotalPriceWrapper>
+            <span className="mr-5 font-weight-normal">К оплате</span>
+            <span className="coffee-color bold">{totalPrice}</span>
+          </TotalPriceWrapper>
+        </Col>
+      </Row>
+      <Row className="mb-4 ">
+        <Col>
+          <Button
+            text="НАЗАД В КОРЗИНУ"
+            size={ButtonSize.LARGE}
+            color={ButtonColor.WHITE_WITH_BORDER}
+            onClick={() => openModal("backetModal")}
+          />
+        </Col>
+        <Col className="d-flex justify-content-end">
+          <Button
+            text="ОФОРМИТЬ ЗАКАЗ"
+            size={ButtonSize.LARGE}
+            color={ButtonColor.WHITE_WITH_BORDER}
+            onClick={handleSubmit(onSubmit)}
+          />
+        </Col>
       </Row>
     </form>
   );
