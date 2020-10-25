@@ -42,14 +42,14 @@ const Footer = () => {
             </div>
           </Col>
           <Col>
-            <H3 className="amatic  mb-4">Время работы</H3>
+            <H3 className="amatic mb-4">Время работы</H3>
             <div>
               <FooterText>Пн-Сб: 10.00–20.00</FooterText>
               <FooterText>Вс: выходной</FooterText>
             </div>
           </Col>
           <Col>
-            <H3 className="amatic  mb-4">Наши соцсети</H3>
+            <H3 className="amatic mb-4">Наши соцсети</H3>
             <div>
               <Social className="pt-1" />
             </div>

@@ -1,61 +1,28 @@
-import { useMemo } from "react";
-import { useHistory, useLocation } from "react-router-dom";
+import { BasketItem } from "components/Basket/helpers";
+import { ProductItemFragment } from "generated/graphql";
+import { BasketValue } from "providers/BasketProvider";
 
-const MODAL_NAMES = {
-  orderModal: "orderModal",
-  basketModal: "backetModal",
-} as const;
-
-type TModalName = typeof MODAL_NAMES[keyof typeof MODAL_NAMES];
-
-type SearchParams = { [key: string]: any } | undefined;
-
-const useModal = () => {
-  const history = useHistory();
-
-  const { pathname, search } = useLocation();
-
-  const openModal = (modalName: TModalName, searchParams: SearchParams) => {
-    const parsedSearchParams = getUrlParams({
-      modal: modalName,
-      ...searchParams,
-    });
-    history.push(`${pathname}${parsedSearchParams}`, {
-      modal: true,
-    });
-  };
-
-  const closeModal = () => {
-    debugger;
-    history.push(pathname, {
-      modal: false,
-    });
-  };
-
-  const modalQueryParams = useMemo(() => {
-    if (!search) return {};
-    const correactedSearch = search.substring(1);
-    const result = JSON.parse(
-      '{"' +
-        decodeURI(correactedSearch)
-          .replace(/"/g, '\\"')
-          .replace(/&/g, '","')
-          .replace(/=/g, '":"') +
-        '"}'
-    );
-    return result;
-  }, [search]);
-
-  return { openModal, closeModal, modalQueryParams };
+export const getBasketListData = (
+  basketValues: BasketValue,
+  products: ProductItemFragment[]
+): BasketItem[] => {
+  const basketValuesKeys = Object.keys(basketValues);
+  if (!basketValuesKeys.length) return [];
+  const basketListData: BasketItem[] = [];
+  basketValuesKeys.forEach((key) => {
+    const product = products.find(({ id }) => id === key);
+    if (product) {
+      const { id, name, price, images } = product;
+      const count = basketValues[key];
+      const basketItem: BasketItem = {
+        id,
+        name,
+        count,
+        price,
+        img: images[0].image || "",
+      };
+      basketListData.push(basketItem);
+    }
+  });
+  return basketListData;
 };
-
-const getUrlParams = (searchParams: SearchParams): string => {
-  if (!searchParams || !Object.keys(searchParams).length) {
-    return "";
-  } else {
-    const urlParams = new URLSearchParams(searchParams).toString();
-    return "?" + urlParams;
-  }
-};
-
-export default useModal;

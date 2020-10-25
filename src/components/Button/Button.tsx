@@ -14,7 +14,7 @@ type Props = {
 export const ButtonColor = {
   TRANSPARENT: "transparent",
   WHITE: "white",
-  LIGHT: "loght",
+  LIGHT: "light",
   WHITE_WITH_BORDER: "whiteWithBorder",
 } as const;
 

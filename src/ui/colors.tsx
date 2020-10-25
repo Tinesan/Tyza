@@ -9,9 +9,12 @@ export const colors: { [key in COLORS]: string } = {
   black: "#000000",
   gray: "#808080",
   mercury: "#E6E6E6",
+  roseWhite: "#FFFCFC",
+  ebb: "#ECE8E5",
 };
 
 type COLORS =
+  | "ebb"
   | "gray"
   | "silk"
   | "black"
@@ -20,5 +23,6 @@ type COLORS =
   | "coffee"
   | "thatch"
   | "mercury"
+  | "roseWhite"
   | "dawnPink"
   | "seashellPeach";

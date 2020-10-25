@@ -4,7 +4,7 @@ import { Link } from "react-scroll";
 
 import Logo from "images/icons/logo.svg";
 
-import Button, { ButtonColor, ButtonSize } from "../Button";
+import Button, { BasketIcon, ButtonColor, ButtonSize } from "../Button";
 import * as Styled from "./Header.styled";
 
 const scrollDefaultProps = {
@@ -19,11 +19,11 @@ const Header = () => {
     <Styled.HeaderWrapper>
       <Container>
         <Row className="align-items-center">
-          <Col>
+          <Col xs={2}>
             <img src={Logo} alt="Logo" />
           </Col>
           <Col xs={6}>
-            <ListGroup horizontal className="justify-content-between">
+            <ListGroup horizontal className="justify-content-around">
               <Styled.ListGroupItem>
                 <Link to="products" {...scrollDefaultProps}>
                   Каталог
@@ -41,7 +41,8 @@ const Header = () => {
               </Styled.ListGroupItem>
             </ListGroup>
           </Col>
-          <Col>
+          <Col className="d-flex align-items-center justify-content-end">
+            <BasketIcon whiteIndicator className="mr-4" />
             <Button
               className="montserrat"
               text="Заказать звонок"

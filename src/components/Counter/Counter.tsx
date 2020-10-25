@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { colors } from "ui/colors";
 
 type Props = {
-  startValue: number;
+  value: number;
   onChange: (value: number) => void;
 };
 
@@ -47,27 +47,21 @@ const CounterValue = styled.div`
   text-align: center;
 `;
 
-const Counter = ({ startValue, onChange }: Props) => {
-  const [count, setCount] = useState<number>(startValue);
-
-  useEffect(() => {
-    onChange(count);
-  }, [count, onChange]);
-
+const Counter = ({ value, onChange }: Props) => {
   const increment = useCallback(() => {
-    setCount(count + 1);
-  }, [count]);
+    onChange(value + 1);
+  }, [onChange, value]);
 
   const decrement = useCallback(() => {
-    setCount(count - 1);
-  }, [count]);
+    onChange(value - 1);
+  }, [onChange, value]);
 
   return (
     <CounterWrapper>
-      <CountButton disabled={count === 1} onClick={decrement}>
+      <CountButton disabled={value === 1} onClick={decrement}>
         -
       </CountButton>
-      <CounterValue>{count}</CounterValue>
+      <CounterValue>{value}</CounterValue>
       <CountButton onClick={increment}>+</CountButton>
     </CounterWrapper>
   );

@@ -18,6 +18,7 @@ export const ProductControlsWrapper = styled.div`
 const ProductControls = ({ id }: Props) => {
   const { addBasketValue } = useContext(BasketContext);
   const [orderCount, setOrderCount] = useState(1);
+
   const addToBasket = () => {
     addBasketValue({ [id]: orderCount });
   };
@@ -28,7 +29,7 @@ const ProductControls = ({ id }: Props) => {
 
   return (
     <ProductControlsWrapper>
-      <Counter startValue={orderCount} onChange={onCounterChagne} />
+      <Counter value={orderCount} onChange={onCounterChagne} />
       <Button
         text="В КОРЗИНУ"
         size={ButtonSize.SMALL}
