@@ -1,12 +1,12 @@
 import Counter from "components/Counter";
 import React from "react";
 import styled from "styled-components";
-import { BasketItem } from "./helpers";
+import { TBasketItem } from "./helpers";
 import DeleteIcon from "images/icons/deleteIcon.svg";
 import { BasketValue } from "providers/BasketProvider";
 
 type Props = {
-  data: BasketItem;
+  data: TBasketItem;
   onDelete: (id: ID) => void;
   onChange: (basketValue: BasketValue) => void;
 };
@@ -34,14 +34,14 @@ const DeleteIconWrapper = styled.div`
   }
 `;
 
-const BaketItem = ({ data, onDelete, onChange }: Props) => {
+const BasketItem = ({ data, onDelete, onChange }: Props) => {
   const { id, img, price, count, name } = data;
 
   return (
     <tr>
       <TableData width={70}>
         <ImageWrapper>
-          <img src={`data:image/jpeg;base64,${img}`} alt={name} />
+          {/* <img src={`data:image/jpeg;base64,${img}`} alt={name} /> */}
         </ImageWrapper>
       </TableData>
       <TableData width={200}>{name}</TableData>
@@ -61,4 +61,4 @@ const BaketItem = ({ data, onDelete, onChange }: Props) => {
   );
 };
 
-export default BaketItem;
+export default BasketItem;

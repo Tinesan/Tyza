@@ -35,8 +35,7 @@ const ProductItem = ({
   onDeleteButtonClick,
 }: Props) => {
   const { name, images } = product;
-  const productImage = images[0]?.image;
-
+  const productImage = images[0]?.uri;
   return (
     <ListGroup.Item action>
       <Row className="align-items-center">
@@ -44,10 +43,7 @@ const ProductItem = ({
         <Col className="justify-content-end d-flex">
           <ProductImage className="mr-3">
             {productImage && (
-              <img
-                src={`data:image/jpeg;base64,${productImage}`}
-                alt="productImage"
-              />
+              <img src={`http://${productImage}`} alt="productImage" />
             )}
           </ProductImage>
           <Form.File

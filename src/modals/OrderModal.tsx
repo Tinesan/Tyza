@@ -1,3 +1,4 @@
+import { OrderForm } from "components/Form";
 import React from "react";
 import styled from "styled-components";
 import { H3 } from "ui/Title";
@@ -14,7 +15,8 @@ const OrderModalWrapper = styled.div`
 const OrderModal = ({ onClose }: Props) => {
   return (
     <OrderModalWrapper>
-      <H3 className="coffee-color mb-4">Заказ</H3>
+      <H3 className="coffee-color mb-4">Оформление заказа</H3>
+      <OrderForm />
     </OrderModalWrapper>
   );
 };

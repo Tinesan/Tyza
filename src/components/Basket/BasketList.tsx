@@ -1,11 +1,11 @@
-import React, { useCallback, useContext } from "react";
+import React, { useContext } from "react";
 import BasketItemC from "./BaketItem";
-import { BasketItem } from "./helpers";
+import { TBasketItem } from "./helpers";
 import styled from "styled-components";
 import { BasketContext } from "providers/BasketProvider";
 
 type Props = {
-  data: BasketItem[];
+  data: TBasketItem[];
 };
 
 const STable = styled.table`

@@ -1,6 +1,6 @@
 import { BasketList } from "components/Basket";
 import BasketResult from "components/Basket/BasketResult";
-import { BasketItem } from "components/Basket/helpers";
+import { TBasketItem } from "components/Basket/helpers";
 import Button, { ButtonColor, ButtonSize } from "components/Button";
 import { BasketContext } from "providers/BasketProvider";
 import { DataContext } from "providers/DataProvider";
@@ -47,7 +47,7 @@ const BasketModal = ({ onClose }: Props) => {
   const { openModal } = useModal();
   const { basketValues } = useContext(BasketContext);
   const { products } = useContext(DataContext);
-  const basketListData: BasketItem[] = getBasketListData(
+  const basketListData: TBasketItem[] = getBasketListData(
     basketValues,
     products
   );

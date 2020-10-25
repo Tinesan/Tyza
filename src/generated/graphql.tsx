@@ -28,6 +28,30 @@ export type CategoryInputDto = {
   description?: Maybe<Scalars['String']>;
 };
 
+export type CustomerDto = {
+  __typename?: 'CustomerDTO';
+  id: Scalars['String'];
+  name: Scalars['String'];
+  phone: Scalars['String'];
+  street: Scalars['String'];
+  house: Scalars['String'];
+  building: Scalars['String'];
+  frontDoor: Scalars['String'];
+  floor: Scalars['String'];
+  flat: Scalars['String'];
+};
+
+export type CustomerInputDto = {
+  name: Scalars['String'];
+  phone: Scalars['String'];
+  street: Scalars['String'];
+  house: Scalars['String'];
+  building: Scalars['String'];
+  frontDoor: Scalars['String'];
+  floor: Scalars['String'];
+  flat: Scalars['String'];
+};
+
 export type DeletePayload = {
   __typename?: 'DeletePayload';
   status: Scalars['Int'];
@@ -35,7 +59,10 @@ export type DeletePayload = {
 
 export type Mutation = {
   __typename?: 'Mutation';
-  /** product */
+  /**
+   * catdog-service
+   *     product
+   */
   saveNewProduct?: Maybe<ProductDto>;
   updateProduct?: Maybe<ProductDto>;
   deleteProduct: DeletePayload;
@@ -46,6 +73,11 @@ export type Mutation = {
   saveNewCategory: CategoryDto;
   updateCategory: CategoryDto;
   deleteCategory: DeletePayload;
+  /**
+   * catdog-order-service
+   *    product-order
+   */
+  placeOrder: ProductOrderDto;
 };
 
 
@@ -92,6 +124,11 @@ export type MutationDeleteCategoryArgs = {
   categoryId: Scalars['String'];
 };
 
+
+export type MutationPlaceOrderArgs = {
+  productOrderInputDTO: ProductOrderInputDto;
+};
+
 export type ProductDto = {
   __typename?: 'ProductDTO';
   id: Scalars['String'];
@@ -109,8 +146,9 @@ export type ProductImageDto = {
   id: Scalars['String'];
   name: Scalars['String'];
   main: Scalars['Boolean'];
-  image?: Maybe<Scalars['String']>;
+  uri: Scalars['String'];
   productId: Scalars['String'];
+  type: Scalars['String'];
 };
 
 export type ProductInputDto = {
@@ -123,9 +161,47 @@ export type ProductInputDto = {
   costPer: Scalars['String'];
 };
 
+export type ProductOrderDto = {
+  __typename?: 'ProductOrderDTO';
+  id: Scalars['String'];
+  customer: CustomerDto;
+  productOrderLines: Array<ProductOrderLineDto>;
+  orderStatus: Scalars['String'];
+  deliveryTime: Scalars['String'];
+};
+
+export type ProductOrderInputDto = {
+  customer: CustomerInputDto;
+  productOrderLines: Array<ProductOrderLineInputDto>;
+  deliveryTime: Scalars['String'];
+};
+
+export type ProductOrderLineDto = {
+  __typename?: 'ProductOrderLineDTO';
+  id: Scalars['String'];
+  productId: Scalars['String'];
+  name: Scalars['String'];
+  price: Scalars['BigDecimal'];
+  description: Scalars['String'];
+  costPer: Scalars['String'];
+  orderQuantity: Scalars['Int'];
+};
+
+export type ProductOrderLineInputDto = {
+  productId: Scalars['String'];
+  name: Scalars['String'];
+  price: Scalars['BigDecimal'];
+  description: Scalars['String'];
+  costPer: Scalars['String'];
+  orderQuantity: Scalars['Int'];
+};
+
 export type Query = {
   __typename?: 'Query';
-  /** product */
+  /**
+   * catdog-service
+   *     product
+   */
   listProduct: Array<ProductDto>;
   productById?: Maybe<ProductDto>;
   /** category */
@@ -221,7 +297,7 @@ export type ProductItemFragment = (
   & Pick<ProductDto, 'id' | 'name' | 'stock' | 'price' | 'costPer' | 'categoryId' | 'description'>
   & { images: Array<(
     { __typename?: 'ProductImageDTO' }
-    & Pick<ProductImageDto, 'id' | 'name' | 'main' | 'image' | 'productId'>
+    & Pick<ProductImageDto, 'id' | 'uri' | 'name' | 'main' | 'productId'>
   )> }
 );
 
@@ -323,9 +399,9 @@ export const ProductItemFragmentDoc = gql`
   description
   images {
     id
+    uri
     name
     main
-    image
     productId
   }
 }

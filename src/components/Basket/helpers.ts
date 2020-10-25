@@ -1,4 +1,4 @@
-export type BasketItem = {
+export type TBasketItem = {
   id: ID;
   img: string;
   name: string;

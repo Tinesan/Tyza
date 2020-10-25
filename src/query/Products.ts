@@ -13,9 +13,9 @@ gql`
     description
     images {
       id
+      uri
       name
       main
-      image
       productId
     }
   }

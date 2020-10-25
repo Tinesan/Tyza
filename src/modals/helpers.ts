@@ -1,25 +1,27 @@
-import { BasketItem } from "components/Basket/helpers";
+import { TBasketItem } from "components/Basket/helpers";
 import { ProductItemFragment } from "generated/graphql";
 import { BasketValue } from "providers/BasketProvider";
+import TestImage from "images/icons/logo.svg";
 
 export const getBasketListData = (
   basketValues: BasketValue,
   products: ProductItemFragment[]
-): BasketItem[] => {
+): TBasketItem[] => {
   const basketValuesKeys = Object.keys(basketValues);
   if (!basketValuesKeys.length) return [];
-  const basketListData: BasketItem[] = [];
+  const basketListData: TBasketItem[] = [];
   basketValuesKeys.forEach((key) => {
     const product = products.find(({ id }) => id === key);
     if (product) {
       const { id, name, price, images } = product;
+      const image = images[0]?.uri;
       const count = basketValues[key];
-      const basketItem: BasketItem = {
+      const basketItem: TBasketItem = {
         id,
         name,
         count,
         price,
-        img: images[0].image || "",
+        img: image || TestImage,
       };
       basketListData.push(basketItem);
     }
