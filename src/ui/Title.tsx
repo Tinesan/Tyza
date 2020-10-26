@@ -5,7 +5,7 @@ export const H2 = styled.h2`
   font-weight: 700;
 `;
 
-export const H3 = styled.h2`
+export const H3 = styled.h3`
   font-size: 36px;
   font-weight: 700;
 `;

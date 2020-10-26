@@ -1,10 +1,6 @@
 import React, { ReactNode, useMemo } from "react";
 
-import {
-  CategoryItemFragment,
-  ProductItemFragment,
-  useCategoriesAndProductsQuery,
-} from "generated/graphql";
+import { CategoryItemFragment, ProductItemFragment, useCategoriesAndProductsQuery } from "generated/graphql";
 
 type Props = {
   children: ReactNode;

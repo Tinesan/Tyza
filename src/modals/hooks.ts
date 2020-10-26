@@ -4,6 +4,7 @@ import { useHistory, useLocation } from "react-router-dom";
 export const MODAL_NAMES = {
   orderModal: "orderModal",
   basketModal: "backetModal",
+  orderResult: "orderResult",
 } as const;
 
 export type TModalName = typeof MODAL_NAMES[keyof typeof MODAL_NAMES];

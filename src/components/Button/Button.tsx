@@ -1,12 +1,14 @@
 import React from "react";
-import styled, { css } from "styled-components";
 
-import { colors } from "ui/colors";
+import { StyledButton } from "./Button.styled";
 
-type Props = {
+type Props = React.DetailedHTMLProps<
+  React.ButtonHTMLAttributes<HTMLButtonElement>,
+  HTMLButtonElement
+> & {
   text: string;
-  color: ButtonColor;
-  size: ButtonSize;
+  color: TButtonColor;
+  size: TButtonSize;
   onClick: () => void;
   className?: string;
 };
@@ -16,134 +18,34 @@ export const ButtonColor = {
   WHITE: "white",
   LIGHT: "light",
   WHITE_WITH_BORDER: "whiteWithBorder",
+  COFFEE_GRADIENT: "coffee-gradient",
 } as const;
 
-type ButtonColor = typeof ButtonColor[keyof typeof ButtonColor];
+export type TButtonColor = typeof ButtonColor[keyof typeof ButtonColor];
 
 export const ButtonSize = {
   SMALL: "SMALL",
   LARGE: "LARGE",
 } as const;
 
-type ButtonSize = keyof typeof ButtonSize;
+export type TButtonSize = keyof typeof ButtonSize;
 
-const StyledButton = styled.button<{ color: ButtonColor; size: ButtonSize }>`
-  position: relative;
-  background-color: transparent;
-  border-radius: 60px;
-  border: none;
-  outline: none;
-  white-space: nowrap;
-  text-transform: uppercase;
-  transition-duration: 0.3s;
-  color: ${colors.coffee};
+const Button = ({
+  color,
+  size,
+  text,
+  className,
+  onClick,
+  ...buttonProps
+}: Props) => {
+  const { disabled } = buttonProps;
 
-  &:focus {
-    outline: none;
-  }
-
-  ${({ color }) => {
-    switch (color) {
-      case ButtonColor.TRANSPARENT:
-        return css`
-          background-color: transparent;
-          border: 1px solid ${colors.white};
-
-          &:hover {
-            background-color: ${colors.white};
-            text-shadow: 0 0 0.65px ${colors.coffee},
-              0 0 0.65px ${colors.coffee};
-          }
-
-          &:active {
-            box-shadow: 0 0 8px 1px ${colors.white};
-          }
-        `;
-      case ButtonColor.WHITE_WITH_BORDER:
-        return css`
-          background-color: ${colors.white};
-          border: 1px solid ${colors.silk};
-
-          &:hover {
-            background-color: ${colors.silk};
-            color: ${colors.white};
-            text-shadow: 0 0 0.65px ${colors.white}, 0 0 0.65px ${colors.white};
-          }
-
-          &:active {
-            box-shadow: 0 0 8px 1px ${colors.white};
-          }
-        `;
-      case ButtonColor.WHITE:
-        return css`
-          background: ${colors.white};
-
-          span {
-            position: relative;
-            z-index: 3;
-          }
-
-          :after {
-            position: absolute;
-            content: "";
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border-radius: 60px;
-            background: linear-gradient(180deg, #c1b3a8 0%, #957965 100%);
-            transition: opacity 0.3s;
-            z-index: 2;
-            opacity: 0;
-          }
-
-          &:hover {
-            color: ${colors.white};
-            text-shadow: 0 0 0.65px ${colors.white}, 0 0 0.65px ${colors.white};
-            filter: drop-shadow(0px 4px 20px rgba(193, 179, 168, 0.5));
-            &:after {
-              opacity: 1;
-            }
-          }
-
-          &:active {
-            box-shadow: 0 0 4px 0px #c1b3a8;
-          }
-        `;
-      default:
-        break;
-    }
-  }}
-  ${({ size }) => {
-    switch (size) {
-      case ButtonSize.LARGE:
-        return css`
-          width: 260px;
-          height: 60px;
-          font-weight: 600;
-          font-size: 16px;
-          line-height: 16px;
-        `;
-      case ButtonSize.SMALL:
-        return css`
-          width: 170px;
-          height: 40px;
-          font-weight: 500;
-          font-size: 14px;
-          line-height: 14px;
-        `;
-      default:
-        break;
-    }
-  }}
-`;
-
-const Button = ({ color, size, text, className, onClick }: Props) => {
   return (
     <StyledButton
       size={size}
       color={color}
       onClick={onClick}
+      disabled={disabled}
       className={className}
     >
       <span>{text}</span>

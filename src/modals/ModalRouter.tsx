@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import { Modal } from "react-bootstrap";
 import styled from "styled-components";
-import { colors } from "ui/colors";
-import BasketModal from "./BasketModal";
-import CloseIcon from "images/icons/closeIcon.svg";
 
+import CloseIcon from "images/icons/closeIcon.svg";
+import { colors } from "ui/colors";
+
+import BasketModal from "./BasketModal";
 import useModal, { MODAL_NAMES, TModalName } from "./hooks";
 import OrderModal from "./OrderModal";
+import OrderResult from "./OrderResult";
 
 const ModalWrapper = styled.div`
   position: relative;
@@ -17,11 +19,12 @@ const ModalWrapper = styled.div`
 
 const MODALS: {
   [key in TModalName]: (
-    value: Required<{ onClose: () => void }>
+    value: Required<{ onClose?: () => void; modalQueryParams?: any }>
   ) => JSX.Element;
 } = {
   [MODAL_NAMES.basketModal]: BasketModal,
   [MODAL_NAMES.orderModal]: OrderModal,
+  [MODAL_NAMES.orderResult]: OrderResult,
 };
 
 const CloseButton = styled.div`
@@ -55,7 +58,7 @@ const ModalRouter = () => {
         <CloseButton onClick={onClose}>
           <img src={CloseIcon} alt="closeIcon" />
         </CloseButton>
-        <ModalWindow onClose={onClose} />
+        <ModalWindow onClose={onClose} {...modalQueryParams} />
       </ModalWrapper>
     </Modal>
   );

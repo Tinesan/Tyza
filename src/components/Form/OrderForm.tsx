@@ -4,10 +4,7 @@ import { useForm } from "react-hook-form";
 import styled from "styled-components";
 
 import Button, { ButtonColor, ButtonSize } from "components/Button";
-import {
-  ProductOrderLineInputDto,
-  usePlaceOrderMutation,
-} from "generated/graphql";
+import { ProductOrderLineInputDto, usePlaceOrderMutation } from "generated/graphql";
 import useBasketProduct, { BasketProduct } from "hooks/useBasketProduct";
 import useModal from "modals/hooks";
 import { BasketContext } from "providers/BasketProvider";
@@ -76,19 +73,19 @@ const getProductOrderLines = (
   return basketProducts.map((product) => {
     const { id, name, price, description, costPer, orderQuantity } = product;
     const ProductOrderLine: ProductOrderLineInputDto = {
-      productId: id,
       name,
       price,
-      description: description || "",
       costPer,
+      productId: id,
       orderQuantity,
+      description: description || "",
     };
     return ProductOrderLine;
   });
 };
 
 const OrderForm = () => {
-  const [placeOrder, { data, loading, error }] = usePlaceOrderMutation();
+  const [placeOrder, { loading: placeOrderLoading }] = usePlaceOrderMutation();
   const { openModal } = useModal();
   const { basketProducts } = useBasketProduct();
   const { totalPrice } = useContext(BasketContext);
@@ -100,8 +97,6 @@ const OrderForm = () => {
   const onSubmit = async (data: Inputs) => {
     const { deliveryTime, comment, ...customer } = data;
     const productOrderLines = getProductOrderLines(basketProducts);
-    console.log("productOrderLines", productOrderLines);
-    console.log("customer", customer);
     try {
       await placeOrder({
         variables: {
@@ -110,8 +105,9 @@ const OrderForm = () => {
           productOrderLines,
         },
       });
+      openModal("orderResult");
     } catch (error) {
-      console.log(error);
+      openModal("orderResult", { failed: 1 });
     }
   };
 
@@ -229,8 +225,9 @@ const OrderForm = () => {
           <Button
             text="ОФОРМИТЬ ЗАКАЗ"
             size={ButtonSize.LARGE}
-            color={ButtonColor.WHITE_WITH_BORDER}
+            disabled={placeOrderLoading}
             onClick={handleSubmit(onSubmit)}
+            color={ButtonColor.COFFEE_GRADIENT}
           />
         </Col>
       </Row>

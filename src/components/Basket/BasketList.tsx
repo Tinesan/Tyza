@@ -1,11 +1,13 @@
 import React, { useContext } from "react";
-import BasketItemC from "./BaketItem";
-import { TBasketItem } from "./helpers";
 import styled from "styled-components";
+
 import { BasketContext } from "providers/BasketProvider";
 
+import BasketItemC from "./BasketItem";
+import { BasketProduct } from "hooks/useBasketProduct";
+
 type Props = {
-  data: TBasketItem[];
+  data: BasketProduct[];
 };
 
 const STable = styled.table`

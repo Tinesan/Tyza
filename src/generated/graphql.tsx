@@ -129,6 +129,31 @@ export type MutationPlaceOrderArgs = {
   productOrderInputDTO: ProductOrderInputDto;
 };
 
+export type PageProductOrderDto = {
+  __typename?: 'PageProductOrderDTO';
+  content: Array<ProductOrderDto>;
+  pageable: PageableDto;
+  totalPages: Scalars['Int'];
+  last: Scalars['Boolean'];
+  totalElements: Scalars['Int'];
+  first: Scalars['Boolean'];
+  number: Scalars['Int'];
+  sort: SortDto;
+  numberOfElements: Scalars['Int'];
+  size: Scalars['Int'];
+  empty: Scalars['Boolean'];
+};
+
+export type PageableDto = {
+  __typename?: 'PageableDTO';
+  sort: SortDto;
+  pageNumber: Scalars['Int'];
+  pageSize: Scalars['Int'];
+  offset: Scalars['Int'];
+  paged: Scalars['Boolean'];
+  unpaged: Scalars['Boolean'];
+};
+
 export type ProductDto = {
   __typename?: 'ProductDTO';
   id: Scalars['String'];
@@ -207,6 +232,8 @@ export type Query = {
   /** category */
   listCategory: Array<CategoryDto>;
   categoryById: CategoryDto;
+  /** catdog-order-service */
+  findAllOrders: PageProductOrderDto;
 };
 
 
@@ -217,6 +244,20 @@ export type QueryProductByIdArgs = {
 
 export type QueryCategoryByIdArgs = {
   categoryId: Scalars['String'];
+};
+
+
+export type QueryFindAllOrdersArgs = {
+  page?: Maybe<Scalars['String']>;
+  size?: Maybe<Scalars['String']>;
+  sort?: Maybe<Scalars['String']>;
+};
+
+export type SortDto = {
+  __typename?: 'SortDTO';
+  sorted: Scalars['Boolean'];
+  unsorted: Scalars['Boolean'];
+  empty: Scalars['Boolean'];
 };
 
 
@@ -293,9 +334,9 @@ export type CategoriesAndProductsQuery = (
 );
 
 export type PlaceOrderMutationVariables = Exact<{
+  deliveryTime: Scalars['String'];
   customer: CustomerInputDto;
   productOrderLines: Array<ProductOrderLineInputDto>;
-  deliveryTime: Scalars['String'];
 }>;
 
 
@@ -304,6 +345,25 @@ export type PlaceOrderMutation = (
   & { placeOrder: (
     { __typename?: 'ProductOrderDTO' }
     & Pick<ProductOrderDto, 'id'>
+  ) }
+);
+
+export type FindAllOrdersQueryVariables = Exact<{
+  page?: Maybe<Scalars['String']>;
+  size?: Maybe<Scalars['String']>;
+  sort?: Maybe<Scalars['String']>;
+}>;
+
+
+export type FindAllOrdersQuery = (
+  { __typename?: 'Query' }
+  & { findAllOrders: (
+    { __typename?: 'PageProductOrderDTO' }
+    & Pick<PageProductOrderDto, 'totalElements'>
+    & { content: Array<(
+      { __typename?: 'ProductOrderDTO' }
+      & Pick<ProductOrderDto, 'id' | 'deliveryTime'>
+    )> }
   ) }
 );
 
@@ -589,7 +649,7 @@ export type CategoriesAndProductsQueryHookResult = ReturnType<typeof useCategori
 export type CategoriesAndProductsLazyQueryHookResult = ReturnType<typeof useCategoriesAndProductsLazyQuery>;
 export type CategoriesAndProductsQueryResult = Apollo.QueryResult<CategoriesAndProductsQuery, CategoriesAndProductsQueryVariables>;
 export const PlaceOrderDocument = gql`
-    mutation PlaceOrder($customer: CustomerInputDTO!, $productOrderLines: [ProductOrderLineInputDTO!]!, $deliveryTime: String!) {
+    mutation PlaceOrder($deliveryTime: String!, $customer: CustomerInputDTO!, $productOrderLines: [ProductOrderLineInputDTO!]!) {
   placeOrder(productOrderInputDTO: {customer: $customer, productOrderLines: $productOrderLines, deliveryTime: $deliveryTime}) {
     id
   }
@@ -610,9 +670,9 @@ export type PlaceOrderMutationFn = Apollo.MutationFunction<PlaceOrderMutation, P
  * @example
  * const [placeOrderMutation, { data, loading, error }] = usePlaceOrderMutation({
  *   variables: {
+ *      deliveryTime: // value for 'deliveryTime'
  *      customer: // value for 'customer'
  *      productOrderLines: // value for 'productOrderLines'
- *      deliveryTime: // value for 'deliveryTime'
  *   },
  * });
  */
@@ -622,6 +682,45 @@ export function usePlaceOrderMutation(baseOptions?: Apollo.MutationHookOptions<P
 export type PlaceOrderMutationHookResult = ReturnType<typeof usePlaceOrderMutation>;
 export type PlaceOrderMutationResult = Apollo.MutationResult<PlaceOrderMutation>;
 export type PlaceOrderMutationOptions = Apollo.BaseMutationOptions<PlaceOrderMutation, PlaceOrderMutationVariables>;
+export const FindAllOrdersDocument = gql`
+    query FindAllOrders($page: String, $size: String, $sort: String) {
+  findAllOrders(page: $page, size: $size, sort: $sort) {
+    content {
+      id
+      deliveryTime
+    }
+    totalElements
+  }
+}
+    `;
+
+/**
+ * __useFindAllOrdersQuery__
+ *
+ * To run a query within a React component, call `useFindAllOrdersQuery` and pass it any options that fit your needs.
+ * When your component renders, `useFindAllOrdersQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useFindAllOrdersQuery({
+ *   variables: {
+ *      page: // value for 'page'
+ *      size: // value for 'size'
+ *      sort: // value for 'sort'
+ *   },
+ * });
+ */
+export function useFindAllOrdersQuery(baseOptions?: Apollo.QueryHookOptions<FindAllOrdersQuery, FindAllOrdersQueryVariables>) {
+        return Apollo.useQuery<FindAllOrdersQuery, FindAllOrdersQueryVariables>(FindAllOrdersDocument, baseOptions);
+      }
+export function useFindAllOrdersLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<FindAllOrdersQuery, FindAllOrdersQueryVariables>) {
+          return Apollo.useLazyQuery<FindAllOrdersQuery, FindAllOrdersQueryVariables>(FindAllOrdersDocument, baseOptions);
+        }
+export type FindAllOrdersQueryHookResult = ReturnType<typeof useFindAllOrdersQuery>;
+export type FindAllOrdersLazyQueryHookResult = ReturnType<typeof useFindAllOrdersLazyQuery>;
+export type FindAllOrdersQueryResult = Apollo.QueryResult<FindAllOrdersQuery, FindAllOrdersQueryVariables>;
 export const AddNewProductDocument = gql`
     mutation AddNewProduct($name: String!, $stock: Boolean!, $costPer: String!, $price: BigDecimal!, $categoryId: String!, $description: String!) {
   saveNewProduct(productInputDTO: {name: $name, price: $price, stock: $stock, costPer: $costPer, categoryId: $categoryId, description: $description}) {

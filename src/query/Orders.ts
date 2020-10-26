@@ -17,3 +17,15 @@ export const PlaceOrder = gql`
     }
   }
 `;
+
+export const FindAllOrders = gql`
+  query FindAllOrders($page: String, $size: String, $sort: String) {
+    findAllOrders(page: $page, size: $size, sort: $sort) {
+      content {
+        id
+        deliveryTime
+      }
+      totalElements
+    }
+  }
+`;

@@ -1,12 +1,14 @@
-import Counter from "components/Counter";
 import React from "react";
 import styled from "styled-components";
-import { TBasketItem } from "./helpers";
+
+import Counter from "components/Counter";
+import { BasketProduct } from "hooks/useBasketProduct";
 import DeleteIcon from "images/icons/deleteIcon.svg";
+import TestImage from "images/icons/logo.svg";
 import { BasketValue } from "providers/BasketProvider";
 
 type Props = {
-  data: TBasketItem;
+  data: BasketProduct;
   onDelete: (id: ID) => void;
   onChange: (basketValue: BasketValue) => void;
 };
@@ -35,23 +37,23 @@ const DeleteIconWrapper = styled.div`
 `;
 
 const BasketItem = ({ data, onDelete, onChange }: Props) => {
-  const { id, img, price, count, name } = data;
-
+  const { id, images, price, orderQuantity, name } = data;
+  const image = images[0]?.uri;
   return (
     <tr>
       <TableData width={70}>
         <ImageWrapper>
-          {/* <img src={`data:image/jpeg;base64,${img}`} alt={name} /> */}
+          <img src={image ? `http://${image}` : TestImage} alt={name} />
         </ImageWrapper>
       </TableData>
       <TableData width={200}>{name}</TableData>
       <TableData width={100}>
         <Counter
-          value={count}
+          value={orderQuantity}
           onChange={(value) => onChange({ [id]: value })}
         />
       </TableData>
-      <TableData width={90}>{price * count} руб.</TableData>
+      <TableData width={90}>{price * orderQuantity} руб.</TableData>
       <TableData width={50}>
         <DeleteIconWrapper onClick={() => onDelete(id)}>
           <img src={DeleteIcon} alt="удалить" />

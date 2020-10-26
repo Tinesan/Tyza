@@ -41,7 +41,7 @@ const Header = () => {
               </Styled.ListGroupItem>
             </ListGroup>
           </Col>
-          <Col className="d-flex align-items-center justify-content-end">
+          <Col xs={4} className="d-flex align-items-center justify-content-end">
             <BasketIcon whiteIndicator className="mr-4" />
             <Button
               className="montserrat"
