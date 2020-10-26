@@ -1,19 +1,21 @@
 import React, { useContext } from "react";
 import { Col, Row } from "react-bootstrap";
 import { useForm } from "react-hook-form";
-import Input from "./Input";
 import styled from "styled-components";
-import { colors } from "ui/colors";
-import TimeRadio, { RADIO_VALUES } from "./TimeRadio";
-import Textarea from "./Textarea";
+
 import Button, { ButtonColor, ButtonSize } from "components/Button";
-import { BasketContext } from "providers/BasketProvider";
-import useModal from "modals/hooks";
 import {
   ProductOrderLineInputDto,
   usePlaceOrderMutation,
 } from "generated/graphql";
 import useBasketProduct, { BasketProduct } from "hooks/useBasketProduct";
+import useModal from "modals/hooks";
+import { BasketContext } from "providers/BasketProvider";
+import { colors } from "ui/colors";
+
+import Input from "./Input";
+import Textarea from "./Textarea";
+import TimeRadio, { RADIO_VALUES } from "./TimeRadio";
 
 const TextBold = styled.p`
   margin: 0;
@@ -64,7 +66,7 @@ export const InputKeys = {
   flat: "flat",
   floor: "floor",
   frontDoor: "frontDoor",
-  deliveryTime: "time",
+  deliveryTime: "deliveryTime",
   comment: "comment",
 } as const;
 
@@ -96,8 +98,10 @@ const OrderForm = () => {
     },
   });
   const onSubmit = async (data: Inputs) => {
-    const { deliveryTime, ...customer } = data;
+    const { deliveryTime, comment, ...customer } = data;
     const productOrderLines = getProductOrderLines(basketProducts);
+    console.log("productOrderLines", productOrderLines);
+    console.log("customer", customer);
     try {
       await placeOrder({
         variables: {
