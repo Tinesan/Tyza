@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useRef } from "react";
 import styled, { css } from "styled-components";
 
 import BIcon from "images/icons/basketIcon.svg";
@@ -27,7 +27,11 @@ const BasketIndicator = styled.div`
   font-weight: 500;
   transition-duration: 0.3s;
   color: ${colors.white};
-  background-color: ${colors.silk};
+  background-color: #c94c4c;
+
+  &.large {
+    box-shadow: 0 0 10px 3px ${colors.vividTangerine};
+  }
 `;
 
 const BasketIconWrapper = styled.div<{ whiteIndicator: boolean | undefined }>`
@@ -35,8 +39,14 @@ const BasketIconWrapper = styled.div<{ whiteIndicator: boolean | undefined }>`
   transition-duration: 0.3s;
   cursor: pointer;
 
+  img {
+    transition-duration: 0.3s;
+  }
+
   &:hover {
-    transform: scale(1.2);
+    img {
+      transform: scale(1.1);
+    }
   }
 
   ${({ whiteIndicator }) =>
@@ -50,23 +60,32 @@ const BasketIconWrapper = styled.div<{ whiteIndicator: boolean | undefined }>`
 `;
 
 const BasketIcon = ({ whiteIndicator, className }: Props) => {
+  const indicator = useRef<HTMLDivElement>(null);
   const { openModal } = useModal();
   const { basketValues } = useContext(BasketContext);
   const basketValuesLength = Object.keys(basketValues).length;
-  const hasBasketValues = !!basketValuesLength;
 
-  return hasBasketValues ? (
+  useEffect(() => {
+    if (indicator.current) {
+      indicator.current.classList.add("large");
+      setTimeout(() => {
+        indicator.current?.classList.remove("large");
+      }, 300);
+    }
+  }, [basketValues]);
+
+  return (
     <BasketIconWrapper
       onClick={() => openModal("backetModal")}
       className={className}
       whiteIndicator={whiteIndicator}
     >
-      {hasBasketValues && (
-        <BasketIndicator>{basketValuesLength}</BasketIndicator>
+      {!!basketValuesLength && (
+        <BasketIndicator ref={indicator}>{basketValuesLength}</BasketIndicator>
       )}
       <img src={BIcon} alt="BasketIcon" />
     </BasketIconWrapper>
-  ) : null;
+  );
 };
 
 export default BasketIcon;

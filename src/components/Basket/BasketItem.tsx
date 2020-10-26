@@ -15,9 +15,12 @@ type Props = {
 
 const ImageWrapper = styled.div`
   display: flex;
+  max-height: 40px;
   max-width: 70px;
+
   img {
-    max-width: 100%;
+    max-height: 40px;
+    max-width: 70px;
   }
 `;
 

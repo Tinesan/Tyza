@@ -1,10 +1,11 @@
-import React, { useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
 
 import { BasketList } from "components/Basket";
 import BasketResult from "components/Basket/BasketResult";
 import Button, { ButtonColor, ButtonSize } from "components/Button";
 import useBasketProduct from "hooks/useBasketProduct";
+import SadCat from "images/sadCat.png";
 import { colors } from "ui/colors";
 import { H3 } from "ui/Title";
 
@@ -42,21 +43,33 @@ const ButtonWrapper = styled.div`
   justify-content: flex-end;
 `;
 
+const ImageWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+
+  img {
+    max-width: 150px;
+    max-height: 150px;
+  }
+`;
+
 const BasketModal = ({ onClose }: Props) => {
   const { openModal } = useModal();
-
   const { basketProducts } = useBasketProduct();
-
-  useEffect(() => {
-    const basketIsEmpty = !basketProducts.length;
-    if (basketIsEmpty) {
-      onClose();
-    }
-  }, [basketProducts, onClose]);
+  const isBasketEmpty = !basketProducts.length;
 
   return (
     <BasketModalWrapper>
-      <H3 className="coffee-color mb-4">Ваша корзина</H3>
+      <H3
+        className={`coffee-color mb-4 ${isBasketEmpty ? " text-center" : ""}`}
+      >
+        Ваша корзина {isBasketEmpty && "пока пуста"}
+      </H3>
+      {isBasketEmpty && (
+        <ImageWrapper>
+          <img src={SadCat} alt="sad-cat" />
+        </ImageWrapper>
+      )}
       <BasketListWrapper>
         <BasketList data={basketProducts} />
       </BasketListWrapper>
@@ -68,8 +81,10 @@ const BasketModal = ({ onClose }: Props) => {
           <Button
             size={ButtonSize.LARGE}
             color={ButtonColor.COFFEE_GRADIENT}
-            text="ОФОРМИТЬ ЗАКАЗ"
-            onClick={() => openModal("orderModal")}
+            text={isBasketEmpty ? "Вернуться к заказу" : "ОФОРМИТЬ ЗАКАЗ"}
+            onClick={() =>
+              isBasketEmpty ? onClose() : openModal("orderModal")
+            }
           />
         </ButtonWrapper>
       </ModalFooter>

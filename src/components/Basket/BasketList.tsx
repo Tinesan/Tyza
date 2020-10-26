@@ -10,11 +10,17 @@ type Props = {
   data: BasketProduct[];
 };
 
-const STable = styled.table`
+const Table = styled.table`
   table-layout: fixed;
   width: 100%;
   td:not(:first-child) {
     padding-left: 15px;
+  }
+
+  tr:not(:last-child) {
+    td {
+      padding-bottom: 10px;
+    }
   }
 `;
 
@@ -22,7 +28,7 @@ const BasketList = ({ data }: Props) => {
   const { deleteBasketValue, addBasketValue } = useContext(BasketContext);
 
   return (
-    <STable>
+    <Table>
       <tbody>
         {data.map((baketItem) => (
           <BasketItemC
@@ -33,7 +39,7 @@ const BasketList = ({ data }: Props) => {
           />
         ))}
       </tbody>
-    </STable>
+    </Table>
   );
 };
 
