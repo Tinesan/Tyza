@@ -1,10 +1,10 @@
 import React, { useContext } from "react";
 import styled from "styled-components";
 
+import { BasketProduct } from "hooks/useBasketProduct";
 import { BasketContext } from "providers/BasketProvider";
 
 import BasketItemC from "./BasketItem";
-import { BasketProduct } from "hooks/useBasketProduct";
 
 type Props = {
   data: BasketProduct[];
