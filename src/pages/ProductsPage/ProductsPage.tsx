@@ -4,9 +4,7 @@ import styled from "styled-components";
 
 import Products from "modules/Admin/Products";
 
-const ProductsPageWrapper = styled.section`
-  padding-top: 40px;
-`;
+const ProductsPageWrapper = styled.section``;
 
 const ProductsPage = () => {
   return (

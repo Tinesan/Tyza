@@ -193,12 +193,15 @@ export type ProductOrderDto = {
   productOrderLines: Array<ProductOrderLineDto>;
   orderStatus: Scalars['String'];
   deliveryTime: Scalars['String'];
+  createdDate: Scalars['String'];
+  comment?: Maybe<Scalars['String']>;
 };
 
 export type ProductOrderInputDto = {
   customer: CustomerInputDto;
   productOrderLines: Array<ProductOrderLineInputDto>;
   deliveryTime: Scalars['String'];
+  comment?: Maybe<Scalars['String']>;
 };
 
 export type ProductOrderLineDto = {
@@ -348,6 +351,18 @@ export type PlaceOrderMutation = (
   ) }
 );
 
+export type OrderContentItemFragment = (
+  { __typename?: 'ProductOrderDTO' }
+  & Pick<ProductOrderDto, 'id' | 'deliveryTime' | 'createdDate'>
+  & { customer: (
+    { __typename?: 'CustomerDTO' }
+    & Pick<CustomerDto, 'id' | 'name' | 'phone' | 'street' | 'house' | 'building' | 'frontDoor' | 'floor' | 'flat'>
+  ), productOrderLines: Array<(
+    { __typename?: 'ProductOrderLineDTO' }
+    & Pick<ProductOrderLineDto, 'id' | 'productId' | 'name' | 'price' | 'description' | 'costPer' | 'orderQuantity'>
+  )> }
+);
+
 export type FindAllOrdersQueryVariables = Exact<{
   page?: Maybe<Scalars['String']>;
   size?: Maybe<Scalars['String']>;
@@ -362,7 +377,7 @@ export type FindAllOrdersQuery = (
     & Pick<PageProductOrderDto, 'totalElements'>
     & { content: Array<(
       { __typename?: 'ProductOrderDTO' }
-      & Pick<ProductOrderDto, 'id' | 'deliveryTime'>
+      & OrderContentItemFragment
     )> }
   ) }
 );
@@ -461,6 +476,34 @@ export const CategoryItemFragmentDoc = gql`
     fragment CategoryItem on CategoryDTO {
   id
   name
+}
+    `;
+export const OrderContentItemFragmentDoc = gql`
+    fragment OrderContentItem on ProductOrderDTO {
+  id
+  deliveryTime
+  deliveryTime
+  createdDate
+  customer {
+    id
+    name
+    phone
+    street
+    house
+    building
+    frontDoor
+    floor
+    flat
+  }
+  productOrderLines {
+    id
+    productId
+    name
+    price
+    description
+    costPer
+    orderQuantity
+  }
 }
     `;
 export const ProductItemFragmentDoc = gql`
@@ -686,13 +729,12 @@ export const FindAllOrdersDocument = gql`
     query FindAllOrders($page: String, $size: String, $sort: String) {
   findAllOrders(page: $page, size: $size, sort: $sort) {
     content {
-      id
-      deliveryTime
+      ...OrderContentItem
     }
     totalElements
   }
 }
-    `;
+    ${OrderContentItemFragmentDoc}`;
 
 /**
  * __useFindAllOrdersQuery__
