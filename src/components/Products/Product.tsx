@@ -13,12 +13,12 @@ type Props = {
 
 const Product = ({ product }: Props) => {
   const { id, name, description, costPer, price, images } = product;
-  const image = images[0]?.uri;
+  const image = images[0]?.uri || TestImage;
 
   return (
     <Styled.ProductWrapper>
       <Styled.ProductImage className="mb-2">
-        <img src={image ? `http://${image}` : TestImage} alt="test" />
+        <img src={image} alt="test" />
       </Styled.ProductImage>
       <Styled.ProductTitle>
         <H5>{name}</H5>

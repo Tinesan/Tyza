@@ -41,12 +41,12 @@ const DeleteIconWrapper = styled.div`
 
 const BasketItem = ({ data, onDelete, onChange }: Props) => {
   const { id, images, price, orderQuantity, name } = data;
-  const image = images[0]?.uri;
+  const image = images[0]?.uri || TestImage;
   return (
     <tr>
       <TableData width={70}>
         <ImageWrapper>
-          <img src={image ? `http://${image}` : TestImage} alt={name} />
+          <img src={image} alt={name} />
         </ImageWrapper>
       </TableData>
       <TableData width={200}>{name}</TableData>

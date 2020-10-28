@@ -42,9 +42,7 @@ const ProductItem = ({
         <Col md={5}>{name}</Col>
         <Col className="justify-content-end d-flex">
           <ProductImage className="mr-3">
-            {productImage && (
-              <img src={`http://${productImage}`} alt="productImage" />
-            )}
+            {productImage && <img src={productImage} alt="productImage" />}
           </ProductImage>
           <Form.File
             custom
