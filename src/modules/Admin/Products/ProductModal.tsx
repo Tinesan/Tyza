@@ -97,7 +97,7 @@ const ProductModal = ({ id, children }: Props) => {
             </option>
             {categories.map(({ id, name }) => {
               return (
-                <option key={id} value={id}>
+                <option key={id} value={id} selected={id === categoryId}>
                   {name}
                 </option>
               );
