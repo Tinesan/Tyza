@@ -107,6 +107,10 @@ const settings: Settings = {
   infinite: false,
   slidesToScroll: 1,
   appendDots: (dots) => <DotsWrapper>{dots}</DotsWrapper>,
+  responsive: [
+    { breakpoint: 992, settings: { slidesToShow: 2 } },
+    { breakpoint: 768, settings: { slidesToShow: 1 } },
+  ],
 };
 
 const ItemWrapper = styled.div`

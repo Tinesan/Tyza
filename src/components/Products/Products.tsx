@@ -24,7 +24,9 @@ const Products = () => {
           {products.map((product: ProductItemFragment, inx) => {
             return (
               <Col
-                md="3"
+                xs={6}
+                sm={4}
+                md={3}
                 className={inx > 3 ? "mt-4" : undefined}
                 key={product.id}
               >

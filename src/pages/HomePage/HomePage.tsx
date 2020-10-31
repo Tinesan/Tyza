@@ -22,9 +22,9 @@ const HomePage = () => {
   return (
     <HomePageWrapper>
       <Header />
-      <Divider size={80} />
+      <Divider className="d-none d-md-block" size={80} />
       <Advantages />
-      <Divider size={100} />
+      <Divider className="d-none d-md-block" size={100} />
       <ProductAdvantages />
       <Divider size={100} />
       <ColdProduction />

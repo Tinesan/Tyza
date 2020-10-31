@@ -9,12 +9,21 @@ import LineWithCircleRT from "images/icons/lineWithCircleRT.svg";
 import ProductAdvantageBg from "images/productAdvantageBg.png";
 import { colors } from "ui/colors";
 import { H2 } from "ui/Title";
+import { device } from "ui/media";
 
 const ProductAdvantagesWrapper = styled.section`
   padding-bottom: 80px;
   background: url(${ProductAdvantageBg}) no-repeat ${colors.dawnPink};
   background-position: 50% bottom;
   background-size: 400px auto;
+
+  @media ${device.tablet} {
+    background-position: 100% bottom;
+    background-size: 400px auto;
+  }
+  @media ${device.mobile} {
+    display: none;
+  }
 `;
 
 const ProductAdvantagesItemWrapper = styled.div<{
@@ -39,6 +48,14 @@ const ProductAdvantagesItemWrapper = styled.div<{
     background: ${({ line }) => `url(${line}) no-repeat`};
     background-size: contain;
   }
+
+  @media ${device.tablet} {
+    max-width: 60%;
+    &::before {
+      content: none;
+      display: none;
+    }
+  }
 `;
 
 const TitleWrapper = styled.div`
@@ -59,7 +76,7 @@ const ProductAdvantages = () => {
           </Col>
         </Row>
         <Row>
-          <Col>
+          <Col xs={12} lg={6}>
             <ProductAdvantagesItemWrapper
               className="mt-4"
               top={true}
@@ -70,7 +87,7 @@ const ProductAdvantages = () => {
               соблюдению оптимального баланса мяса, жира и субпродуктов.
             </ProductAdvantagesItemWrapper>
           </Col>
-          <Col className="d-flex justify-content-end">
+          <Col xs={12} lg={6} className="d-flex justify-content-lg-end">
             <ProductAdvantagesItemWrapper
               className="mt-4"
               top={true}
@@ -84,7 +101,7 @@ const ProductAdvantages = () => {
           </Col>
         </Row>
         <Row>
-          <Col>
+          <Col xs={12} lg={6} className="mt-4 mt-lg-0">
             <ProductAdvantagesItemWrapper
               line={LineWithCircleLB}
               top={false}
@@ -96,7 +113,7 @@ const ProductAdvantages = () => {
               сказаться на здоровье питомца.
             </ProductAdvantagesItemWrapper>
           </Col>
-          <Col className="d-flex justify-content-end">
+          <Col xs={12} lg={6} className="d-flex justify-content-lg-end">
             <ProductAdvantagesItemWrapper
               top={false}
               left={false}

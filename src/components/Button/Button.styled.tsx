@@ -1,6 +1,7 @@
 import styled, { css } from "styled-components";
 
 import { colors } from "ui/colors";
+import { device } from "ui/media";
 
 import { ButtonColor, ButtonSize } from ".";
 import { TButtonColor, TButtonSize } from "./Button";
@@ -147,6 +148,12 @@ export const StyledButton = styled.button<
           font-weight: 600;
           font-size: 16px;
           line-height: 16px;
+
+          @media ${device.tablet} {
+            width: 175px;
+            height: 45px;
+            font-size: 14px;
+          }
         `;
       case ButtonSize.SMALL:
         return css`

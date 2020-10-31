@@ -20,10 +20,10 @@ const Header = () => {
       <Styled.HeaderWrapper>
         <Container>
           <Row className="align-items-center">
-            <Col xs={2}>
+            <Col xs={6} md={2}>
               <img src={Logo} alt="Logo" />
             </Col>
-            <Col xs={6}>
+            <Col className="d-none d-md-block" xs={0} md={6}>
               <ListGroup horizontal className="justify-content-around">
                 <Styled.ListGroupItem>
                   <Link to="products" {...scrollDefaultProps}>
@@ -43,12 +43,13 @@ const Header = () => {
               </ListGroup>
             </Col>
             <Col
-              xs={4}
+              xs={6}
+              md={4}
               className="d-flex align-items-center justify-content-end"
             >
               <BasketIcon whiteIndicator className="mr-4" />
               <Button
-                className="montserrat"
+                className="montserrat d-none d-md-block"
                 text="Заказать звонок"
                 onClick={console.log}
                 size={ButtonSize.LARGE}

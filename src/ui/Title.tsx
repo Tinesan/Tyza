@@ -1,8 +1,13 @@
 import styled from "styled-components";
+import { device } from "./media";
 
 export const H2 = styled.h2`
   font-size: 50px;
   font-weight: 700;
+
+  @media ${device.tablet} {
+    font-size: 36px;
+  }
 `;
 
 export const H3 = styled.h3`

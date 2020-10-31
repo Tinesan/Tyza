@@ -10,6 +10,7 @@ import { colors } from "ui/colors";
 import { H2 } from "ui/Title";
 
 import Advantage from "./Advantage";
+import { device } from "ui/media";
 
 const UnderlinedText = styled.p`
   margin-bottom: 0;
@@ -58,7 +59,11 @@ const ADVANTAGES: {
   },
 ];
 
-export const AdvantagesWrapper = styled.section``;
+export const AdvantagesWrapper = styled.section`
+  @media ${device.mobile} {
+    display: none;
+  }
+`;
 
 export const TitleWrapper = styled.div`
   margin-bottom: 40px;
@@ -81,7 +86,7 @@ const Advantages = () => {
           {ADVANTAGES.map((advantage, inx) => {
             const key: string = inx + advantage.title;
             return (
-              <Col key={key}>
+              <Col key={key} lg={3} md={6} className={inx < 2 ? "mb-md-3" : ""}>
                 <Advantage {...advantage} />
               </Col>
             );
