@@ -41,12 +41,12 @@ const Categories = () => {
   ] = useDeleteCategoryMutation();
 
   const onModalSave = async (data: CategoryModalData) => {
-    const { id, categoryName: name } = data;
+    const { id, categoryName: name, categoryOrder: description } = data;
     if (id) {
-      await updateCategory({ variables: { id, name } });
+      await updateCategory({ variables: { id, name, description } });
     } else {
       await addNewCategory({
-        variables: { name },
+        variables: { name, description },
       });
     }
     await refetchCategoriesAndProducts();

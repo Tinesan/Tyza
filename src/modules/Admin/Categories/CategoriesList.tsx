@@ -33,6 +33,7 @@ const CategoriesList = ({
                 </div>
                 <div>
                   <Button
+                    disabled={name === "OTHER"}
                     variant="danger"
                     onClick={() => onDeleteButtonClick(id)}
                   >

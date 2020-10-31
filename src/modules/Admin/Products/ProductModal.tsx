@@ -1,8 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Col, Form, Row } from "react-bootstrap";
 
-import { DataContext } from "providers/DataProvider";
 import { useProductQuery } from "generated/graphql";
+import { DataContext } from "providers/DataProvider";
 
 type Props = {
   id?: ID;

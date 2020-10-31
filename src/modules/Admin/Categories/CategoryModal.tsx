@@ -15,18 +15,24 @@ type Props = {
 export type CategoryModalData = {
   id?: ID;
   categoryName: string;
+  categoryOrder: string;
 };
 
 const CategoryModal = ({ id, children }: Props) => {
   const [categoryName, setCategoryName] = useState<string>("");
+  const [categoryOrder, setCategoryOrder] = useState<string>("1");
   const { data } = useCategoryQuery({
     skip: !id,
     variables: { id: id as string },
   });
 
   useEffect(() => {
-    if (data?.categoryById.name) {
+    if (data?.categoryById) {
       setCategoryName(data.categoryById.name);
+      if (data.categoryById.description) {
+        const categoryOrder = +data.categoryById.description;
+        setCategoryOrder(isNaN(categoryOrder) ? "1" : categoryOrder.toString());
+      }
     }
   }, [data]);
 
@@ -41,6 +47,14 @@ const CategoryModal = ({ id, children }: Props) => {
             value={categoryName}
             onChange={(e) => setCategoryName(e.target.value)}
           />
+          <Form.Label>Числовой порядок отображения категории</Form.Label>
+          <Form.Control
+            min={1}
+            type="number"
+            placeholder="Введите числовой порядок отображения категории"
+            value={categoryOrder}
+            onChange={(e) => setCategoryOrder(e.target.value)}
+          />
         </Form.Group>
       </Col>
     </Row>
@@ -48,7 +62,7 @@ const CategoryModal = ({ id, children }: Props) => {
 
   return children({
     form,
-    categoryModalData: { categoryName, id },
+    categoryModalData: { categoryName, categoryOrder, id },
     isSaveButtonDisabled: !categoryName.trim(),
   });
 };

@@ -25,6 +25,7 @@ const ProductImage = styled.div`
   img {
     max-width: 100%;
     max-height: 100%;
+    object-fit: contain;
   }
 `;
 
@@ -35,7 +36,7 @@ const ProductItem = ({
   onDeleteButtonClick,
 }: Props) => {
   const { name, images } = product;
-  const productImage = images[0]?.uri;
+  const productImage = images[images.length - 1]?.uri ?? undefined;
   return (
     <ListGroup.Item action>
       <Row className="align-items-center">

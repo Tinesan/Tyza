@@ -1,4 +1,5 @@
 import styled from "styled-components";
+
 import { colors } from "ui/colors";
 
 export const ProductTitle = styled.div`
@@ -23,6 +24,8 @@ export const ProductImage = styled.div`
   height: 130px;
   img {
     max-height: 100%;
+    max-width: 100%;
+    object-fit: contain;
   }
 `;
 

@@ -21,6 +21,7 @@ const ImageWrapper = styled.div`
   img {
     max-height: 40px;
     max-width: 70px;
+    object-fit: contain;
   }
 `;
 
@@ -41,7 +42,7 @@ const DeleteIconWrapper = styled.div`
 
 const BasketItem = ({ data, onDelete, onChange }: Props) => {
   const { id, images, price, orderQuantity, name } = data;
-  const image = images[0]?.uri || TestImage;
+  const image = images[images.length - 1]?.uri ?? TestImage;
   return (
     <tr>
       <TableData width={70}>

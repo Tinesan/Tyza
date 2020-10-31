@@ -13,7 +13,7 @@ type Props = {
 
 const Product = ({ product }: Props) => {
   const { id, name, description, costPer, price, images } = product;
-  const image = images[0]?.uri || TestImage;
+  const image = images[images.length - 1]?.uri ?? TestImage;
 
   return (
     <Styled.ProductWrapper>

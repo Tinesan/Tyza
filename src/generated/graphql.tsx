@@ -266,7 +266,7 @@ export type SortDto = {
 
 export type CategoryItemFragment = (
   { __typename?: 'CategoryDTO' }
-  & Pick<CategoryDto, 'id' | 'name'>
+  & Pick<CategoryDto, 'id' | 'name' | 'description'>
 );
 
 export type CategoryQueryVariables = Exact<{
@@ -278,13 +278,14 @@ export type CategoryQuery = (
   { __typename?: 'Query' }
   & { categoryById: (
     { __typename?: 'CategoryDTO' }
-    & Pick<CategoryDto, 'id' | 'name'>
+    & CategoryItemFragment
   ) }
 );
 
 export type UpdateCategoryMutationVariables = Exact<{
   id: Scalars['String'];
   name: Scalars['String'];
+  description: Scalars['String'];
 }>;
 
 
@@ -298,6 +299,7 @@ export type UpdateCategoryMutation = (
 
 export type AddNewCategoryMutationVariables = Exact<{
   name: Scalars['String'];
+  description: Scalars['String'];
 }>;
 
 
@@ -476,6 +478,7 @@ export const CategoryItemFragmentDoc = gql`
     fragment CategoryItem on CategoryDTO {
   id
   name
+  description
 }
     `;
 export const OrderContentItemFragmentDoc = gql`
@@ -527,11 +530,10 @@ export const ProductItemFragmentDoc = gql`
 export const CategoryDocument = gql`
     query Category($id: String!) {
   categoryById(categoryId: $id) {
-    id
-    name
+    ...CategoryItem
   }
 }
-    `;
+    ${CategoryItemFragmentDoc}`;
 
 /**
  * __useCategoryQuery__
@@ -559,8 +561,8 @@ export type CategoryQueryHookResult = ReturnType<typeof useCategoryQuery>;
 export type CategoryLazyQueryHookResult = ReturnType<typeof useCategoryLazyQuery>;
 export type CategoryQueryResult = Apollo.QueryResult<CategoryQuery, CategoryQueryVariables>;
 export const UpdateCategoryDocument = gql`
-    mutation UpdateCategory($id: String!, $name: String!) {
-  updateCategory(categoryId: $id, categoryInputDTO: {name: $name}) {
+    mutation UpdateCategory($id: String!, $name: String!, $description: String!) {
+  updateCategory(categoryId: $id, categoryInputDTO: {name: $name, description: $description}) {
     id
   }
 }
@@ -582,6 +584,7 @@ export type UpdateCategoryMutationFn = Apollo.MutationFunction<UpdateCategoryMut
  *   variables: {
  *      id: // value for 'id'
  *      name: // value for 'name'
+ *      description: // value for 'description'
  *   },
  * });
  */
@@ -592,8 +595,8 @@ export type UpdateCategoryMutationHookResult = ReturnType<typeof useUpdateCatego
 export type UpdateCategoryMutationResult = Apollo.MutationResult<UpdateCategoryMutation>;
 export type UpdateCategoryMutationOptions = Apollo.BaseMutationOptions<UpdateCategoryMutation, UpdateCategoryMutationVariables>;
 export const AddNewCategoryDocument = gql`
-    mutation AddNewCategory($name: String!) {
-  saveNewCategory(categoryInputDTO: {name: $name}) {
+    mutation AddNewCategory($name: String!, $description: String!) {
+  saveNewCategory(categoryInputDTO: {name: $name, description: $description}) {
     id
   }
 }
@@ -614,6 +617,7 @@ export type AddNewCategoryMutationFn = Apollo.MutationFunction<AddNewCategoryMut
  * const [addNewCategoryMutation, { data, loading, error }] = useAddNewCategoryMutation({
  *   variables: {
  *      name: // value for 'name'
+ *      description: // value for 'description'
  *   },
  * });
  */
