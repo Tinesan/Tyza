@@ -3,6 +3,7 @@ import { Col, Container, ListGroup, Row } from "react-bootstrap";
 import { Element, Link } from "react-scroll";
 
 import Logo from "images/icons/logo.svg";
+import useModal from "modals/hooks";
 
 import Button, { BasketIcon, ButtonColor, ButtonSize } from "../Button";
 import * as Styled from "./Header.styled";
@@ -15,6 +16,7 @@ const scrollDefaultProps = {
 };
 
 const Header = () => {
+  const { openModal } = useModal();
   return (
     <Element name="header">
       <Styled.HeaderWrapper>
@@ -51,7 +53,9 @@ const Header = () => {
               <Button
                 className="montserrat d-none d-md-block"
                 text="Заказать звонок"
-                onClick={console.log}
+                onClick={() =>
+                  openModal("callModal", { dialogClassName: "call-modal" })
+                }
                 size={ButtonSize.LARGE}
                 color={ButtonColor.TRANSPARENT}
               />

@@ -5,6 +5,7 @@ export const MODAL_NAMES = {
   orderModal: "orderModal",
   basketModal: "backetModal",
   orderResult: "orderResult",
+  callModal: "callModal",
 } as const;
 
 export type TModalName = typeof MODAL_NAMES[keyof typeof MODAL_NAMES];

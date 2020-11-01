@@ -7,6 +7,7 @@ import Social from "components/Social";
 import Logo from "images/icons/logo.svg";
 import { colors } from "ui/colors";
 import { H3 } from "ui/Title";
+import useModal from "modals/hooks";
 
 const FooterWrapper = styled.section``;
 
@@ -23,6 +24,7 @@ const OrderCallWrapper = styled.div`
 `;
 
 const Footer = () => {
+  const { openModal } = useModal();
   return (
     <FooterWrapper>
       <Container>
@@ -61,7 +63,9 @@ const Footer = () => {
                 text="ЗАКАЗАТЬ ЗВОНОК"
                 size={ButtonSize.LARGE}
                 color={ButtonColor.WHITE_WITH_BORDER}
-                onClick={console.log}
+                onClick={() =>
+                  openModal("callModal", { dialogClassName: "call-modal" })
+                }
               />
             </OrderCallWrapper>
           </Col>

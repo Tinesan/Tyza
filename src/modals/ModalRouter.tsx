@@ -6,6 +6,7 @@ import CloseIcon from "images/icons/closeIcon.svg";
 import { colors } from "ui/colors";
 
 import BasketModal from "./BasketModal";
+import CallModal from "./CallModal";
 import useModal, { MODAL_NAMES, TModalName } from "./hooks";
 import OrderModal from "./OrderModal";
 import OrderResult from "./OrderResult";
@@ -25,6 +26,7 @@ const MODALS: {
   [MODAL_NAMES.basketModal]: BasketModal,
   [MODAL_NAMES.orderModal]: OrderModal,
   [MODAL_NAMES.orderResult]: OrderResult,
+  [MODAL_NAMES.callModal]: CallModal,
 };
 
 const CloseButton = styled.div`
@@ -33,6 +35,7 @@ const CloseButton = styled.div`
   right: 45px;
   transition-duration: 0.3s;
   cursor: pointer;
+  opacity: 0.5;
 
   &:hover {
     transform: scale(1.2);
@@ -51,10 +54,17 @@ const ModalRouter = () => {
   const ModalWindow = MODALS[modalQueryParams.modal as TModalName];
 
   if (!ModalWindow) return null;
-
+  const { dialogClassName } = modalQueryParams;
+  console.log("dialogClassName", dialogClassName);
   return (
-    <Modal show={showModal} size="lg" centered onHide={onClose}>
-      <ModalWrapper>
+    <Modal
+      show={showModal}
+      size="lg"
+      centered
+      onHide={onClose}
+      dialogClassName={dialogClassName}
+    >
+      <ModalWrapper className="modal-wrapper">
         <CloseButton onClick={onClose}>
           <img src={CloseIcon} alt="closeIcon" />
         </CloseButton>
