@@ -55,6 +55,10 @@ export const FindAllOrders = gql`
       content {
         ...OrderContentItem
       }
+      last
+      first
+      number
+      totalPages
       totalElements
     }
   }

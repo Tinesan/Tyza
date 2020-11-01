@@ -376,7 +376,7 @@ export type FindAllOrdersQuery = (
   { __typename?: 'Query' }
   & { findAllOrders: (
     { __typename?: 'PageProductOrderDTO' }
-    & Pick<PageProductOrderDto, 'totalElements'>
+    & Pick<PageProductOrderDto, 'last' | 'first' | 'number' | 'totalPages' | 'totalElements'>
     & { content: Array<(
       { __typename?: 'ProductOrderDTO' }
       & OrderContentItemFragment
@@ -735,6 +735,10 @@ export const FindAllOrdersDocument = gql`
     content {
       ...OrderContentItem
     }
+    last
+    first
+    number
+    totalPages
     totalElements
   }
 }
