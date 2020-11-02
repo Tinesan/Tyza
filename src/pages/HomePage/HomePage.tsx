@@ -28,9 +28,9 @@ const HomePage = () => {
       <ProductAdvantages />
       <Divider size={100} />
       <ColdProduction />
-      <Divider size={50} />
+      <Divider className="d-none d-md-block" size={50} />
       <Products />
-      <Divider size={100} />
+      <Divider className="d-none d-md-block" size={100} />
       <Portion />
       <Divider size={40} />
       <Reviews />

@@ -1,12 +1,18 @@
 import React from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import styled from "styled-components";
-import { colors } from "ui/colors";
+
 import FooterInfo from "images/icons/footerInfo.svg";
+import { colors } from "ui/colors";
+import { device } from "ui/media";
 
 const CompanyInfoWrapper = styled.div`
   border-top: 1px solid ${colors.silk};
   padding: 15px 0;
+
+  @media ${device.mobile} {
+    padding: 10px 0;
+  }
 `;
 
 const InfoTextWrapper = styled.div`
@@ -14,6 +20,10 @@ const InfoTextWrapper = styled.div`
   flex-direction: column;
   font-size: 14px;
   opacity: 50%;
+
+  @media ${device.mobile} {
+    font-size: 12px;
+  }
 `;
 
 const CompanyInfo = () => {

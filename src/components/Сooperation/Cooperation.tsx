@@ -4,18 +4,38 @@ import styled from "styled-components";
 
 import CooperationIcon from "images/icons/cooperation.svg";
 import { colors } from "ui/colors";
+import { device } from "ui/media";
 
 const CooperationWrapper = styled.section`
   background-color: ${colors.silk};
   padding: 40px 0;
   font-size: 24px;
   color: ${colors.white};
+
+  @media ${device.tablet} {
+    padding: 25px 0;
+    font-size: 18px;
+  }
+
+  @media ${device.mobile} {
+    padding: 35px 0;
+  }
 `;
 
 const CooperationBg = styled.div`
   height: 200px;
   background: url(${CooperationIcon}) no-repeat;
+  background-size: contain;
   background-position: center center;
+
+  @media ${device.tablet} {
+    height: 135px;
+  }
+
+  @media ${device.mobile} {
+    height: 200px;
+    margin-bottom: 30px;
+  }
 `;
 
 const Cooperation = () => {

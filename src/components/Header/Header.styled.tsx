@@ -21,6 +21,11 @@ export const HeaderWrapper = styled.section`
     height: 470px;
     background-size: 150px, 300px, 100%;
   }
+
+  @media ${device.mobile} {
+    height: 650px;
+    background-position: 62% bottom, 62% bottom, 0 0;
+  }
 `;
 
 export const ListGroupItem = styled(Item)`
@@ -50,6 +55,10 @@ export const Title = styled.h1`
   @media ${device.tablet} {
     font-size: 45px;
   }
+
+  @media ${device.mobile} {
+    font-size: 32px;
+  }
 `;
 
 export const TitleWrapper = styled.div`
@@ -57,6 +66,12 @@ export const TitleWrapper = styled.div`
 
   @media ${device.tablet} {
     max-width: 450px;
+  }
+
+  @media ${device.mobile} {
+    ${Title} {
+      text-align: center;
+    }
   }
 `;
 
@@ -70,5 +85,13 @@ export const Subtitle = styled.p`
 
   @media ${device.tablet} {
     font-size: 18px;
+  }
+`;
+
+export const ButtonWrapper = styled.div`
+  @media ${device.mobile} {
+    .header-button {
+      width: 100%;
+    }
   }
 `;

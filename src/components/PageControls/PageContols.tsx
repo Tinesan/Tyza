@@ -5,6 +5,7 @@ import styled from "styled-components";
 import { BasketIcon } from "components/Button";
 import UpArrow from "images/icons/upArrow.svg";
 import { colors } from "ui/colors";
+import { device } from "ui/media";
 
 const PageContolsWrapper = styled.div`
   display: flex;
@@ -20,6 +21,15 @@ const PageContolsWrapper = styled.div`
     right: 20px;
     opacity: 1;
   }
+
+  @media ${device.mobile} {
+    bottom: 10px;
+
+    &.show {
+      bottom: 10px;
+      right: 10px;
+    }
+  }
 `;
 
 const ButtonWrapper = styled.div`
@@ -34,6 +44,18 @@ const ButtonWrapper = styled.div`
   background-color: ${colors.white};
   transition-duration: 0.3s;
   cursor: pointer;
+
+  @media ${device.mobile} {
+    width: 45px;
+    height: 45px;
+
+    &.basket {
+      img {
+        max-width: 30px;
+        max-height: 30px;
+      }
+    }
+  }
 
   &:hover {
     transform: scale(1.1);
@@ -77,7 +99,7 @@ const PageContols = () => {
           <img src={UpArrow} alt="up-arrow" />
         </ButtonWrapper>
       </Link>
-      <ButtonWrapper>
+      <ButtonWrapper className="basket">
         <BasketIcon />
       </ButtonWrapper>
     </PageContolsWrapper>

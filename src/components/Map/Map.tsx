@@ -17,7 +17,7 @@ const Map = () => {
           </Col>
         </Row>
       </Container>
-      <div className="mt-5">
+      <div className="mt-3 mt-lg-5">
         <YMaps>
           <YMap
             style={{ width: "100%", height: 500 }}

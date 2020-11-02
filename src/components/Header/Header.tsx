@@ -65,7 +65,8 @@ const Header = () => {
             <Col>
               <Styled.TitleWrapper>
                 <Styled.Title className="amatic mt-4">
-                  Натуральный замороженный мясной корм <br />
+                  Натуральный замороженный мясной корм{" "}
+                  <br className="d-none d-lg-block" />
                   для собак и кошек
                 </Styled.Title>
               </Styled.TitleWrapper>
@@ -75,15 +76,26 @@ const Header = () => {
                   доставкой
                 </Styled.Subtitle>
               </Styled.SubtitleWrapper>
-              <div className="mt-4">
+              <Styled.ButtonWrapper className="mt-4">
+                <Link to="products" {...scrollDefaultProps}>
+                  <Button
+                    className="montserrat header-button "
+                    text="Купить"
+                    onClick={console.log}
+                    size={ButtonSize.LARGE}
+                    color={ButtonColor.WHITE}
+                  />
+                </Link>
                 <Button
-                  className="montserrat"
-                  text="Купить"
-                  onClick={console.log}
+                  className="montserrat d-block d-md-none mt-3 header-button"
+                  text="Заказать звонок"
+                  onClick={() =>
+                    openModal("callModal", { dialogClassName: "call-modal" })
+                  }
                   size={ButtonSize.LARGE}
-                  color={ButtonColor.WHITE}
+                  color={ButtonColor.TRANSPARENT}
                 />
-              </div>
+              </Styled.ButtonWrapper>
             </Col>
           </Row>
         </Container>

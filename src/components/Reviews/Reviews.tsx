@@ -2,13 +2,13 @@ import React, { useRef } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import Slider, { Settings } from "react-slick";
 import styled, { css } from "styled-components";
-import TestFoto from "images/testImages/person.png";
-import Arrow from "images/icons/arrow.svg";
 
+import Arrow from "images/icons/arrow.svg";
+import TestFoto from "images/testImages/person.png";
+import { colors } from "ui/colors";
 import { H2 } from "ui/Title";
 
 import ReviewItem from "./ReviewItem";
-import { colors } from "ui/colors";
 
 const ReviewsWrapper = styled.section`
   overflow: hidden;
@@ -123,13 +123,12 @@ const SlideWrapper = styled.div`
 
 const Reviews = () => {
   const slider = useRef<Slider | null>(null);
-  console.log(slider);
   return (
     <ReviewsWrapper>
       <Container>
         <Row>
           <Col>
-            <H2 className="amatic coffee-color text-center mb-5">
+            <H2 className="amatic coffee-color text-center mb-2 mb-lg-5">
               Отзывы о нашем корме
             </H2>
           </Col>

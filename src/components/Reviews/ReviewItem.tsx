@@ -1,6 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 
+import { device } from "ui/media";
+
 type Props = {
   title: string;
   image: string;
@@ -18,6 +20,10 @@ const ReviewItemWrapper = styled.div`
   background: #ffffff;
   box-shadow: 0px 4px 30px rgba(193, 179, 168, 0.3);
   border-radius: 20px;
+
+  @media ${device.tablet} {
+    padding: 40px 20px;
+  }
 `;
 
 const ReviewImageWrapper = styled.div`
@@ -27,6 +33,10 @@ const ReviewImageWrapper = styled.div`
   border-radius: 80px;
   overflow: hidden;
   margin-bottom: 30px;
+
+  @media ${device.tablet} {
+    margin-bottom: 20px;
+  }
 
   img {
     max-width: 100%;
@@ -47,6 +57,9 @@ const ReviewText = styled.span`
 
 const ReviewDescription = styled.div`
   margin-top: 30px;
+  @media ${device.tablet} {
+    margin-top: 20px;
+  }
 `;
 
 const ReviewItem = ({ title, image, titleDescription, description }: Props) => {

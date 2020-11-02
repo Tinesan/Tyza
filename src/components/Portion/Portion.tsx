@@ -5,12 +5,23 @@ import styled from "styled-components";
 
 import DogOnFoot from "images/dogOnFoot.png";
 import { colors } from "ui/colors";
+import { device } from "ui/media";
 import { H2 } from "ui/Title";
 
 const PortionWrapper = styled.section`
   position: relative;
   padding: 90px 0;
   color: ${colors.white};
+
+  @media ${device.tablet} {
+    padding: 40px 0;
+  }
+
+  @media ${device.mobile} {
+    margin-bottom: 200px;
+    padding: 20px 0;
+    color: ${colors.coffee};
+  }
 
   &:before {
     content: "";
@@ -19,23 +30,51 @@ const PortionWrapper = styled.section`
     height: 100%;
     top: 0;
     left: 0;
-    background: url(${DogOnFoot}) no-repeat;
+    background: url(${DogOnFoot}) no-repeat,
+      linear-gradient(to bottom, white 20%, ${colors.silk} 20% 80%, white 80%);
     background-position: 50% bottom;
     background-size: contain;
+
+    @media ${device.tablet} {
+      background-position: 55% bottom, 100% center;
+    }
+
+    @media ${device.mobile} {
+      top: 100%;
+      height: 200px;
+    }
   }
 `;
 
 const PortionContent = styled.div`
   padding: 70px 0;
   background-color: ${colors.silk};
+
+  @media ${device.tablet} {
+    padding: 35px 0;
+  }
+
+  @media ${device.mobile} {
+    padding: 10px 0;
+    background-color: transparent;
+  }
 `;
 
 const PortionMainDescription = styled.p`
   font-size: 24px;
+
+  @media ${device.tablet} {
+    font-size: 18px;
+  }
 `;
 
 const PortionSecondaryDescription = styled.p`
   font-size: 18px;
+  margin-bottom: 0;
+
+  @media ${device.tablet} {
+    font-size: 16px;
+  }
 `;
 
 const Portion = () => {
@@ -45,8 +84,10 @@ const Portion = () => {
         <PortionContent>
           <Container>
             <Row>
-              <Col md={6}>
-                <H2 className="amatic  mb-5">Порция взрослой собаки</H2>
+              <Col sm={12} md={6}>
+                <H2 className="amatic mb-2 mb-md-2 mb-lg-5">
+                  Порция взрослой собаки
+                </H2>
                 <PortionMainDescription>
                   Вес взрослой собаки * на <b>0,035</b>
                 </PortionMainDescription>
@@ -54,8 +95,8 @@ const Portion = () => {
                   Пример: собака 10 кг * 0,035 = 350 гр.)
                 </PortionSecondaryDescription>
               </Col>
-              <Col md={{ span: 4, offset: 2 }}>
-                <H2 className="amatic white-color mb-5">Порция щенка</H2>
+              <Col className="mt-5 mt-md-0" sm={12} md={{ span: 4, offset: 2 }}>
+                <H2 className="amatic mb-2 mb-md-2  mb-lg-5">Порция щенка</H2>
                 <PortionMainDescription>
                   Вес щенка * на <b>0,065</b>
                 </PortionMainDescription>

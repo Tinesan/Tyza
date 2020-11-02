@@ -162,6 +162,12 @@ export const StyledButton = styled.button<
           font-weight: 500;
           font-size: 14px;
           line-height: 14px;
+
+          @media ${device.tablet} {
+            width: 130px;
+            height: 40px;
+            font-size: 14px;
+          }
         `;
       default:
         break;
