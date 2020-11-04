@@ -4,6 +4,7 @@ import styled from "styled-components";
 
 import CloseIcon from "images/icons/closeIcon.svg";
 import { colors } from "ui/colors";
+import { device } from "ui/media";
 
 import BasketModal from "./BasketModal";
 import CallModal from "./CallModal";
@@ -16,6 +17,10 @@ const ModalWrapper = styled.div`
   padding: 75px 100px;
   background-color: ${colors.roseWhite};
   border-radius: 10px;
+
+  @media ${device.mobile} {
+    padding: 30px;
+  }
 `;
 
 const MODALS: {
@@ -37,6 +42,11 @@ const CloseButton = styled.div`
   cursor: pointer;
   opacity: 0.5;
 
+  @media ${device.mobile} {
+    top: 10px;
+    right: 15px;
+  }
+
   &:hover {
     transform: scale(1.2);
   }
@@ -55,7 +65,6 @@ const ModalRouter = () => {
 
   if (!ModalWindow) return null;
   const { dialogClassName } = modalQueryParams;
-  console.log("dialogClassName", dialogClassName);
   return (
     <Modal
       show={showModal}

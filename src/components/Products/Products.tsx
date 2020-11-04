@@ -51,8 +51,6 @@ const transformProductsForClient = ({
     return +a.order - +b.order;
   });
 
-  console.log(productsWithCategoryName);
-
   return productsWithCategoryName;
 };
 
@@ -72,7 +70,7 @@ const Products = () => {
               <Col>
                 <Row>
                   <Col>
-                    <H2 className="amatic coffee-color text-center mb-4">
+                    <H2 className="amatic coffee-color text-center">
                       {categoryName}
                     </H2>
                   </Col>
@@ -84,7 +82,7 @@ const Products = () => {
                         xs={6}
                         sm={4}
                         md={3}
-                        className={inx > 3 ? "mt-4" : undefined}
+                        className="mt-4"
                         key={product.id}
                       >
                         <Product product={product} />

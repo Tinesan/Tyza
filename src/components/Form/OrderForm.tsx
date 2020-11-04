@@ -212,23 +212,27 @@ const OrderForm = () => {
           </TotalPriceWrapper>
         </Col>
       </Row>
-      <Row className="mb-4 ">
-        <Col>
+      <Row className="mb-4 order-form-button-wrapper">
+        <Col xs={12} lg={6}>
           <Button
+            className="order-form-button"
             text="НАЗАД В КОРЗИНУ"
             size={ButtonSize.LARGE}
             color={ButtonColor.WHITE_WITH_BORDER}
             onClick={() => openModal("backetModal")}
           />
         </Col>
-        <Col className="d-flex justify-content-end">
-          <Button
-            text="ОФОРМИТЬ ЗАКАЗ"
-            size={ButtonSize.LARGE}
-            disabled={placeOrderLoading}
-            onClick={handleSubmit(onSubmit)}
-            color={ButtonColor.COFFEE_GRADIENT}
-          />
+        <Col xs={12} lg={6}>
+          <div className="d-flex justify-content-end">
+            <Button
+              className="order-form-button"
+              text="ОФОРМИТЬ ЗАКАЗ"
+              size={ButtonSize.LARGE}
+              disabled={placeOrderLoading}
+              onClick={handleSubmit(onSubmit)}
+              color={ButtonColor.COFFEE_GRADIENT}
+            />
+          </div>
         </Col>
       </Row>
     </form>

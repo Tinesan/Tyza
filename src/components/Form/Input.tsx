@@ -1,7 +1,9 @@
 import React from "react";
-import { RefReturn, InputKeys } from "./OrderForm";
 import styled from "styled-components";
+
 import { colors } from "ui/colors";
+
+import { InputKeys, RefReturn } from "./OrderForm";
 
 const InputWrapper = styled.div<{ hasError: boolean }>`
   display: flex;
@@ -69,7 +71,6 @@ const getCyrillicLabel = (label: keyof typeof InputKeys): string => {
 };
 
 const Input = ({ label, register, required, hasError }: Props) => {
-  console.log("hasError", hasError);
   return (
     <InputWrapper hasError={hasError}>
       <label>

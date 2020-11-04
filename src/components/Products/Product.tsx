@@ -23,7 +23,9 @@ const Product = ({ product }: Props) => {
       <Styled.ProductTitle>
         <H5>{name}</H5>
       </Styled.ProductTitle>
-      <Styled.ProductText className="mb-2">{description}</Styled.ProductText>
+      <Styled.ProductText className="mb-2 flex-grow-1">
+        {description}
+      </Styled.ProductText>
       <Styled.ProductText className="mb-2">
         Стоимость за {costPer}
       </Styled.ProductText>

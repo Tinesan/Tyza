@@ -63,79 +63,97 @@ const ProductModal = ({ id, children }: Props) => {
   });
 
   const form = (
-    <Row className="justify-content-center">
-      <Col>
-        <Form.Group>
-          <Form.Label>Название товара</Form.Label>
-          <Form.Control
-            type="text"
-            value={name}
-            placeholder="Введите название товара"
-            onChange={(e) => setName(e.target.value)}
-          />
-        </Form.Group>
-        <Form.Group>
-          <Form.Label>Цена товара, рублей</Form.Label>
-          <Form.Control
-            min="0"
-            value={price}
-            type="number"
-            placeholder="Введите цену товара"
-            onChange={(e) => setPrice(e.target.value)}
-          />
-        </Form.Group>
-        <Form.Group controlId="exampleForm.SelectCustom">
-          <Form.Label>Категория товара</Form.Label>
-          <Form.Control
-            as="select"
-            custom
-            defaultValue={""}
-            onChange={(e) => setCategoryId(e.target.value)}
-          >
-            <option disabled value="">
-              Выберите категорию
-            </option>
-            {categories.map(({ id, name }) => {
-              return (
-                <option key={id} value={id} selected={id === categoryId}>
-                  {name}
-                </option>
-              );
-            })}
-          </Form.Control>
-        </Form.Group>
-      </Col>
-      <Col>
-        <Form.Group>
-          <Form.Label>Описание товара</Form.Label>
-          <Form.Control
-            type="text"
-            placeholder="Введите описание товара"
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-          />
-        </Form.Group>
-        <Form.Group>
-          <Form.Label>Cтоимость за</Form.Label>
-          <Form.Control
-            type="text"
-            value={costPer}
-            placeholder="Введите название стоимость за ( 1кг, 1 упаковку, пару, метр)"
-            onChange={(e) => setCoastPer(e.target.value)}
-          />
-        </Form.Group>
-        <Form.Group controlId="formBasicCheckbox">
-          <Form.Check
-            type="checkbox"
-            checked={stock}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-              setStock(e.target.checked)
-            }
-            label="Товар в наличии"
-          />
-        </Form.Group>
-      </Col>
-    </Row>
+    <>
+      <Row className="justify-content-center">
+        <Col>
+          <Form.Group>
+            <Form.Label>Название товара</Form.Label>
+            <Form.Control
+              type="text"
+              value={name}
+              placeholder="Введите название товара"
+              onChange={(e) => setName(e.target.value)}
+            />
+          </Form.Group>
+        </Col>
+        <Col>
+          <Form.Group controlId="exampleForm.SelectCustom">
+            <Form.Label>Категория товара</Form.Label>
+            <Form.Control
+              as="select"
+              custom
+              defaultValue={""}
+              onChange={(e) => setCategoryId(e.target.value)}
+            >
+              <option disabled value="">
+                Выберите категорию
+              </option>
+              {categories.map(({ id, name }) => {
+                return (
+                  <option key={id} value={id} selected={id === categoryId}>
+                    {name}
+                  </option>
+                );
+              })}
+            </Form.Control>
+          </Form.Group>
+        </Col>
+      </Row>
+      <Row>
+        <Col>
+          <Form.Group>
+            <Form.Label>Цена товара, рублей</Form.Label>
+            <Form.Control
+              min="0"
+              value={price}
+              type="number"
+              placeholder="Введите цену товара"
+              onChange={(e) => setPrice(e.target.value)}
+            />
+          </Form.Group>
+        </Col>
+        <Col>
+          <Form.Group>
+            <Form.Label>Cтоимость за</Form.Label>
+            <Form.Control
+              type="text"
+              value={costPer}
+              placeholder="Введите название стоимость за ( 1кг, 1 упаковку, пару, метр)"
+              onChange={(e) => setCoastPer(e.target.value)}
+            />
+          </Form.Group>
+        </Col>
+      </Row>
+      <Row>
+        <Col>
+          <Form.Group>
+            <Form.Label>Описание товара</Form.Label>
+            <Form.Control
+              rows={3}
+              type="text"
+              as="textarea"
+              placeholder="Введите описание товара"
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+            />
+          </Form.Group>
+        </Col>
+      </Row>
+      <Row>
+        <Col>
+          <Form.Group controlId="formBasicCheckbox">
+            <Form.Check
+              type="checkbox"
+              checked={stock}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                setStock(e.target.checked)
+              }
+              label="Товар в наличии"
+            />
+          </Form.Group>
+        </Col>
+      </Row>
+    </>
   );
 
   return children({

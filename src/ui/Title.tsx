@@ -1,4 +1,5 @@
 import styled from "styled-components";
+
 import { device } from "./media";
 
 export const H2 = styled.h2`
@@ -13,6 +14,10 @@ export const H2 = styled.h2`
 export const H3 = styled.h3`
   font-size: 36px;
   font-weight: 700;
+
+  @media ${device.mobile} {
+    font-size: 24px;
+  }
 `;
 
 export const H5 = styled.h5`

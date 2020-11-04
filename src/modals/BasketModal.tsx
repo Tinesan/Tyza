@@ -7,6 +7,7 @@ import Button, { ButtonColor, ButtonSize } from "components/Button";
 import useBasketProduct from "hooks/useBasketProduct";
 import SadCat from "images/sadCat.png";
 import { colors } from "ui/colors";
+import { device } from "ui/media";
 import { H3 } from "ui/Title";
 
 import useModal from "./hooks";
@@ -24,6 +25,14 @@ const BasketListWrapper = styled.div`
   display: flex;
   padding-bottom: 30px;
   border-bottom: 2px solid ${colors.ebb};
+  @media ${device.mobile} {
+    padding-bottom: 0px;
+  }
+`;
+
+const ButtonWrapper = styled.div`
+  display: flex;
+  justify-content: flex-end;
 `;
 
 const ModalFooter = styled.div`
@@ -33,15 +42,23 @@ const ModalFooter = styled.div`
   > div {
     width: calc(50% - 15px);
     flex-shrink: 0;
+
+    @media ${device.tablet} {
+      width: auto;
+    }
+  }
+
+  @media ${device.tablet} {
+    flex-direction: column;
+    margin-top: 20px;
+    ${ButtonWrapper} {
+      margin-top: 20px;
+      justify-content: center;
+    }
   }
 `;
 
 const ResultWrapper = styled.div``;
-
-const ButtonWrapper = styled.div`
-  display: flex;
-  justify-content: flex-end;
-`;
 
 const ImageWrapper = styled.div`
   display: flex;

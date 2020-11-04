@@ -6,6 +6,7 @@ import { BasketProduct } from "hooks/useBasketProduct";
 import DeleteIcon from "images/icons/deleteIcon.svg";
 import TestImage from "images/icons/logo.svg";
 import { BasketValue } from "providers/BasketProvider";
+import { device } from "ui/media";
 
 type Props = {
   data: BasketProduct;
@@ -27,16 +28,21 @@ const ImageWrapper = styled.div`
 
 const TableData = styled.td<{ width: number }>`
   width: ${({ width }) => `${width}px`};
+
+  @media ${device.mobile} {
+    width: auto;
+  }
 `;
 
 const DeleteIconWrapper = styled.div`
   display: flex;
   margin-left: auto;
-  max-width: 30px;
-  max-height: 30px;
+  width: 30px;
+  height: 30px;
   cursor: pointer;
   img {
     max-width: 100%;
+    object-fit: contain;
   }
 `;
 
