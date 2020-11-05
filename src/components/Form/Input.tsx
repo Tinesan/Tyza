@@ -1,4 +1,5 @@
 import React from "react";
+import InputMask, { ReactInputMask } from "react-input-mask";
 import styled from "styled-components";
 
 import { colors } from "ui/colors";
@@ -44,7 +45,13 @@ type Props = React.DetailedHTMLProps<
 > & {
   hasError: boolean;
   label: keyof typeof InputKeys;
-  register: ({ required }: { required?: boolean }) => RefReturn;
+  register: ({
+    required,
+  }: {
+    required?: boolean;
+    pattern?: any;
+    validate?: any;
+  }) => RefReturn;
 };
 
 const getCyrillicLabel = (label: keyof typeof InputKeys): string => {
@@ -78,6 +85,43 @@ const Input = ({ label, register, required, hasError }: Props) => {
         {required && "*"}
       </label>
       <input name={label} ref={register({ required })} />
+    </InputWrapper>
+  );
+};
+
+const isPhoneValid = (value: string) => {
+  // const allNumbersInPhoneValue = (value.match(/\d/g) || []).map(Number);
+  // const flag = allNumbersInPhoneValue.length === 12 ? undefined : "not valid";
+  // return flag;
+  const a =
+    value &&
+    value.match(
+      /^[+]?[0-9]{3}[-\s.]?[(][0-9]{2}[)]?[-\s.]?[0-9]{3}[-\s.]?[0-9]{2}[-\s.]?[0-9]{2}$/im
+    );
+  console.log(a);
+  return true;
+};
+
+export const InputPhone = ({ label, register, required, hasError }: Props) => {
+  return (
+    <InputWrapper hasError={hasError}>
+      <label>
+        {getCyrillicLabel(label)}
+        {required && "*"}
+      </label>
+      <InputMask mask="+375 (99) 999-99-99" alwaysShowMask>
+        {(inputProps: any) => (
+          <input
+            ref={register({
+              required: true,
+              //validate: isPhoneValid,
+              pattern: /^[+]?[0-9]{3}[-\s.]?[(][0-9]{2}[)]?[-\s.]?[0-9]{3}[-\s.]?[0-9]{2}[-\s.]?[0-9]{2}$/im,
+            })}
+            name={label}
+            {...inputProps}
+          />
+        )}
+      </InputMask>
     </InputWrapper>
   );
 };

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
 
 import { BasketList } from "components/Basket";
@@ -6,6 +6,7 @@ import BasketResult from "components/Basket/BasketResult";
 import Button, { ButtonColor, ButtonSize } from "components/Button";
 import useBasketProduct from "hooks/useBasketProduct";
 import SadCat from "images/sadCat.png";
+import { BasketContext } from "providers/BasketProvider";
 import { colors } from "ui/colors";
 import { device } from "ui/media";
 import { H3 } from "ui/Title";
@@ -72,9 +73,11 @@ const ImageWrapper = styled.div`
 
 const BasketModal = ({ onClose }: Props) => {
   const { openModal } = useModal();
+  const { totalPrice } = useContext(BasketContext);
   const { basketProducts } = useBasketProduct();
   const isBasketEmpty = !basketProducts.length;
-
+  const isPriceMoreMinimum = totalPrice > 25;
+  const canCreateOrder = !isBasketEmpty && isPriceMoreMinimum;
   return (
     <BasketModalWrapper>
       <H3
@@ -92,15 +95,21 @@ const BasketModal = ({ onClose }: Props) => {
       </BasketListWrapper>
       <ModalFooter>
         <ResultWrapper>
-          <BasketResult />
+          {isPriceMoreMinimum ? (
+            <BasketResult />
+          ) : (
+            <span className="coffee-color">
+              Минимальная сумма заказа - 25 рублей
+            </span>
+          )}
         </ResultWrapper>
         <ButtonWrapper>
           <Button
             size={ButtonSize.LARGE}
             color={ButtonColor.COFFEE_GRADIENT}
-            text={isBasketEmpty ? "Вернуться к заказу" : "ОФОРМИТЬ ЗАКАЗ"}
+            text={canCreateOrder ? "ОФОРМИТЬ ЗАКАЗ" : "Вернуться к заказу"}
             onClick={() =>
-              isBasketEmpty ? onClose() : openModal("orderModal")
+              canCreateOrder ? openModal("orderModal") : onClose()
             }
           />
         </ButtonWrapper>

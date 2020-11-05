@@ -1,9 +1,8 @@
-import { BasketContext } from "providers/BasketProvider";
 import React, { useContext } from "react";
 import styled from "styled-components";
-import { colors } from "ui/colors";
 
-type Props = {};
+import { BasketContext } from "providers/BasketProvider";
+import { colors } from "ui/colors";
 
 const BasketResultWrapper = styled.div`
   display: flex;
@@ -26,17 +25,17 @@ const TotalPriceWrapper = styled.div`
 `;
 
 const BasketResult = () => {
-  const { totalPrice } = useContext(BasketContext);
+  const { totalPrice, deliveryPrice } = useContext(BasketContext);
 
   return (
     <BasketResultWrapper>
       <DeliveryWrapper>
         <span>Доставка</span>
-        <span>0.00 руб</span>
+        <span>{deliveryPrice} руб.</span>
       </DeliveryWrapper>
       <TotalPriceWrapper>
         <span>К оплате</span>
-        <span>{totalPrice}</span>
+        <span>{totalPrice + deliveryPrice}</span>
       </TotalPriceWrapper>
     </BasketResultWrapper>
   );

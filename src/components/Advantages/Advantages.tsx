@@ -7,10 +7,10 @@ import Truck from "images/icons/delivery-truck.svg";
 import Like from "images/icons/like.svg";
 import Store from "images/icons/store.svg";
 import { colors } from "ui/colors";
+import { device } from "ui/media";
 import { H2 } from "ui/Title";
 
 import Advantage from "./Advantage";
-import { device } from "ui/media";
 
 const UnderlinedText = styled.p`
   margin-bottom: 0;

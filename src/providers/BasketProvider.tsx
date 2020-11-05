@@ -1,4 +1,5 @@
 import React, { ReactNode, useContext, useMemo, useState } from "react";
+
 import { DataContext } from "./DataProvider";
 
 type Props = {
@@ -9,6 +10,7 @@ export type BasketValue = { [key in ID]: number };
 
 type BasketContext = {
   totalPrice: number;
+  deliveryPrice: number;
   basketValues: BasketValue;
   addBasketValue: (basketValue: BasketValue) => void;
   deleteBasketValue: (id: ID) => void;
@@ -16,6 +18,7 @@ type BasketContext = {
 
 export const BasketContext = React.createContext<BasketContext>({
   totalPrice: 0,
+  deliveryPrice: 0,
   basketValues: {},
   addBasketValue: () => {},
   deleteBasketValue: () => {},
@@ -52,11 +55,20 @@ const BasketProvider = ({ children }: Props) => {
     return price;
   }, [basketValues, products]);
 
+  const deliveryPrice: number = useMemo(() => {
+    if (totalPrice >= 40) {
+      return 0;
+    } else {
+      return 4;
+    }
+  }, [totalPrice]);
+
   return (
     <BasketContext.Provider
       value={{
         totalPrice,
         basketValues,
+        deliveryPrice,
         addBasketValue,
         deleteBasketValue,
       }}

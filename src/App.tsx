@@ -2,6 +2,7 @@ import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
 import { createUploadLink } from "apollo-upload-client";
 import React from "react";
 import { BrowserRouter as Router } from "react-router-dom";
+import { ToastProvider } from "react-toast-notifications";
 
 import ErrorBoundary from "pages/ErrorBoundary";
 import AuthContext from "providers/AuthProvider";
@@ -22,17 +23,19 @@ const client = new ApolloClient({
 function App() {
   return (
     <ErrorBoundary>
-      <ApolloProvider client={client}>
-        <AuthContext>
-          <DataProvider>
-            <BasketProvider>
-              <Router>
-                <Routes />
-              </Router>
-            </BasketProvider>
-          </DataProvider>
-        </AuthContext>
-      </ApolloProvider>
+      <ToastProvider>
+        <ApolloProvider client={client}>
+          <AuthContext>
+            <DataProvider>
+              <BasketProvider>
+                <Router>
+                  <Routes />
+                </Router>
+              </BasketProvider>
+            </DataProvider>
+          </AuthContext>
+        </ApolloProvider>
+      </ToastProvider>
     </ErrorBoundary>
   );
 }

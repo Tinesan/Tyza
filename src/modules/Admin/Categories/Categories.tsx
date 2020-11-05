@@ -1,5 +1,6 @@
 import React, { useContext, useMemo, useState } from "react";
 import { Button, Col, Row, Spinner } from "react-bootstrap";
+import { useToasts } from "react-toast-notifications";
 
 import { ConfirmModal, FormModal } from "components/Modal";
 import {
@@ -15,6 +16,7 @@ import CategoryModal, { CategoryModalData } from "./CategoryModal";
 type EditableCategotyId = string | null | undefined;
 
 const Categories = () => {
+  const { addToast } = useToasts();
   const {
     categories,
     dataProviderLoading,
@@ -42,14 +44,18 @@ const Categories = () => {
 
   const onModalSave = async (data: CategoryModalData) => {
     const { id, categoryName: name, categoryOrder: description } = data;
-    if (id) {
-      await updateCategory({ variables: { id, name, description } });
-    } else {
-      await addNewCategory({
-        variables: { name, description },
-      });
+    try {
+      if (id) {
+        await updateCategory({ variables: { id, name, description } });
+      } else {
+        await addNewCategory({
+          variables: { name, description },
+        });
+      }
+      await refetchCategoriesAndProducts();
+    } catch (error) {
+      addToast("Извините, произошла ошибка", { appearance: "error" });
     }
-    await refetchCategoriesAndProducts();
     setEditableCategotyId(null);
   };
 
@@ -66,10 +72,10 @@ const Categories = () => {
       try {
         await deleteCategory({ variables: { id: deletedСategoryId } });
         await refetchCategoriesAndProducts();
-        setDeletedСategoryId(undefined);
       } catch (error) {
-        console.log(error);
+        addToast("Извините, произошла ошибка", { appearance: "error" });
       }
+      setDeletedСategoryId(undefined);
     }
   };
 

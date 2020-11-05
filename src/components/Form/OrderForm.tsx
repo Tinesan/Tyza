@@ -4,13 +4,16 @@ import { useForm } from "react-hook-form";
 import styled from "styled-components";
 
 import Button, { ButtonColor, ButtonSize } from "components/Button";
-import { ProductOrderLineInputDto, usePlaceOrderMutation } from "generated/graphql";
+import {
+  ProductOrderLineInputDto,
+  usePlaceOrderMutation,
+} from "generated/graphql";
 import useBasketProduct, { BasketProduct } from "hooks/useBasketProduct";
 import useModal from "modals/hooks";
 import { BasketContext } from "providers/BasketProvider";
 import { colors } from "ui/colors";
 
-import Input from "./Input";
+import Input, { InputPhone } from "./Input";
 import Textarea from "./Textarea";
 import TimeRadio, { RADIO_VALUES } from "./TimeRadio";
 
@@ -88,13 +91,15 @@ const OrderForm = () => {
   const [placeOrder, { loading: placeOrderLoading }] = usePlaceOrderMutation();
   const { openModal } = useModal();
   const { basketProducts } = useBasketProduct();
-  const { totalPrice } = useContext(BasketContext);
+  const { totalPrice, deliveryPrice } = useContext(BasketContext);
   const { register, handleSubmit, errors } = useForm<Inputs>({
     defaultValues: {
       deliveryTime: RADIO_VALUES.firstValue,
     },
+    reValidateMode: "onChange",
   });
   const onSubmit = async (data: Inputs) => {
+    debugger;
     const { deliveryTime, comment, ...customer } = data;
     const productOrderLines = getProductOrderLines(basketProducts);
     try {
@@ -123,7 +128,7 @@ const OrderForm = () => {
           />
         </Col>
         <Col>
-          <Input
+          <InputPhone
             required
             register={register}
             label={InputKeys.phone}
@@ -208,7 +213,9 @@ const OrderForm = () => {
         <Col className="d-flex justify-content-end">
           <TotalPriceWrapper>
             <span className="mr-5 font-weight-normal">К оплате</span>
-            <span className="coffee-color bold">{totalPrice}</span>
+            <span className="coffee-color bold">
+              {totalPrice + deliveryPrice}
+            </span>
           </TotalPriceWrapper>
         </Col>
       </Row>

@@ -1,19 +1,16 @@
 import React, { useContext, useMemo, useState } from "react";
 import { Button, Col, ListGroup, Row, Spinner } from "react-bootstrap";
+import { useToasts } from "react-toast-notifications";
 
 import { ConfirmModal, FormModal } from "components/Modal";
-import {
-  useAddNewImagesMutation,
-  useAddNewProductMutation,
-  useDeleteProductMutation,
-  useUpdateProductMutation,
-} from "generated/graphql";
+import { useAddNewImagesMutation, useAddNewProductMutation, useDeleteProductMutation, useUpdateProductMutation } from "generated/graphql";
 import { DataContext } from "providers/DataProvider";
 
 import ProductItem from "./ProductItem";
 import ProductModal, { ProductModalData } from "./ProductModal";
 
 const Products = () => {
+  const { addToast } = useToasts();
   const {
     products,
     dataProviderLoading,
@@ -56,7 +53,7 @@ const Products = () => {
       await refetchCategoriesAndProducts();
       setEditableProductId(null);
     } catch (error) {
-      console.log(error);
+      addToast("Извините, произошла ошибка", { appearance: "error" });
     }
   };
 
@@ -72,7 +69,7 @@ const Products = () => {
         setDeletedProductId(undefined);
       }
     } catch (error) {
-      console.log(error);
+      addToast("Извините, произошла ошибка", { appearance: "error" });
     }
   };
 
@@ -89,7 +86,7 @@ const Products = () => {
         });
         await refetchCategoriesAndProducts();
       } catch (error) {
-        console.log(error);
+        addToast("Извините, произошла ошибка", { appearance: "error" });
       }
     }
   };
