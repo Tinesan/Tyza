@@ -9,7 +9,7 @@ type Props = React.DetailedHTMLProps<
   text: string;
   color: TButtonColor;
   size: TButtonSize;
-  onClick: () => void;
+  onClick?: () => void;
   className?: string;
 };
 

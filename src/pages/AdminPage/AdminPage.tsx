@@ -14,11 +14,11 @@ const AdminPage = () => {
 
   return (
     <>
-      <Navbar className="mb-5" bg="primary" variant="dark">
+      <Navbar className="mb-5 " bg="primary" variant="dark">
         <Navbar.Brand onClick={() => history.push(`/admin`)}>
           TyZa - Admin panel
         </Navbar.Brand>
-        <Nav className="mr-auto">
+        <Nav className="w-100">
           <Nav.Link onClick={() => history.push(`/admin/categories`)}>
             Категории
           </Nav.Link>
@@ -27,6 +27,12 @@ const AdminPage = () => {
           </Nav.Link>
           <Nav.Link onClick={() => history.push(`/admin/orders`)}>
             Заказы
+          </Nav.Link>
+          <Nav.Link
+            className="font-weight-bold text-white ml-auto"
+            onClick={() => history.push(`/`)}
+          >
+            Вернуться на сайт
           </Nav.Link>
         </Nav>
       </Navbar>

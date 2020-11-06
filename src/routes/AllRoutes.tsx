@@ -10,10 +10,10 @@ import LoginPage from "../pages/LoginPage";
 import PrivateRoute from "./PrivateRoute";
 
 const AllRoutes = () => {
-  const { isAuth } = useContext(AuthContext);
+  const { authData } = useContext(AuthContext);
   const location = useLocation<{ modal?: boolean }>();
   const isModal = location.state?.modal;
-
+  const isAuth = !!authData;
   return (
     <>
       <Switch>

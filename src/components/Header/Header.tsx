@@ -81,7 +81,6 @@ const Header = () => {
                   <Button
                     className="montserrat header-button "
                     text="Купить"
-                    onClick={console.log}
                     size={ButtonSize.LARGE}
                     color={ButtonColor.WHITE}
                   />

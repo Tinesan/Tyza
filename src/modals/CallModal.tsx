@@ -58,7 +58,7 @@ type ResultValue = {
 
 const CallModal = ({ onClose }: Props) => {
   const [idLoading, setIsLoading] = useState<boolean>(false);
-  const { refetch: callRequest } = useCallRequestQuery();
+  const { refetch: callRequest } = useCallRequestQuery({ skip: true });
   const { register, handleSubmit, errors, control } = useForm<Inputs>();
   const [{ showResult, resultError }, setResultModal] = useState<ResultValue>({
     showResult: false,

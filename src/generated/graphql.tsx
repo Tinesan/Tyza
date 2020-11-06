@@ -306,6 +306,25 @@ export type SortDto = {
 };
 
 
+export type AuthenticateDataFragment = (
+  { __typename?: 'OAuth2AccessTokenDTO' }
+  & Pick<OAuth2AccessTokenDto, 'tokenType' | 'accessToken' | 'authorities' | 'authenticationName'>
+);
+
+export type AuthenticateQueryVariables = Exact<{
+  username: Scalars['String'];
+  password: Scalars['String'];
+}>;
+
+
+export type AuthenticateQuery = (
+  { __typename?: 'Query' }
+  & { authenticate: (
+    { __typename?: 'OAuth2AccessTokenDTO' }
+    & AuthenticateDataFragment
+  ) }
+);
+
 export type CallRequestQueryVariables = Exact<{
   name: Scalars['String'];
   phone: Scalars['String'];
@@ -530,6 +549,14 @@ export type DeleteProductMutation = (
   ) }
 );
 
+export const AuthenticateDataFragmentDoc = gql`
+    fragment AuthenticateData on OAuth2AccessTokenDTO {
+  tokenType
+  accessToken
+  authorities
+  authenticationName
+}
+    `;
 export const CategoryItemFragmentDoc = gql`
     fragment CategoryItem on CategoryDTO {
   id
@@ -583,6 +610,40 @@ export const ProductItemFragmentDoc = gql`
   }
 }
     `;
+export const AuthenticateDocument = gql`
+    query authenticate($username: String!, $password: String!) {
+  authenticate(credentialsInput: {username: $username, password: $password}) {
+    ...AuthenticateData
+  }
+}
+    ${AuthenticateDataFragmentDoc}`;
+
+/**
+ * __useAuthenticateQuery__
+ *
+ * To run a query within a React component, call `useAuthenticateQuery` and pass it any options that fit your needs.
+ * When your component renders, `useAuthenticateQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useAuthenticateQuery({
+ *   variables: {
+ *      username: // value for 'username'
+ *      password: // value for 'password'
+ *   },
+ * });
+ */
+export function useAuthenticateQuery(baseOptions?: Apollo.QueryHookOptions<AuthenticateQuery, AuthenticateQueryVariables>) {
+        return Apollo.useQuery<AuthenticateQuery, AuthenticateQueryVariables>(AuthenticateDocument, baseOptions);
+      }
+export function useAuthenticateLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<AuthenticateQuery, AuthenticateQueryVariables>) {
+          return Apollo.useLazyQuery<AuthenticateQuery, AuthenticateQueryVariables>(AuthenticateDocument, baseOptions);
+        }
+export type AuthenticateQueryHookResult = ReturnType<typeof useAuthenticateQuery>;
+export type AuthenticateLazyQueryHookResult = ReturnType<typeof useAuthenticateLazyQuery>;
+export type AuthenticateQueryResult = Apollo.QueryResult<AuthenticateQuery, AuthenticateQueryVariables>;
 export const CallRequestDocument = gql`
     query callRequest($name: String!, $phone: String!) {
   callRequest(callRequestInput: {name: $name, phone: $phone}) {

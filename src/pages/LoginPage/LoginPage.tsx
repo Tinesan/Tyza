@@ -1,26 +1,36 @@
 import React, { useCallback, useContext, useEffect, useState } from "react";
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
+import { useToasts } from "react-toast-notifications";
 
+import { useAuthenticateQuery } from "generated/graphql";
 import { AuthContext } from "providers/AuthProvider";
 
 const LoginPage = () => {
-  const { setIsAuth } = useContext(AuthContext);
   const history = useHistory();
-  const [loginValue, setLoginValue] = useState<string>("");
-  const [passwordValue, setPasswordValue] = useState<string>("");
+  const { addToast } = useToasts();
+  const { setAuthData } = useContext(AuthContext);
+  const { refetch: userAuth } = useAuthenticateQuery({ skip: true });
+  const [loginValue, setLoginValue] = useState<string>("admin");
+  const [passwordValue, setPasswordValue] = useState<string>("12345678");
 
-  const isValidUser = useCallback(() => {
-    return loginValue === "user" && passwordValue === "111";
-  }, [loginValue, passwordValue]);
-
-  const onSubmit = useCallback(() => {
-    if (isValidUser()) {
-      setIsAuth(true);
-      window.localStorage.setItem("isAuth", "true");
-      history.push("/admin");
+  const onSubmit = useCallback(async () => {
+    try {
+      const {
+        data: { authenticate },
+      } = await userAuth({
+        username: loginValue,
+        password: passwordValue,
+      });
+      if (authenticate) {
+        window.localStorage.setItem("authData", JSON.stringify(authenticate));
+        setAuthData(authenticate);
+        history.push("/admin");
+      }
+    } catch (error) {
+      addToast("Неверный логин или пароль", { appearance: "error" });
     }
-  }, [isValidUser, history, setIsAuth]);
+  }, [loginValue, passwordValue, history, setAuthData, userAuth, addToast]);
 
   useEffect(() => {
     const submitOnEnter = (e: KeyboardEvent) => {

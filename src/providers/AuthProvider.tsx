@@ -1,27 +1,38 @@
 import React, { ReactNode, useState } from "react";
 
+import { AuthenticateDataFragment } from "generated/graphql";
+
 type Props = {
   children: ReactNode;
 };
 
 export const AuthContext = React.createContext<{
-  isAuth: boolean;
-  setIsAuth: (isAuth: boolean) => void;
+  authData?: AuthenticateDataFragment;
+  setAuthData: (authData: AuthenticateDataFragment) => void;
 }>({
-  isAuth: false,
-  setIsAuth: () => {},
+  authData: undefined,
+  setAuthData: () => {},
 });
 
 const AuthProvider = ({ children }: Props) => {
-  const [isAuth, setIsAuth] = useState<boolean>(false);
-  const isAuthLocalStorage = window.localStorage.getItem("isAuth");
-  const isAuthCommon = isAuth || !!isAuthLocalStorage;
+  const [authData, setAuthData] = useState<
+    AuthenticateDataFragment | undefined
+  >(undefined);
+
+  const authDataFromLocalStorage = window.localStorage.getItem("authData");
+
+  if (authDataFromLocalStorage && !authData) {
+    const parsedData: AuthenticateDataFragment = JSON.parse(
+      authDataFromLocalStorage
+    );
+    setAuthData(parsedData);
+  }
 
   return (
     <AuthContext.Provider
       value={{
-        isAuth: isAuthCommon,
-        setIsAuth,
+        authData,
+        setAuthData,
       }}
     >
       {children}

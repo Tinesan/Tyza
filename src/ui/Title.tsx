@@ -15,7 +15,7 @@ export const H3 = styled.h3`
   font-size: 36px;
   font-weight: 700;
 
-  @media ${device.mobile} {
+  @media ${device.tablet} {
     font-size: 24px;
   }
 `;
