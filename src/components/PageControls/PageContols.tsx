@@ -11,6 +11,7 @@ const PageContolsWrapper = styled.div`
   display: flex;
   flex-direction: column;
   position: fixed;
+  z-index: 500;
   bottom: 20px;
   right: -80px;
   opacity: 0;

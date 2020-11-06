@@ -94,16 +94,20 @@ const BasketModal = ({ onClose }: Props) => {
         <BasketList data={basketProducts} />
       </BasketListWrapper>
       <ModalFooter>
-        <ResultWrapper>
-          {isPriceMoreMinimum ? (
-            <BasketResult />
-          ) : (
-            <span className="coffee-color">
-              Минимальная сумма заказа - 25 рублей
-            </span>
-          )}
-        </ResultWrapper>
-        <ButtonWrapper>
+        {!isBasketEmpty && (
+          <ResultWrapper>
+            {isPriceMoreMinimum ? (
+              <BasketResult />
+            ) : (
+              <span className="coffee-color">
+                Минимальная сумма заказа - 25 рублей
+              </span>
+            )}
+          </ResultWrapper>
+        )}
+        <ButtonWrapper
+          className={isBasketEmpty ? "d-flex w-100 justify-content-center" : ""}
+        >
           <Button
             size={ButtonSize.LARGE}
             color={ButtonColor.COFFEE_GRADIENT}
