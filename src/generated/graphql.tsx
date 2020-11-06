@@ -15,6 +15,11 @@ export type Scalars = {
 };
 
 
+export type CallRequestInput = {
+  name: Scalars['String'];
+  phone: Scalars['String'];
+};
+
 export type CategoryDto = {
   __typename?: 'CategoryDTO';
   id: Scalars['String'];
@@ -26,6 +31,11 @@ export type CategoryInputDto = {
   id?: Maybe<Scalars['String']>;
   name: Scalars['String'];
   description?: Maybe<Scalars['String']>;
+};
+
+export type CredentialsInput = {
+  username: Scalars['String'];
+  password: Scalars['String'];
 };
 
 export type CustomerDto = {
@@ -52,11 +62,6 @@ export type CustomerInputDto = {
   flat: Scalars['String'];
 };
 
-export type DeletePayload = {
-  __typename?: 'DeletePayload';
-  status: Scalars['Int'];
-};
-
 export type Mutation = {
   __typename?: 'Mutation';
   /**
@@ -65,14 +70,14 @@ export type Mutation = {
    */
   saveNewProduct?: Maybe<ProductDto>;
   updateProduct?: Maybe<ProductDto>;
-  deleteProduct: DeletePayload;
+  deleteProduct: Payload;
   /** productImage */
   updateMainImageById?: Maybe<ProductDto>;
   addNewImages?: Maybe<ProductDto>;
   /** category */
   saveNewCategory: CategoryDto;
   updateCategory: CategoryDto;
-  deleteCategory: DeletePayload;
+  deleteCategory: Payload;
   /**
    * catdog-order-service
    *    product-order
@@ -129,6 +134,18 @@ export type MutationPlaceOrderArgs = {
   productOrderInputDTO: ProductOrderInputDto;
 };
 
+export type OAuth2AccessTokenDto = {
+  __typename?: 'OAuth2AccessTokenDTO';
+  accessToken: Scalars['String'];
+  tokenType: Scalars['String'];
+  refreshToken: Scalars['String'];
+  expiresIn: Scalars['Int'];
+  scope: Array<Scalars['String']>;
+  authenticationName: Scalars['String'];
+  authorities: Array<Scalars['String']>;
+  jti: Scalars['String'];
+};
+
 export type PageProductOrderDto = {
   __typename?: 'PageProductOrderDTO';
   content: Array<ProductOrderDto>;
@@ -152,6 +169,11 @@ export type PageableDto = {
   offset: Scalars['Int'];
   paged: Scalars['Boolean'];
   unpaged: Scalars['Boolean'];
+};
+
+export type Payload = {
+  __typename?: 'Payload';
+  status: Scalars['Int'];
 };
 
 export type ProductDto = {
@@ -237,6 +259,11 @@ export type Query = {
   categoryById: CategoryDto;
   /** catdog-order-service */
   findAllOrders: PageProductOrderDto;
+  /** authentication-service */
+  authenticate: OAuth2AccessTokenDto;
+  refreshToken: OAuth2AccessTokenDto;
+  /** telegram */
+  callRequest: Payload;
 };
 
 
@@ -256,6 +283,21 @@ export type QueryFindAllOrdersArgs = {
   sort?: Maybe<Scalars['String']>;
 };
 
+
+export type QueryAuthenticateArgs = {
+  credentialsInput: CredentialsInput;
+};
+
+
+export type QueryRefreshTokenArgs = {
+  refreshToken: Scalars['String'];
+};
+
+
+export type QueryCallRequestArgs = {
+  callRequestInput?: Maybe<CallRequestInput>;
+};
+
 export type SortDto = {
   __typename?: 'SortDTO';
   sorted: Scalars['Boolean'];
@@ -263,6 +305,20 @@ export type SortDto = {
   empty: Scalars['Boolean'];
 };
 
+
+export type CallRequestQueryVariables = Exact<{
+  name: Scalars['String'];
+  phone: Scalars['String'];
+}>;
+
+
+export type CallRequestQuery = (
+  { __typename?: 'Query' }
+  & { callRequest: (
+    { __typename?: 'Payload' }
+    & Pick<Payload, 'status'>
+  ) }
+);
 
 export type CategoryItemFragment = (
   { __typename?: 'CategoryDTO' }
@@ -319,8 +375,8 @@ export type DeleteCategoryMutationVariables = Exact<{
 export type DeleteCategoryMutation = (
   { __typename?: 'Mutation' }
   & { deleteCategory: (
-    { __typename?: 'DeletePayload' }
-    & Pick<DeletePayload, 'status'>
+    { __typename?: 'Payload' }
+    & Pick<Payload, 'status'>
   ) }
 );
 
@@ -469,8 +525,8 @@ export type DeleteProductMutationVariables = Exact<{
 export type DeleteProductMutation = (
   { __typename?: 'Mutation' }
   & { deleteProduct: (
-    { __typename?: 'DeletePayload' }
-    & Pick<DeletePayload, 'status'>
+    { __typename?: 'Payload' }
+    & Pick<Payload, 'status'>
   ) }
 );
 
@@ -527,6 +583,40 @@ export const ProductItemFragmentDoc = gql`
   }
 }
     `;
+export const CallRequestDocument = gql`
+    query callRequest($name: String!, $phone: String!) {
+  callRequest(callRequestInput: {name: $name, phone: $phone}) {
+    status
+  }
+}
+    `;
+
+/**
+ * __useCallRequestQuery__
+ *
+ * To run a query within a React component, call `useCallRequestQuery` and pass it any options that fit your needs.
+ * When your component renders, `useCallRequestQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useCallRequestQuery({
+ *   variables: {
+ *      name: // value for 'name'
+ *      phone: // value for 'phone'
+ *   },
+ * });
+ */
+export function useCallRequestQuery(baseOptions?: Apollo.QueryHookOptions<CallRequestQuery, CallRequestQueryVariables>) {
+        return Apollo.useQuery<CallRequestQuery, CallRequestQueryVariables>(CallRequestDocument, baseOptions);
+      }
+export function useCallRequestLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<CallRequestQuery, CallRequestQueryVariables>) {
+          return Apollo.useLazyQuery<CallRequestQuery, CallRequestQueryVariables>(CallRequestDocument, baseOptions);
+        }
+export type CallRequestQueryHookResult = ReturnType<typeof useCallRequestQuery>;
+export type CallRequestLazyQueryHookResult = ReturnType<typeof useCallRequestLazyQuery>;
+export type CallRequestQueryResult = Apollo.QueryResult<CallRequestQuery, CallRequestQueryVariables>;
 export const CategoryDocument = gql`
     query Category($id: String!) {
   categoryById(categoryId: $id) {

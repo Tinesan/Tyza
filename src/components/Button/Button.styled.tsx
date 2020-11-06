@@ -30,6 +30,11 @@ export const StyledButton = styled.button<
     outline: none;
   }
 
+  &:disabled {
+    pointer-events: none;
+    opacity: 0.5;
+  }
+
   ${({ color }) => {
     switch (color) {
       case ButtonColor.TRANSPARENT:

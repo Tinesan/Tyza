@@ -24,8 +24,8 @@ function App() {
   return (
     <ErrorBoundary>
       <ToastProvider>
-        <ApolloProvider client={client}>
-          <AuthContext>
+        <AuthContext>
+          <ApolloProvider client={client}>
             <DataProvider>
               <BasketProvider>
                 <Router>
@@ -33,8 +33,8 @@ function App() {
                 </Router>
               </BasketProvider>
             </DataProvider>
-          </AuthContext>
-        </ApolloProvider>
+          </ApolloProvider>
+        </AuthContext>
       </ToastProvider>
     </ErrorBoundary>
   );

@@ -92,14 +92,12 @@ const OrderForm = () => {
   const { openModal } = useModal();
   const { basketProducts } = useBasketProduct();
   const { totalPrice, deliveryPrice } = useContext(BasketContext);
-  const { register, handleSubmit, errors } = useForm<Inputs>({
+  const { register, handleSubmit, control, errors } = useForm<Inputs>({
     defaultValues: {
       deliveryTime: RADIO_VALUES.firstValue,
     },
-    reValidateMode: "onChange",
   });
   const onSubmit = async (data: Inputs) => {
-    debugger;
     const { deliveryTime, comment, ...customer } = data;
     const productOrderLines = getProductOrderLines(basketProducts);
     try {
@@ -130,7 +128,7 @@ const OrderForm = () => {
         <Col>
           <InputPhone
             required
-            register={register}
+            control={control}
             label={InputKeys.phone}
             hasError={!!errors[InputKeys.phone]}
           />

@@ -1,11 +1,12 @@
-import Button, { ButtonColor, ButtonSize } from "components/Button";
-import Input from "components/Form/Input";
 import React, { useState } from "react";
 import { Col } from "react-bootstrap";
 import { Row } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import styled from "styled-components";
 
+import Button, { ButtonColor, ButtonSize } from "components/Button";
+import Input, { InputPhone } from "components/Form/Input";
+import { useCallRequestQuery } from "generated/graphql";
 import Success from "images/icons/success.svg";
 
 type Props = {
@@ -56,20 +57,25 @@ type ResultValue = {
 };
 
 const CallModal = ({ onClose }: Props) => {
-  const { register, handleSubmit, errors } = useForm<Inputs>();
+  const [idLoading, setIsLoading] = useState<boolean>(false);
+  const { refetch: callRequest } = useCallRequestQuery();
+  const { register, handleSubmit, errors, control } = useForm<Inputs>();
   const [{ showResult, resultError }, setResultModal] = useState<ResultValue>({
     showResult: false,
     resultError: false,
   });
 
-  const onSubmit = (data: Inputs) => {
+  const onSubmit = async ({ name, phone }: Inputs) => {
+    setIsLoading(true);
     try {
+      await callRequest({ name, phone });
       setResultModal({ showResult: true, resultError: false });
     } catch (error) {
       setResultModal({ showResult: true, resultError: true });
+    } finally {
+      setIsLoading(false);
     }
   };
-
   if (showResult) {
     return (
       <CallModalWrapper>
@@ -117,9 +123,9 @@ const CallModal = ({ onClose }: Props) => {
         </Row>
         <Row>
           <Col>
-            <Input
+            <InputPhone
               required
-              register={register}
+              control={control}
               label={InputKeys.phone}
               hasError={!!errors[InputKeys.phone]}
             />
@@ -129,6 +135,7 @@ const CallModal = ({ onClose }: Props) => {
       <ButtonWrapper>
         <Button
           text="Жду звонка"
+          disabled={idLoading}
           size={ButtonSize.LARGE}
           onClick={handleSubmit(onSubmit)}
           color={ButtonColor.COFFEE_GRADIENT}

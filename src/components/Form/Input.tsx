@@ -1,5 +1,6 @@
 import React from "react";
-import InputMask, { ReactInputMask } from "react-input-mask";
+import { Control, Controller } from "react-hook-form";
+import InputMask from "react-input-mask";
 import styled from "styled-components";
 
 import { colors } from "ui/colors";
@@ -90,38 +91,38 @@ const Input = ({ label, register, required, hasError }: Props) => {
 };
 
 const isPhoneValid = (value: string) => {
-  // const allNumbersInPhoneValue = (value.match(/\d/g) || []).map(Number);
-  // const flag = allNumbersInPhoneValue.length === 12 ? undefined : "not valid";
-  // return flag;
-  const a =
-    value &&
-    value.match(
-      /^[+]?[0-9]{3}[-\s.]?[(][0-9]{2}[)]?[-\s.]?[0-9]{3}[-\s.]?[0-9]{2}[-\s.]?[0-9]{2}$/im
-    );
-  console.log(a);
-  return true;
+  return value && value.indexOf("_") === -1
+    ? undefined
+    : "Phone number is required.";
 };
 
-export const InputPhone = ({ label, register, required, hasError }: Props) => {
+type InputPhoneProps = Omit<Props, "register"> & { control: Control };
+
+// pattern: /^[+]?[0-9]{3}[-\s.]?[(][0-9]{2}[)]?[-\s.]?[0-9]{3}[-\s.]?[0-9]{2}[-\s.]?[0-9]{2}$/im,
+// +375447419152
+export const InputPhone = ({
+  label,
+  control,
+  required,
+  hasError,
+}: InputPhoneProps) => {
   return (
     <InputWrapper hasError={hasError}>
       <label>
         {getCyrillicLabel(label)}
         {required && "*"}
       </label>
-      <InputMask mask="+375 (99) 999-99-99" alwaysShowMask>
-        {(inputProps: any) => (
-          <input
-            ref={register({
-              required: true,
-              //validate: isPhoneValid,
-              pattern: /^[+]?[0-9]{3}[-\s.]?[(][0-9]{2}[)]?[-\s.]?[0-9]{3}[-\s.]?[0-9]{2}[-\s.]?[0-9]{2}$/im,
-            })}
-            name={label}
-            {...inputProps}
-          />
-        )}
-      </InputMask>
+      <Controller
+        as={InputMask}
+        name={label}
+        alwaysShowMask
+        mask="+375 (99) 999-99-99"
+        rules={{
+          required,
+          validate: isPhoneValid,
+        }}
+        control={control}
+      />
     </InputWrapper>
   );
 };

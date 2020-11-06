@@ -1,18 +1,8 @@
 import React, { useCallback } from "react";
-import {
-  Col,
-  Container,
-  Pagination,
-  Row,
-  Spinner,
-  Table,
-} from "react-bootstrap";
+import { Col, Container, Pagination, Row, Spinner, Table } from "react-bootstrap";
 import styled from "styled-components";
 
-import {
-  OrderContentItemFragment,
-  useFindAllOrdersQuery,
-} from "generated/graphql";
+import { OrderContentItemFragment, useFindAllOrdersQuery } from "generated/graphql";
 
 import OrderItem from "./OrderItem";
 
