@@ -18,6 +18,18 @@ const FooterText = styled.p`
   font-size: 16px;
 `;
 
+const FooterTextLink = styled.a`
+  margin: 0;
+  color: ${colors.gray};
+  font-size: 16px;
+  transition-duration: 0.3s;
+
+  &:hover {
+    color: ${colors.gray};
+    text-shadow: 0 0 0.65px ${colors.gray}, 0 0 0.65px ${colors.gray};
+  }
+`;
+
 const OrderCallWrapper = styled.div`
   display: flex;
   align-items: center;
@@ -50,11 +62,15 @@ const Footer = () => {
             <H3 className="amatic  mb-2 mb-lg-4">Контакты</H3>
             <div className="mb-2">
               <FooterText>Для приемов заказа</FooterText>
-              <FooterText>+375(44) 794-86-56</FooterText>
+              <FooterTextLink href="tel:+375447948656">
+                +375(44) 794-86-56
+              </FooterTextLink>
             </div>
             <div>
               <FooterText>Для сотрудичества</FooterText>
-              <FooterText>+375(29) 387-64-93</FooterText>
+              <FooterTextLink href="tel:+375293876493">
+                +375(29) 387-64-93
+              </FooterTextLink>
             </div>
           </Col>
           <Col xs={12} className="mb-3 mb-lg-0" lg={4} xl="auto">

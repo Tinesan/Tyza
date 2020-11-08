@@ -6,6 +6,18 @@ import VK from "images/icons/vk.svg";
 
 const SocialWrapper = styled.div`
   display: flex;
+
+  a {
+    display: flex;
+
+    img {
+      transition-duration: 0.3s;
+
+      &:hover {
+        filter: contrast(80%);
+      }
+    }
+  }
 `;
 
 type Props = {
@@ -16,12 +28,20 @@ const Social = ({ className }: Props) => {
   return (
     <SocialWrapper className={className}>
       <div className="mr-3">
-        <a href="">
+        <a
+          target="_blank"
+          rel="noopener noreferrer"
+          href="https://vk.com/eda_dlya_jivotnih"
+        >
           <img src={VK} alt="VK" />
         </a>
       </div>
       <div>
-        <a href="">
+        <a
+          target="_blank"
+          rel="noopener noreferrer"
+          href="https://www.instagram.com/pitaniedog/?r=nametag"
+        >
           <img src={Instagram} alt="VK" />
         </a>
       </div>
