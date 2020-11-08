@@ -4,11 +4,11 @@ import Slider, { Settings } from "react-slick";
 import styled, { css } from "styled-components";
 
 import Arrow from "images/icons/arrow.svg";
-import TestFoto from "images/testImages/person.png";
 import { colors } from "ui/colors";
 import { H2 } from "ui/Title";
 
 import ReviewItem from "./ReviewItem";
+import { ReviewsData } from "./Data";
 
 const ReviewsWrapper = styled.section`
   overflow: hidden;
@@ -149,42 +149,20 @@ const Reviews = () => {
                   <SlickArrow onClick={() => slider.current?.slickNext()} />
                 }
               >
-                <ItemWrapper>
-                  <ReviewItem
-                    image={TestFoto}
-                    title="Алена Трубицина1"
-                    titleDescription="Порода собаки: Чау-чау"
-                    description="Раньше кормила собаку кормом акана, это дорогой корм профессиональной линейки, но изменились мои финансовые обстоятельства, и я уже не могу потянуть этот корм, а кормить чем-то по дешевле 
-                      не позволяет совесть. Перешли на ваш натуральный корм, пока очень довольны."
-                  />
-                </ItemWrapper>
-                <ItemWrapper>
-                  <ReviewItem
-                    image={TestFoto}
-                    title="Алена Трубицина2"
-                    titleDescription="Порода собаки: Чау-чау"
-                    description="Раньше кормила собаку кормом акана, это дорогой корм профессиональной линейки, но изменились мои финансовые обстоятельства, и я уже не могу потянуть этот корм, а кормить чем-то по дешевле 
-                      не позволяет совесть. Перешли на ваш натуральный корм, пока очень довольны."
-                  />
-                </ItemWrapper>
-                <ItemWrapper>
-                  <ReviewItem
-                    image={TestFoto}
-                    title="Алена Трубицина3"
-                    titleDescription="Порода собаки: Чау-чау"
-                    description="Раньше кормила собаку кормом акана, это дорогой корм профессиональной линейки, но изменились мои финансовые обстоятельства, и я уже не могу потянуть этот корм, а кормить чем-то по дешевле 
-                      не позволяет совесть. Перешли на ваш натуральный корм, пока очень довольны."
-                  />
-                </ItemWrapper>
-                <ItemWrapper>
-                  <ReviewItem
-                    image={TestFoto}
-                    title="Алена Трубицина4"
-                    titleDescription="Порода собаки: Чау-чау"
-                    description="Раньше кормила собаку кормом акана, это дорогой корм профессиональной линейки, но изменились мои финансовые обстоятельства, и я уже не могу потянуть этот корм, а кормить чем-то по дешевле 
-                      не позволяет совесть. Перешли на ваш натуральный корм, пока очень довольны."
-                  />
-                </ItemWrapper>
+                {ReviewsData.map(
+                  ({ photo, title, description, titleDescription }) => {
+                    return (
+                      <ItemWrapper key={title}>
+                        <ReviewItem
+                          image={photo}
+                          title={title}
+                          description={description}
+                          titleDescription={titleDescription}
+                        />
+                      </ItemWrapper>
+                    );
+                  }
+                )}
               </Slider>
             </SlideWrapper>
           </Col>

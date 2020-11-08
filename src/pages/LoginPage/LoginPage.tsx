@@ -23,7 +23,6 @@ const LoginPage = () => {
         password: passwordValue,
       });
       if (authenticate) {
-        window.localStorage.setItem("authData", JSON.stringify(authenticate));
         setAuthData(authenticate);
         history.push("/admin");
       }

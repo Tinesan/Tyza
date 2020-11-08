@@ -19,15 +19,6 @@ const AuthProvider = ({ children }: Props) => {
     AuthenticateDataFragment | undefined
   >(undefined);
 
-  const authDataFromLocalStorage = window.localStorage.getItem("authData");
-
-  if (authDataFromLocalStorage && !authData) {
-    const parsedData: AuthenticateDataFragment = JSON.parse(
-      authDataFromLocalStorage
-    );
-    setAuthData(parsedData);
-  }
-
   return (
     <AuthContext.Provider
       value={{
