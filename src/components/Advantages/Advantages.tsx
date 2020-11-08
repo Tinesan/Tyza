@@ -11,6 +11,7 @@ import { device } from "ui/media";
 import { H2 } from "ui/Title";
 
 import Advantage from "./Advantage";
+import { Link } from "react-scroll";
 
 const UnderlinedText = styled.p`
   margin-bottom: 0;
@@ -23,9 +24,11 @@ const UnderlinedText = styled.p`
 const StoreDescription = (
   <>
     <span>Возможность приобрести корм в ближайших от васпунктах продаж.</span>
-    <UnderlinedText className="m-t-2" onClick={console.log}>
-      Все адреса пунктов продаж
-    </UnderlinedText>
+    <Link to="contacts" spy smooth duration={1000}>
+      <UnderlinedText className="m-t-2">
+        Все адреса пунктов продаж
+      </UnderlinedText>
+    </Link>
   </>
 );
 
