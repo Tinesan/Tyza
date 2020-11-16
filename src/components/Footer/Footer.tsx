@@ -94,7 +94,7 @@ const Footer = () => {
                 text="Оформить заказ"
                 size={ButtonSize.LARGE}
                 color={ButtonColor.WHITE_WITH_BORDER}
-                onClick={() => openModal("orderModal")}
+                onClick={() => openModal("backetModal")}
               />
               <Button
                 className="button-footer"

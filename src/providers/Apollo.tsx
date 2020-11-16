@@ -1,4 +1,9 @@
-import { ApolloClient, ApolloProvider, from, InMemoryCache } from "@apollo/client";
+import {
+  ApolloClient,
+  ApolloProvider,
+  from,
+  InMemoryCache,
+} from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
 import { onError } from "@apollo/client/link/error";
 import { createUploadLink } from "apollo-upload-client";
@@ -9,8 +14,11 @@ import { AuthContext } from "./AuthProvider";
 type Props = {
   children: ReactNode;
 };
+const { protocol, hostname } = window.location;
 
-const uploadLink = createUploadLink({ uri: "http://localhost:5003/graphql/" });
+const uploadLink = createUploadLink({
+  uri: `${protocol}//${hostname}:5003/graphql/`,
+});
 
 const errorLink = onError(({ graphQLErrors, networkError }) => {
   if (graphQLErrors)
