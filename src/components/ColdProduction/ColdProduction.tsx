@@ -4,8 +4,8 @@ import styled from "styled-components";
 
 import ColdProd from "images/coldProd.png";
 import CurveLine from "images/icons/curveLine.svg";
-import { H2 } from "ui/Title";
 import { device } from "ui/media";
+import { H2 } from "ui/Title";
 
 const ColdProductionWrapper = styled.section``;
 
@@ -21,6 +21,9 @@ const CurveLineBg = styled.div`
   background-size: contain;
   @media ${device.tablet} {
     height: 80px;
+  }
+  @media ${device.mobile} {
+    height: 20px;
   }
 `;
 

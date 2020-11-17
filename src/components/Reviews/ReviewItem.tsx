@@ -29,7 +29,7 @@ const ReviewItemWrapper = styled.div`
 const ReviewImageWrapper = styled.div`
   display: flex;
   width: 80px;
-  width: 80px;
+  height: 80px;
   border-radius: 80px;
   overflow: hidden;
   margin-bottom: 30px;

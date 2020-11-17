@@ -1,9 +1,9 @@
 import React from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { Element } from "react-scroll";
-import { Map as YMap, Placemark, YMaps } from "react-yandex-maps";
-import MapPointer from "images/icons/mapPointer.svg";
+import { Placemark, Map as YMap, YMaps } from "react-yandex-maps";
 
+import MapPointer from "images/icons/mapPointer.svg";
 import { H2 } from "ui/Title";
 
 const mapPlaces = [
@@ -77,10 +77,11 @@ const Map = () => {
                 }}
                 properties={{
                   hintContent: text,
+                  balloonContent: text,
                 }}
                 key={text}
                 geometry={coordinates}
-                modules={["geoObject.addon.hint"]}
+                modules={["geoObject.addon.hint", "geoObject.addon.balloon"]}
               />
             ))}
           </YMap>

@@ -7,8 +7,8 @@ import Arrow from "images/icons/arrow.svg";
 import { colors } from "ui/colors";
 import { H2 } from "ui/Title";
 
-import ReviewItem from "./ReviewItem";
 import { ReviewsData } from "./Data";
+import ReviewItem from "./ReviewItem";
 
 const ReviewsWrapper = styled.section`
   overflow: hidden;
@@ -19,6 +19,13 @@ const ReviewsWrapper = styled.section`
     &.slick-active {
       opacity: 1 !important;
     }
+  }
+  .slick-track {
+    display: flex;
+  }
+  .slick-track .slick-slide {
+    display: flex;
+    height: auto;
   }
 `;
 
@@ -114,6 +121,7 @@ const settings: Settings = {
 };
 
 const ItemWrapper = styled.div`
+  height: 100%;
   padding: 15px 15px 30px;
 `;
 

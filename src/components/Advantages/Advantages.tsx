@@ -1,5 +1,6 @@
 import React, { ReactNode } from "react";
 import { Col, Container, Row } from "react-bootstrap";
+import { Link } from "react-scroll";
 import styled from "styled-components";
 
 import Box from "images/icons/box.svg";
@@ -11,11 +12,10 @@ import { device } from "ui/media";
 import { H2 } from "ui/Title";
 
 import Advantage from "./Advantage";
-import { Link } from "react-scroll";
 
 const UnderlinedText = styled.p`
   margin-bottom: 0;
-  color: ${colors.thatch};
+  color: ${colors.coffee};
   font-weight: 500;
   text-decoration: underline;
   cursor: pointer;
@@ -24,7 +24,7 @@ const UnderlinedText = styled.p`
 const StoreDescription = (
   <>
     <span>Возможность приобрести корм в ближайших от васпунктах продаж.</span>
-    <Link to="contacts" spy smooth duration={1000}>
+    <Link to="footer" spy smooth duration={1000}>
       <UnderlinedText className="m-t-2">
         Все адреса пунктов продаж
       </UnderlinedText>
@@ -89,7 +89,12 @@ const Advantages = () => {
           {ADVANTAGES.map((advantage, inx) => {
             const key: string = inx + advantage.title;
             return (
-              <Col key={key} lg={3} md={6} className={inx < 2 ? "mb-md-3" : ""}>
+              <Col
+                key={key}
+                lg={3}
+                md={6}
+                className={inx < 2 ? "mb-md-3 mb-lg-0" : ""}
+              >
                 <Advantage {...advantage} />
               </Col>
             );

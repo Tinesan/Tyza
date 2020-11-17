@@ -8,8 +8,8 @@ import LineWithCircleRB from "images/icons/lineWithCircleRB.svg";
 import LineWithCircleRT from "images/icons/lineWithCircleRT.svg";
 import ProductAdvantageBg from "images/productAdvantageBg.png";
 import { colors } from "ui/colors";
-import { H2 } from "ui/Title";
 import { device } from "ui/media";
+import { H2 } from "ui/Title";
 
 const ProductAdvantagesWrapper = styled.section`
   padding-bottom: 80px;
@@ -75,7 +75,7 @@ const ProductAdvantages = () => {
             </TitleWrapper>
           </Col>
         </Row>
-        <Row>
+        <Row className="mb-0 mb-lg-4">
           <Col xs={12} lg={6}>
             <ProductAdvantagesItemWrapper
               className="mt-4"
@@ -100,7 +100,7 @@ const ProductAdvantages = () => {
             </ProductAdvantagesItemWrapper>
           </Col>
         </Row>
-        <Row>
+        <Row className="mt-0 mt-lg-4">
           <Col xs={12} lg={6} className="mt-4 mt-lg-0">
             <ProductAdvantagesItemWrapper
               line={LineWithCircleLB}

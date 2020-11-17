@@ -1,7 +1,7 @@
-import Valentina from "./images/valentina.png";
-import Olga from "./images/olga.png";
-import Yaugen from "./images/yaugen.png";
 import Oleg from "./images/oleg.webp";
+import Olga from "./images/olga.png";
+import Valentina from "./images/valentina.png";
+import Yaugen from "./images/yaugen.png";
 
 export const ReviewsData = [
   {
