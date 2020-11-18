@@ -7,9 +7,11 @@ type Props = {
 };
 
 export const AuthContext = React.createContext<{
+  isAdmin: boolean;
   authData?: AuthenticateDataFragment;
   setAuthData: (authData: AuthenticateDataFragment) => void;
 }>({
+  isAdmin: false,
   authData: undefined,
   setAuthData: () => {},
 });
@@ -19,9 +21,17 @@ const AuthProvider = ({ children }: Props) => {
     AuthenticateDataFragment | undefined
   >(undefined);
 
+  const authDataSession = JSON.parse(sessionStorage.getItem("login") ?? "");
+  if (authDataSession && "accessToken" in authDataSession && !authData) {
+    setAuthData(authDataSession);
+  }
+
+  const isAdmin = !!authData?.authorities.includes("ROLE_ADMIN");
+
   return (
     <AuthContext.Provider
       value={{
+        isAdmin,
         authData,
         setAuthData,
       }}

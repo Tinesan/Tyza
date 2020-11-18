@@ -8,6 +8,7 @@ import {
   useDeleteCategoryMutation,
   useUpdateCategoryMutation,
 } from "generated/graphql";
+import { AuthContext } from "providers/AuthProvider";
 import { DataContext } from "providers/DataProvider";
 
 import CategoriesList from "./CategoriesList";
@@ -22,6 +23,7 @@ const Categories = () => {
     dataProviderLoading,
     refetchCategoriesAndProducts,
   } = useContext(DataContext);
+  const { isAdmin } = useContext(AuthContext);
   const [editableCategotyId, setEditableCategotyId] = useState<
     EditableCategotyId
   >(null);
@@ -98,7 +100,10 @@ const Categories = () => {
     <>
       <Row className="mt-3">
         <Col>
-          <Button onClick={() => setEditableCategotyId(undefined)}>
+          <Button
+            disabled={!isAdmin}
+            onClick={() => setEditableCategotyId(undefined)}
+          >
             Добавить категорию
           </Button>
         </Col>

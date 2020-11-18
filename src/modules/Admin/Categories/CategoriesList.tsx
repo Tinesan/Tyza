@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Button, Col, ListGroup, Row } from "react-bootstrap";
+
+import { AuthContext } from "providers/AuthProvider";
 
 type Props = {
   categories: {
@@ -15,9 +17,11 @@ const CategoriesList = ({
   onEditButtonClick,
   onDeleteButtonClick,
 }: Props) => {
+  const { isAdmin } = useContext(AuthContext);
   return (
     <ListGroup>
       {categories.map(({ id, name }) => {
+        const isButtonDisabled = !isAdmin || name === "OTHER";
         return (
           <ListGroup.Item action key={id}>
             <Row className="align-items-center">
@@ -26,6 +30,7 @@ const CategoriesList = ({
                 <div className="mr-3">
                   <Button
                     variant="primary"
+                    disabled={isButtonDisabled}
                     onClick={() => onEditButtonClick(id)}
                   >
                     Редактировать
@@ -33,8 +38,8 @@ const CategoriesList = ({
                 </div>
                 <div>
                   <Button
-                    disabled={name === "OTHER"}
                     variant="danger"
+                    disabled={isButtonDisabled}
                     onClick={() => onDeleteButtonClick(id)}
                   >
                     Удалить

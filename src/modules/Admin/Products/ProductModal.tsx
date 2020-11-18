@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { Col, Form, Row } from "react-bootstrap";
 
 import { useProductQuery } from "generated/graphql";
+import { AuthContext } from "providers/AuthProvider";
 import { DataContext } from "providers/DataProvider";
 
 type Props = {
@@ -24,6 +25,7 @@ export type ProductModalData = {
 };
 
 const ProductModal = ({ id, children }: Props) => {
+  const { isAdmin } = useContext(AuthContext);
   const { data } = useProductQuery({ variables: { id: id! }, skip: !id });
   const { categories } = useContext(DataContext);
   const [name, setName] = useState<string>("");
@@ -71,6 +73,7 @@ const ProductModal = ({ id, children }: Props) => {
             <Form.Control
               type="text"
               value={name}
+              disabled={!isAdmin}
               placeholder="Введите название товара"
               onChange={(e) => setName(e.target.value)}
             />
@@ -82,6 +85,7 @@ const ProductModal = ({ id, children }: Props) => {
             <Form.Control
               as="select"
               custom
+              disabled={!isAdmin}
               defaultValue={""}
               onChange={(e) => setCategoryId(e.target.value)}
             >
@@ -107,6 +111,7 @@ const ProductModal = ({ id, children }: Props) => {
               min="0"
               value={price}
               type="number"
+              disabled={!isAdmin}
               placeholder="Введите цену товара"
               onChange={(e) => setPrice(e.target.value)}
             />
@@ -118,6 +123,7 @@ const ProductModal = ({ id, children }: Props) => {
             <Form.Control
               type="text"
               value={costPer}
+              disabled={!isAdmin}
               placeholder="Введите название стоимость за ( 1кг, 1 упаковку, пару, метр)"
               onChange={(e) => setCoastPer(e.target.value)}
             />
@@ -132,8 +138,9 @@ const ProductModal = ({ id, children }: Props) => {
               rows={3}
               type="text"
               as="textarea"
-              placeholder="Введите описание товара"
+              disabled={!isAdmin}
               value={description}
+              placeholder="Введите описание товара"
               onChange={(e) => setDescription(e.target.value)}
             />
           </Form.Group>

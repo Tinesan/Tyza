@@ -23,6 +23,7 @@ const LoginPage = () => {
         password: passwordValue,
       });
       if (authenticate) {
+        sessionStorage.setItem("login", JSON.stringify(authenticate));
         setAuthData(authenticate);
         history.push("/admin");
       }

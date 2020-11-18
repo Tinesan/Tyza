@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Col, Row } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import styled from "styled-components";
@@ -88,6 +88,7 @@ const getProductOrderLines = (
 };
 
 const OrderForm = () => {
+  const [loading, setLoading] = useState<boolean>(false);
   const [placeOrder, { loading: placeOrderLoading }] = usePlaceOrderMutation();
   const { openModal } = useModal();
   const { basketProducts } = useBasketProduct();
@@ -98,6 +99,7 @@ const OrderForm = () => {
     },
   });
   const onSubmit = async (data: Inputs) => {
+    setLoading(true);
     const { deliveryTime, comment, ...customer } = data;
     const productOrderLines = getProductOrderLines(basketProducts);
     try {
@@ -111,6 +113,8 @@ const OrderForm = () => {
       openModal("orderResult");
     } catch (error) {
       openModal("orderResult", { failed: 1 });
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -233,9 +237,9 @@ const OrderForm = () => {
               className="order-form-button"
               text="ОФОРМИТЬ ЗАКАЗ"
               size={ButtonSize.LARGE}
-              disabled={placeOrderLoading}
               onClick={handleSubmit(onSubmit)}
               color={ButtonColor.COFFEE_GRADIENT}
+              disabled={placeOrderLoading || loading}
             />
           </div>
         </Col>

@@ -3,12 +3,8 @@ import { Button, Col, ListGroup, Row, Spinner } from "react-bootstrap";
 import { useToasts } from "react-toast-notifications";
 
 import { ConfirmModal, FormModal } from "components/Modal";
-import {
-  useAddNewImagesMutation,
-  useAddNewProductMutation,
-  useDeleteProductMutation,
-  useUpdateProductMutation,
-} from "generated/graphql";
+import { useAddNewImagesMutation, useAddNewProductMutation, useDeleteProductMutation, useUpdateProductMutation } from "generated/graphql";
+import { AuthContext } from "providers/AuthProvider";
 import { DataContext } from "providers/DataProvider";
 
 import ProductItem from "./ProductItem";
@@ -21,7 +17,7 @@ const Products = () => {
     dataProviderLoading,
     refetchCategoriesAndProducts,
   } = useContext(DataContext);
-
+  const { isAdmin } = useContext(AuthContext);
   const [addNewImage] = useAddNewImagesMutation();
   const [addNewProduct] = useAddNewProductMutation();
   const [updateProduct] = useUpdateProductMutation();
@@ -100,7 +96,10 @@ const Products = () => {
     <>
       <Row className="mt-3">
         <Col>
-          <Button onClick={() => setEditableProductId(undefined)}>
+          <Button
+            disabled={!isAdmin}
+            onClick={() => setEditableProductId(undefined)}
+          >
             Добавить товар
           </Button>
         </Col>

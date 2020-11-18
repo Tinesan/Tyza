@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Col, Form } from "react-bootstrap";
 import { Button } from "react-bootstrap";
 import { Row } from "react-bootstrap";
@@ -6,6 +6,7 @@ import { ListGroup } from "react-bootstrap";
 import styled from "styled-components";
 
 import { ProductItemFragment } from "generated/graphql";
+import { AuthContext } from "providers/AuthProvider";
 
 type Props = {
   product: ProductItemFragment;
@@ -35,6 +36,7 @@ const ProductItem = ({
   onEditButtonClick,
   onDeleteButtonClick,
 }: Props) => {
+  const { isAdmin } = useContext(AuthContext);
   const { name, images } = product;
   const productImage = images[images.length - 1]?.uri ?? undefined;
   return (
@@ -48,6 +50,7 @@ const ProductItem = ({
           <Form.File
             custom
             className="mr-3"
+            disabled={!isAdmin}
             label={productImage ? "Изменить картинку" : "Загрузить картинку"}
             onChange={onChangeIcon}
           />
@@ -57,7 +60,11 @@ const ProductItem = ({
             </Button>
           </div>
           <div>
-            <Button variant="danger" onClick={onDeleteButtonClick}>
+            <Button
+              variant="danger"
+              disabled={!isAdmin}
+              onClick={onDeleteButtonClick}
+            >
               Удалить
             </Button>
           </div>
