@@ -11,8 +11,8 @@ const LoginPage = () => {
   const { addToast } = useToasts();
   const { setAuthData } = useContext(AuthContext);
   const { refetch: userAuth } = useAuthenticateQuery({ skip: true });
-  const [loginValue, setLoginValue] = useState<string>("admin");
-  const [passwordValue, setPasswordValue] = useState<string>("12345678");
+  const [loginValue, setLoginValue] = useState<string>("");
+  const [passwordValue, setPasswordValue] = useState<string>("");
 
   const onSubmit = useCallback(async () => {
     try {
