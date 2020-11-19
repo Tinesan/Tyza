@@ -38,7 +38,7 @@ const Header = () => {
                   </Link>
                 </Styled.ListGroupItem>
                 <Styled.ListGroupItem>
-                  <Link to="contacts" {...scrollDefaultProps}>
+                  <Link to="footer" {...scrollDefaultProps}>
                     Контакты
                   </Link>
                 </Styled.ListGroupItem>

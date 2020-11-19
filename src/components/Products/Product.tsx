@@ -1,12 +1,12 @@
 import React from "react";
 
+import { LOCATION_PROTOKOL } from "App";
 import { ProductItemFragment } from "generated/graphql";
 import TestImage from "images/icons/logo.svg";
 import { H5 } from "ui/Title";
 
 import ProductControls from "./ProductControls";
 import * as Styled from "./Products.styled";
-import { LOCATION_PROTOKOL } from "App";
 
 type Props = {
   product: ProductItemFragment;

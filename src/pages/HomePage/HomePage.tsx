@@ -3,6 +3,7 @@ import styled from "styled-components";
 
 import Advantages from "components/Advantages";
 import ColdProduction from "components/ColdProduction";
+import Delivery from "components/Delivery";
 import Divider from "components/Divider";
 import Footer, { CompanyInfo } from "components/Footer";
 import Header from "components/Header";
@@ -38,6 +39,7 @@ const HomePage = () => {
       <Cooperation />
       <Divider size={80} />
       <Map />
+      <Delivery />
       <Divider size={50} />
       <Footer />
       <Divider size={40} />

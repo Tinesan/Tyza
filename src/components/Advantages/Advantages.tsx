@@ -24,7 +24,7 @@ const UnderlinedText = styled.p`
 const StoreDescription = (
   <>
     <span>Возможность приобрести корм в ближайших от васпунктах продаж.</span>
-    <Link to="footer" spy smooth duration={1000}>
+    <Link to="contacts" offset={-30} spy smooth duration={1000}>
       <UnderlinedText className="m-t-2">
         Все адреса пунктов продаж
       </UnderlinedText>

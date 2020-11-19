@@ -13,6 +13,12 @@ const ColdProductionBg = styled.div`
   height: 220px;
   background: url(${ColdProd}) no-repeat;
   background-size: contain;
+
+  @media ${device.mobile} {
+    height: 120px;
+    background-position: center center;
+    margin-bottom: 20px;
+  }
 `;
 
 const CurveLineBg = styled.div`

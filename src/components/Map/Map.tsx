@@ -2,8 +2,10 @@ import React from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { Element } from "react-scroll";
 import { Placemark, Map as YMap, YMaps } from "react-yandex-maps";
+import styled from "styled-components";
 
 import MapPointer from "images/icons/mapPointer.svg";
+import { device } from "ui/media";
 import { H2 } from "ui/Title";
 
 const mapPlaces = [
@@ -49,6 +51,15 @@ const mapPlaces = [
   },
 ];
 
+const MapWrapper = styled.div`
+  position: relative;
+  height: 520px;
+
+  @media ${device.mobile} {
+    height: 350px;
+  }
+`;
+
 const Map = () => {
   return (
     <Element name="contacts">
@@ -61,10 +72,16 @@ const Map = () => {
           </Col>
         </Row>
       </Container>
-      <div className="mt-3 mt-lg-5">
+      <MapWrapper className="mt-3 mt-lg-5">
         <YMaps query={{ lang: "ru_RU" }}>
           <YMap
-            style={{ width: "100%", height: 500 }}
+            style={{
+              position: "absolute",
+              left: 0,
+              top: 0,
+              width: "100%",
+              height: "100%",
+            }}
             defaultState={{ zoom: 10, center: [53.902284, 27.561831] }}
           >
             {mapPlaces.map(({ coordinates, text }) => (
@@ -86,7 +103,7 @@ const Map = () => {
             ))}
           </YMap>
         </YMaps>
-      </div>
+      </MapWrapper>
     </Element>
   );
 };

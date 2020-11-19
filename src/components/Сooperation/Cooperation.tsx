@@ -33,8 +33,8 @@ const CooperationBg = styled.div`
   }
 
   @media ${device.mobile} {
-    height: 200px;
-    margin-bottom: 30px;
+    height: 100px;
+    margin-bottom: 20px;
   }
 `;
 
