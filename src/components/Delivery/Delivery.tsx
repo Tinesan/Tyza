@@ -39,11 +39,17 @@ const Delivery = () => {
       <Container>
         <Row className="align-items-center">
           <Col md={8}>
-            <p className="mb-2">
-              При заказе от 40 руб. доставка осуществляется бесплатно.
-            </p>
-            <p className="mb-0">
-              При заказе от 25 руб. стоимость доставки составляет 4 руб.{" "}
+            <div className="mb-3">
+              <p className="mb-2 font-weight-bold">Доставка по городу Минск:</p>
+              <p className="mb-2">
+                При заказе от 40 руб. доставка осуществляется бесплатно.
+              </p>
+              <p className="mb-0">
+                При заказе от 25 руб. стоимость доставки составляет 4 руб.{" "}
+              </p>
+            </div>
+            <p className="mb-0 font-weight-bold">
+              Доставка за пределы города оговаривается с менеджером
             </p>
           </Col>
           <Col className="d-none d-md-block" md={4}>

@@ -54,15 +54,11 @@ const ProductModal = ({ id, children }: Props) => {
     }
   }, [data]);
 
-  const isSaveButtonDisabled = [
-    name,
-    price,
-    costPer,
-    categoryId,
-    description,
-  ].some((field) => {
-    return !field.toString().trim();
-  });
+  const isSaveButtonDisabled = [name, price, costPer, categoryId].some(
+    (field) => {
+      return !field.toString().trim();
+    }
+  );
 
   const form = (
     <>
