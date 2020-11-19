@@ -14,6 +14,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.css";
 
+export const LOCATION_PROTOKOL = `${window.location.protocol}//`;
+
 function App() {
   return (
     <ErrorBoundary>

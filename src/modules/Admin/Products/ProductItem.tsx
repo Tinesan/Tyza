@@ -5,6 +5,7 @@ import { Row } from "react-bootstrap";
 import { ListGroup } from "react-bootstrap";
 import styled from "styled-components";
 
+import { LOCATION_PROTOKOL } from "App";
 import { ProductItemFragment } from "generated/graphql";
 import { AuthContext } from "providers/AuthProvider";
 
@@ -38,20 +39,22 @@ const ProductItem = ({
 }: Props) => {
   const { isAdmin } = useContext(AuthContext);
   const { name, images } = product;
-  const productImage = images[images.length - 1]?.uri ?? undefined;
+  const image = images[images.length - 1]?.uri;
   return (
     <ListGroup.Item action>
       <Row className="align-items-center">
         <Col md={5}>{name}</Col>
         <Col className="justify-content-end d-flex">
           <ProductImage className="mr-3">
-            {productImage && <img src={productImage} alt="productImage" />}
+            {image && (
+              <img src={`${LOCATION_PROTOKOL}${image}`} alt="productImage" />
+            )}
           </ProductImage>
           <Form.File
             custom
             className="mr-3"
             disabled={!isAdmin}
-            label={productImage ? "Изменить картинку" : "Загрузить картинку"}
+            label={image ? "Изменить картинку" : "Загрузить картинку"}
             onChange={onChangeIcon}
           />
           <div className="mr-3">
