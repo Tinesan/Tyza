@@ -13,7 +13,7 @@ type Props = {
 };
 
 const Product = ({ product }: Props) => {
-  const { id, name, description, costPer, price, images } = product;
+  const { id, name, description, costPer, price, images, stock } = product;
   const image = images[images.length - 1]?.uri;
   const imageUrl = image ? `${LOCATION_PROTOKOL}${image}` : TestImage;
 
@@ -25,13 +25,17 @@ const Product = ({ product }: Props) => {
       <Styled.ProductTitle>
         <H5>{name}</H5>
       </Styled.ProductTitle>
-      <Styled.ProductText className="mb-2 flex-grow-1">
-        {description}
-      </Styled.ProductText>
+      {!!description && (
+        <Styled.ProductText className="mb-2 flex-grow-1">
+          {description}
+        </Styled.ProductText>
+      )}
       <Styled.ProductText className="mb-2">
         Стоимость за {costPer}
       </Styled.ProductText>
-      <Styled.ProductPrice className="mb-2">{price} руб.</Styled.ProductPrice>
+      <Styled.ProductPrice className="mb-2">
+        {!stock ? "Нет в наличии" : `${price} руб.`}
+      </Styled.ProductPrice>
       <ProductControls id={id} />
     </Styled.ProductWrapper>
   );
