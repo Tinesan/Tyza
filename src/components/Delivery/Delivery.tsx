@@ -38,7 +38,7 @@ const Delivery = () => {
     <DeliveryWrapper>
       <Container>
         <Row className="align-items-center">
-          <Col md={8}>
+          <Col md={9}>
             <div className="mb-3">
               <p className="mb-2 font-weight-bold">Доставка по городу Минск:</p>
               <p className="mb-2">
@@ -52,7 +52,7 @@ const Delivery = () => {
               Доставка за пределы города оговаривается с менеджером
             </p>
           </Col>
-          <Col className="d-none d-md-block" md={4}>
+          <Col className="d-none d-md-block" md={3}>
             <DeliveryBg />
           </Col>
         </Row>
