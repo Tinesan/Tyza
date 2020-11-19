@@ -51,6 +51,7 @@ const BasketItem = ({ data, onDelete, onChange }: Props) => {
   const { id, images, price, orderQuantity, name } = data;
   const image = images[images.length - 1]?.uri;
   const imageUrl = image ? `${LOCATION_PROTOKOL}${image}` : TestImage;
+  const totalPrice = +(price * orderQuantity).toFixed(2);
 
   return (
     <tr>
@@ -66,7 +67,7 @@ const BasketItem = ({ data, onDelete, onChange }: Props) => {
           onChange={(value) => onChange({ [id]: value })}
         />
       </TableData>
-      <TableData width={90}>{price * orderQuantity} руб.</TableData>
+      <TableData width={90}>{totalPrice} руб.</TableData>
       <TableData width={50}>
         <DeleteIconWrapper onClick={() => onDelete(id)}>
           <img src={DeleteIcon} alt="удалить" />

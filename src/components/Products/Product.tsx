@@ -30,7 +30,7 @@ const Product = ({ product }: Props) => {
           {description}
         </Styled.ProductText>
       )}
-      <Styled.ProductText className="mb-2">
+      <Styled.ProductText className="mb-2 mt-auto">
         Стоимость за {costPer}
       </Styled.ProductText>
       <Styled.ProductPrice className="mb-2">

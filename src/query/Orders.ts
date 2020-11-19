@@ -4,12 +4,14 @@ import { OrderContentItemFragmentDoc } from "generated/graphql";
 
 export const PlaceOrder = gql`
   mutation PlaceOrder(
+    $comment: String!
     $deliveryTime: String!
     $customer: CustomerInputDTO!
     $productOrderLines: [ProductOrderLineInputDTO!]!
   ) {
     placeOrder(
       productOrderInputDTO: {
+        comment: $comment
         customer: $customer
         productOrderLines: $productOrderLines
         deliveryTime: $deliveryTime

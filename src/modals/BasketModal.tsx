@@ -76,7 +76,7 @@ const BasketModal = ({ onClose }: Props) => {
   const { totalPrice } = useContext(BasketContext);
   const { basketProducts } = useBasketProduct();
   const isBasketEmpty = !basketProducts.length;
-  const isPriceMoreMinimum = totalPrice > 25;
+  const isPriceMoreMinimum = totalPrice >= 25;
   const canCreateOrder = !isBasketEmpty && isPriceMoreMinimum;
   return (
     <BasketModalWrapper>

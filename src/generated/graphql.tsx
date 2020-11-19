@@ -414,6 +414,7 @@ export type CategoriesAndProductsQuery = (
 );
 
 export type PlaceOrderMutationVariables = Exact<{
+  comment: Scalars['String'];
   deliveryTime: Scalars['String'];
   customer: CustomerInputDto;
   productOrderLines: Array<ProductOrderLineInputDto>;
@@ -847,8 +848,8 @@ export type CategoriesAndProductsQueryHookResult = ReturnType<typeof useCategori
 export type CategoriesAndProductsLazyQueryHookResult = ReturnType<typeof useCategoriesAndProductsLazyQuery>;
 export type CategoriesAndProductsQueryResult = Apollo.QueryResult<CategoriesAndProductsQuery, CategoriesAndProductsQueryVariables>;
 export const PlaceOrderDocument = gql`
-    mutation PlaceOrder($deliveryTime: String!, $customer: CustomerInputDTO!, $productOrderLines: [ProductOrderLineInputDTO!]!) {
-  placeOrder(productOrderInputDTO: {customer: $customer, productOrderLines: $productOrderLines, deliveryTime: $deliveryTime}) {
+    mutation PlaceOrder($comment: String!, $deliveryTime: String!, $customer: CustomerInputDTO!, $productOrderLines: [ProductOrderLineInputDTO!]!) {
+  placeOrder(productOrderInputDTO: {comment: $comment, customer: $customer, productOrderLines: $productOrderLines, deliveryTime: $deliveryTime}) {
     id
   }
 }
@@ -868,6 +869,7 @@ export type PlaceOrderMutationFn = Apollo.MutationFunction<PlaceOrderMutation, P
  * @example
  * const [placeOrderMutation, { data, loading, error }] = usePlaceOrderMutation({
  *   variables: {
+ *      comment: // value for 'comment'
  *      deliveryTime: // value for 'deliveryTime'
  *      customer: // value for 'customer'
  *      productOrderLines: // value for 'productOrderLines'

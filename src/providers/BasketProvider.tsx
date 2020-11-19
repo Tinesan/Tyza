@@ -52,7 +52,7 @@ const BasketProvider = ({ children }: Props) => {
         }
       });
     }
-    return price;
+    return +price.toFixed(2);
   }, [basketValues, products]);
 
   const deliveryPrice: number = useMemo(() => {

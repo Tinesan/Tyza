@@ -15,7 +15,7 @@ const SpinnerWrapper = styled.div`
 
 const OrderPage = () => {
   const { data, refetch: refetchOrders } = useFindAllOrdersQuery({
-    variables: { page: "0", size: "10", sort: "createdDate,DESC" },
+    variables: { page: "0", size: "20", sort: "createdDate,DESC" },
   });
 
   const getNextPage = useCallback(() => {
