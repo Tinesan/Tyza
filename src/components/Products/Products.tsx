@@ -75,14 +75,14 @@ const Products = () => {
                     </H2>
                   </Col>
                 </Row>
-                <Row>
+                <Row style={{ marginTop: "-23px" }}>
                   {products.map((product: ProductItemFragment, inx) => {
                     return (
                       <Col
                         xs={6}
                         sm={4}
                         md={3}
-                        className="mt-4"
+                        className="mt-5"
                         key={product.id}
                       >
                         <Product product={product} />

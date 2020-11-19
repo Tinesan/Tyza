@@ -29,7 +29,7 @@ const CurveLineBg = styled.div`
     height: 80px;
   }
   @media ${device.mobile} {
-    height: 20px;
+    height: 50px;
   }
 `;
 
@@ -38,6 +38,10 @@ const CurveLineBgWrapper = styled.div`
 
   @media ${device.tablet} {
     margin-top: 30px;
+  }
+
+  @media ${device.mobile} {
+    margin-top: 15px;
   }
 `;
 
