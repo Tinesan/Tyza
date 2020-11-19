@@ -21,9 +21,13 @@ const AuthProvider = ({ children }: Props) => {
     AuthenticateDataFragment | undefined
   >(undefined);
 
-  const authDataSession = JSON.parse(sessionStorage.getItem("login") ?? "");
-  if (authDataSession && "accessToken" in authDataSession && !authData) {
-    setAuthData(authDataSession);
+  const authSessionLogin = sessionStorage.getItem("login");
+
+  if (authSessionLogin && !authData) {
+    const authDataSession = JSON.parse(authSessionLogin);
+    if ("accessToken" in authDataSession) {
+      setAuthData(authDataSession);
+    }
   }
 
   const isAdmin = !!authData?.authorities.includes("ROLE_ADMIN");
