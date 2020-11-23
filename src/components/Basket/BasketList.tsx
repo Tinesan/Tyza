@@ -15,6 +15,7 @@ type Props = {
 const Table = styled.table`
   table-layout: fixed;
   width: 100%;
+  color: rgba(0, 0, 0, 0.5);
   td:not(:first-child) {
     padding-left: 15px;
   }
@@ -62,8 +63,10 @@ const Table = styled.table`
 `;
 
 const BasketList = ({ data }: Props) => {
-  const { deleteBasketValue, addBasketValue } = useContext(BasketContext);
-
+  const { deleteBasketValue, addBasketValue, totalPrice } = useContext(
+    BasketContext
+  );
+  if (!data.length) return null;
   return (
     <Table>
       <tbody>
@@ -75,6 +78,16 @@ const BasketList = ({ data }: Props) => {
             onDelete={deleteBasketValue}
           />
         ))}
+        <tr>
+          <td className="p-0"></td>
+          <td className="p-0"></td>
+          <td>
+            <span className="font-weight-bold">Всего</span>
+          </td>
+          <td colSpan={2}>
+            <span className="font-weight-bold">{totalPrice} руб</span>
+          </td>
+        </tr>
       </tbody>
     </Table>
   );

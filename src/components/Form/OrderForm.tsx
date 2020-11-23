@@ -4,7 +4,10 @@ import { useForm } from "react-hook-form";
 import styled from "styled-components";
 
 import Button, { ButtonColor, ButtonSize } from "components/Button";
-import { ProductOrderLineInputDto, usePlaceOrderMutation } from "generated/graphql";
+import {
+  ProductOrderLineInputDto,
+  usePlaceOrderMutation,
+} from "generated/graphql";
 import useBasketProduct, { BasketProduct } from "hooks/useBasketProduct";
 import useModal from "modals/hooks";
 import { BasketContext } from "providers/BasketProvider";
@@ -89,7 +92,7 @@ const OrderForm = () => {
   const [placeOrder, { loading: placeOrderLoading }] = usePlaceOrderMutation();
   const { openModal } = useModal();
   const { basketProducts } = useBasketProduct();
-  const { totalPrice, deliveryPrice } = useContext(BasketContext);
+  const { totalPrice, deliveryPrice, clearBasket } = useContext(BasketContext);
   const { register, handleSubmit, control, errors } = useForm<Inputs>({
     defaultValues: {
       deliveryTime: RADIO_VALUES.firstValue,
@@ -108,6 +111,7 @@ const OrderForm = () => {
           productOrderLines,
         },
       });
+      clearBasket();
       openModal("orderResult");
     } catch (error) {
       openModal("orderResult", { failed: 1 });

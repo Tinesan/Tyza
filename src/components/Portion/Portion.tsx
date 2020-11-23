@@ -92,7 +92,7 @@ const Portion = () => {
                   Вес взрослой собаки * на <b>0,035</b>
                 </PortionMainDescription>
                 <PortionSecondaryDescription>
-                  Пример: собака 10 кг * 0,035 = 350 гр.)
+                  Пример: собака 10 кг * 0,035 = 350 гр.
                 </PortionSecondaryDescription>
               </Col>
               <Col className="mt-5 mt-md-0" sm={12} md={{ span: 4, offset: 2 }}>
@@ -101,7 +101,7 @@ const Portion = () => {
                   Вес щенка * на <b>0,065</b>
                 </PortionMainDescription>
                 <PortionSecondaryDescription>
-                  Пример: щенок 5 кг * 0,065 = 325 гр.)
+                  Пример: щенок 5 кг * 0,065 = 325 гр.
                 </PortionSecondaryDescription>
               </Col>
             </Row>

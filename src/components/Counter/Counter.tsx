@@ -43,8 +43,37 @@ const CountButton = styled.button`
 `;
 
 const CounterValue = styled.div`
-  width: 25px;
   text-align: center;
+
+  input {
+    width: 32px;
+    height: 20px;
+    font-size: 16px;
+    margin: 0 3px;
+    color: ${colors.coffee};
+    border: 1px solid ${colors.coffee};
+    border-radius: 10px;
+    padding: 0px 5px;
+    text-align: center;
+    transition-duration: 0.3s;
+
+    &:focus {
+      outline: none;
+      box-shadow: 0 0 3px rgba(120, 99, 84, 0.5);
+    }
+  }
+
+  /* Chrome, Safari, Edge, Opera */
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  /* Firefox */
+  input[type="number"] {
+    -moz-appearance: textfield;
+  }
 `;
 
 const Counter = ({ value, onChange }: Props) => {
@@ -56,13 +85,32 @@ const Counter = ({ value, onChange }: Props) => {
     onChange(value - 1);
   }, [onChange, value]);
 
+  const onInputChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      const value = +e.target.value;
+      if (value > 99) return;
+      if (typeof value === "number") {
+        onChange(Math.abs(value));
+      }
+    },
+    [onChange]
+  );
+
   return (
     <CounterWrapper>
-      <CountButton disabled={value === 1} onClick={decrement}>
+      <CountButton disabled={value < 1} onClick={decrement}>
         -
       </CountButton>
-      <CounterValue>{value}</CounterValue>
-      <CountButton onClick={increment}>+</CountButton>
+      <CounterValue>
+        <input
+          type="number"
+          onChange={onInputChange}
+          value={!!value ? value : ""}
+        />
+      </CounterValue>
+      <CountButton disabled={value >= 99} onClick={increment}>
+        +
+      </CountButton>
     </CounterWrapper>
   );
 };

@@ -12,14 +12,16 @@ type BasketContext = {
   totalPrice: number;
   deliveryPrice: number;
   basketValues: BasketValue;
-  addBasketValue: (basketValue: BasketValue) => void;
+  clearBasket: () => void;
   deleteBasketValue: (id: ID) => void;
+  addBasketValue: (basketValue: BasketValue) => void;
 };
 
 export const BasketContext = React.createContext<BasketContext>({
   totalPrice: 0,
   deliveryPrice: 0,
   basketValues: {},
+  clearBasket: () => {},
   addBasketValue: () => {},
   deleteBasketValue: () => {},
 });
@@ -63,10 +65,15 @@ const BasketProvider = ({ children }: Props) => {
     }
   }, [totalPrice]);
 
+  const clearBasket = () => {
+    setBasketValues({});
+  };
+
   return (
     <BasketContext.Provider
       value={{
         totalPrice,
+        clearBasket,
         basketValues,
         deliveryPrice,
         addBasketValue,
