@@ -8,6 +8,7 @@ gql`
     name
     stock
     price
+    order
     costPer
     categoryId
     description
@@ -23,6 +24,7 @@ gql`
 
 export const AddNewProduct = gql`
   mutation AddNewProduct(
+    $order: Int!
     $name: String!
     $stock: Boolean!
     $costPer: String!
@@ -33,6 +35,7 @@ export const AddNewProduct = gql`
     saveNewProduct(
       productInputDTO: {
         name: $name
+        order: $order
         price: $price
         stock: $stock
         costPer: $costPer
@@ -48,6 +51,7 @@ export const AddNewProduct = gql`
 export const UpdateProduct = gql`
   mutation UpdateProduct(
     $id: String!
+    $order: Int!
     $name: String!
     $stock: Boolean!
     $costPer: String!
@@ -59,6 +63,7 @@ export const UpdateProduct = gql`
       productId: $id
       productInputDTO: {
         name: $name
+        order: $order
         stock: $stock
         price: $price
         costPer: $costPer

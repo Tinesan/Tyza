@@ -17,10 +17,11 @@ type Props = {
 export type ProductModalData = {
   id?: ID;
   name: string;
-  costPer: string;
-  stock: boolean;
-  categoryId: string;
+  order: number;
   price: string;
+  stock: boolean;
+  costPer: string;
+  categoryId: string;
   description: string;
 };
 
@@ -29,6 +30,7 @@ const ProductModal = ({ id, children }: Props) => {
   const { data } = useProductQuery({ variables: { id: id! }, skip: !id });
   const { categories } = useContext(DataContext);
   const [name, setName] = useState<string>("");
+  const [order, setOrder] = useState<number>(0);
   const [price, setPrice] = useState<string>("");
   const [stock, setStock] = useState<boolean>(true);
   const [costPer, setCoastPer] = useState<string>("1кг");
@@ -41,11 +43,13 @@ const ProductModal = ({ id, children }: Props) => {
         name,
         price,
         stock,
+        order,
         costPer,
         categoryId,
         description,
       } = data.productById;
       setName(name);
+      setOrder(order);
       setPrice(price);
       setStock(stock);
       setCoastPer(costPer);
@@ -102,6 +106,34 @@ const ProductModal = ({ id, children }: Props) => {
       <Row>
         <Col>
           <Form.Group>
+            <Form.Label>Описание товара</Form.Label>
+            <Form.Control
+              rows={3}
+              type="text"
+              as="textarea"
+              disabled={!isAdmin}
+              value={description}
+              placeholder="Введите описание товара"
+              onChange={(e) => setDescription(e.target.value)}
+            />
+          </Form.Group>
+        </Col>
+      </Row>
+      <Row>
+        <Col>
+          <Form.Group>
+            <Form.Label>Порядок отображения</Form.Label>
+            <Form.Control
+              value={order}
+              type="number"
+              disabled={!isAdmin}
+              placeholder="Введите числовой порядок отображения"
+              onChange={(e) => setOrder(+e.target.value)}
+            />
+          </Form.Group>
+        </Col>
+        <Col>
+          <Form.Group>
             <Form.Label>Цена товара, рублей</Form.Label>
             <Form.Control
               min="0"
@@ -122,22 +154,6 @@ const ProductModal = ({ id, children }: Props) => {
               disabled={!isAdmin}
               placeholder="Введите название стоимость за ( 1кг, 1 упаковку, пару, метр)"
               onChange={(e) => setCoastPer(e.target.value)}
-            />
-          </Form.Group>
-        </Col>
-      </Row>
-      <Row>
-        <Col>
-          <Form.Group>
-            <Form.Label>Описание товара</Form.Label>
-            <Form.Control
-              rows={3}
-              type="text"
-              as="textarea"
-              disabled={!isAdmin}
-              value={description}
-              placeholder="Введите описание товара"
-              onChange={(e) => setDescription(e.target.value)}
             />
           </Form.Group>
         </Col>
@@ -166,6 +182,7 @@ const ProductModal = ({ id, children }: Props) => {
       name,
       price,
       stock,
+      order,
       costPer,
       categoryId,
       description,

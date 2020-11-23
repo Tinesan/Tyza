@@ -186,6 +186,7 @@ export type ProductDto = {
   categoryId: Scalars['String'];
   costPer: Scalars['String'];
   images: Array<ProductImageDto>;
+  order: Scalars['Int'];
 };
 
 export type ProductImageDto = {
@@ -206,6 +207,7 @@ export type ProductInputDto = {
   stock: Scalars['Boolean'];
   categoryId: Scalars['String'];
   costPer: Scalars['String'];
+  order: Scalars['Int'];
 };
 
 export type ProductOrderDto = {
@@ -462,7 +464,7 @@ export type FindAllOrdersQuery = (
 
 export type ProductItemFragment = (
   { __typename?: 'ProductDTO' }
-  & Pick<ProductDto, 'id' | 'name' | 'stock' | 'price' | 'costPer' | 'categoryId' | 'description'>
+  & Pick<ProductDto, 'id' | 'name' | 'stock' | 'price' | 'order' | 'costPer' | 'categoryId' | 'description'>
   & { images: Array<(
     { __typename?: 'ProductImageDTO' }
     & Pick<ProductImageDto, 'id' | 'uri' | 'name' | 'main' | 'productId'>
@@ -470,6 +472,7 @@ export type ProductItemFragment = (
 );
 
 export type AddNewProductMutationVariables = Exact<{
+  order: Scalars['Int'];
   name: Scalars['String'];
   stock: Scalars['Boolean'];
   costPer: Scalars['String'];
@@ -489,6 +492,7 @@ export type AddNewProductMutation = (
 
 export type UpdateProductMutationVariables = Exact<{
   id: Scalars['String'];
+  order: Scalars['Int'];
   name: Scalars['String'];
   stock: Scalars['Boolean'];
   costPer: Scalars['String'];
@@ -599,6 +603,7 @@ export const ProductItemFragmentDoc = gql`
   name
   stock
   price
+  order
   costPer
   categoryId
   description
@@ -925,8 +930,8 @@ export type FindAllOrdersQueryHookResult = ReturnType<typeof useFindAllOrdersQue
 export type FindAllOrdersLazyQueryHookResult = ReturnType<typeof useFindAllOrdersLazyQuery>;
 export type FindAllOrdersQueryResult = Apollo.QueryResult<FindAllOrdersQuery, FindAllOrdersQueryVariables>;
 export const AddNewProductDocument = gql`
-    mutation AddNewProduct($name: String!, $stock: Boolean!, $costPer: String!, $price: BigDecimal!, $categoryId: String!, $description: String!) {
-  saveNewProduct(productInputDTO: {name: $name, price: $price, stock: $stock, costPer: $costPer, categoryId: $categoryId, description: $description}) {
+    mutation AddNewProduct($order: Int!, $name: String!, $stock: Boolean!, $costPer: String!, $price: BigDecimal!, $categoryId: String!, $description: String!) {
+  saveNewProduct(productInputDTO: {name: $name, order: $order, price: $price, stock: $stock, costPer: $costPer, categoryId: $categoryId, description: $description}) {
     id
   }
 }
@@ -946,6 +951,7 @@ export type AddNewProductMutationFn = Apollo.MutationFunction<AddNewProductMutat
  * @example
  * const [addNewProductMutation, { data, loading, error }] = useAddNewProductMutation({
  *   variables: {
+ *      order: // value for 'order'
  *      name: // value for 'name'
  *      stock: // value for 'stock'
  *      costPer: // value for 'costPer'
@@ -962,8 +968,8 @@ export type AddNewProductMutationHookResult = ReturnType<typeof useAddNewProduct
 export type AddNewProductMutationResult = Apollo.MutationResult<AddNewProductMutation>;
 export type AddNewProductMutationOptions = Apollo.BaseMutationOptions<AddNewProductMutation, AddNewProductMutationVariables>;
 export const UpdateProductDocument = gql`
-    mutation UpdateProduct($id: String!, $name: String!, $stock: Boolean!, $costPer: String!, $price: BigDecimal!, $categoryId: String!, $description: String!) {
-  updateProduct(productId: $id, productInputDTO: {name: $name, stock: $stock, price: $price, costPer: $costPer, categoryId: $categoryId, description: $description}) {
+    mutation UpdateProduct($id: String!, $order: Int!, $name: String!, $stock: Boolean!, $costPer: String!, $price: BigDecimal!, $categoryId: String!, $description: String!) {
+  updateProduct(productId: $id, productInputDTO: {name: $name, order: $order, stock: $stock, price: $price, costPer: $costPer, categoryId: $categoryId, description: $description}) {
     id
   }
 }
@@ -984,6 +990,7 @@ export type UpdateProductMutationFn = Apollo.MutationFunction<UpdateProductMutat
  * const [updateProductMutation, { data, loading, error }] = useUpdateProductMutation({
  *   variables: {
  *      id: // value for 'id'
+ *      order: // value for 'order'
  *      name: // value for 'name'
  *      stock: // value for 'stock'
  *      costPer: // value for 'costPer'
