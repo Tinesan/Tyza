@@ -1464,7 +1464,7 @@
             "deprecationReason": null
           },
           {
-            "name": "order",
+            "name": "position",
             "description": "",
             "args": [],
             "type": {
@@ -1693,7 +1693,7 @@
             "defaultValue": null
           },
           {
-            "name": "order",
+            "name": "position",
             "description": "",
             "type": {
               "kind": "NON_NULL",

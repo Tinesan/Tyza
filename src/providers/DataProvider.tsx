@@ -20,7 +20,7 @@ export const DataContext = React.createContext<DataContext>({
   refetchCategoriesAndProducts: () => {},
 });
 
-function sorterFunction<T extends { name: string }>(a: T, b: T) {
+export function sorterFunction<T extends { name: string }>(a: T, b: T) {
   if (a.name > b.name) {
     return 1;
   }
@@ -36,8 +36,8 @@ const DataProvider = ({ children }: Props) => {
     if (data?.listCategory && data.listProduct) {
       const { listCategory, listProduct } = data;
       return {
-        products: [...listProduct].sort(sorterFunction),
-        categories: [...listCategory].sort(sorterFunction),
+        products: listProduct,
+        categories: listCategory,
       };
     }
     return { products: [], categories: [] };

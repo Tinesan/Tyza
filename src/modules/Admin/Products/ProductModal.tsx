@@ -17,10 +17,10 @@ type Props = {
 export type ProductModalData = {
   id?: ID;
   name: string;
-  order: number;
   price: string;
   stock: boolean;
   costPer: string;
+  position: number;
   categoryId: string;
   description: string;
 };
@@ -30,9 +30,9 @@ const ProductModal = ({ id, children }: Props) => {
   const { data } = useProductQuery({ variables: { id: id! }, skip: !id });
   const { categories } = useContext(DataContext);
   const [name, setName] = useState<string>("");
-  const [order, setOrder] = useState<number>(0);
   const [price, setPrice] = useState<string>("");
   const [stock, setStock] = useState<boolean>(true);
+  const [position, setPosition] = useState<number>(0);
   const [costPer, setCoastPer] = useState<string>("1кг");
   const [categoryId, setCategoryId] = useState<string>("");
   const [description, setDescription] = useState<string>("Состав:");
@@ -43,16 +43,16 @@ const ProductModal = ({ id, children }: Props) => {
         name,
         price,
         stock,
-        order,
         costPer,
+        position,
         categoryId,
         description,
       } = data.productById;
       setName(name);
-      setOrder(order);
       setPrice(price);
       setStock(stock);
       setCoastPer(costPer);
+      setPosition(position);
       setCategoryId(categoryId);
       setDescription(description || "");
     }
@@ -124,11 +124,11 @@ const ProductModal = ({ id, children }: Props) => {
           <Form.Group>
             <Form.Label>Порядок отображения</Form.Label>
             <Form.Control
-              value={order}
               type="number"
+              value={position}
               disabled={!isAdmin}
               placeholder="Введите числовой порядок отображения"
-              onChange={(e) => setOrder(+e.target.value)}
+              onChange={(e) => setPosition(+e.target.value)}
             />
           </Form.Group>
         </Col>
@@ -182,8 +182,8 @@ const ProductModal = ({ id, children }: Props) => {
       name,
       price,
       stock,
-      order,
       costPer,
+      position,
       categoryId,
       description,
     },

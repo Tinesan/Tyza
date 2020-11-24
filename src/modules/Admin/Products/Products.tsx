@@ -5,7 +5,7 @@ import { useToasts } from "react-toast-notifications";
 import { ConfirmModal, FormModal } from "components/Modal";
 import { useAddNewImagesMutation, useAddNewProductMutation, useDeleteProductMutation, useUpdateProductMutation } from "generated/graphql";
 import { AuthContext } from "providers/AuthProvider";
-import { DataContext } from "providers/DataProvider";
+import { DataContext, sorterFunction } from "providers/DataProvider";
 
 import ProductItem from "./ProductItem";
 import ProductModal, { ProductModalData } from "./ProductModal";
@@ -108,7 +108,7 @@ const Products = () => {
         <Col>
           {!dataProviderLoading ? (
             <ListGroup>
-              {products.map((product) => {
+              {[...products].sort(sorterFunction).map((product) => {
                 const { id } = product;
                 return (
                   <ProductItem

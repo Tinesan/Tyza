@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { Button, Col, ListGroup, Row } from "react-bootstrap";
 
 import { AuthContext } from "providers/AuthProvider";
+import { sorterFunction } from "providers/DataProvider";
 
 type Props = {
   categories: {
@@ -20,7 +21,7 @@ const CategoriesList = ({
   const { isAdmin } = useContext(AuthContext);
   return (
     <ListGroup>
-      {categories.map(({ id, name }) => {
+      {[...categories].sort(sorterFunction).map(({ id, name }) => {
         const isButtonDisabled = !isAdmin || name === "OTHER";
         return (
           <ListGroup.Item action key={id}>
