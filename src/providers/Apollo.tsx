@@ -1,9 +1,4 @@
-import {
-  ApolloClient,
-  ApolloProvider,
-  from,
-  InMemoryCache,
-} from "@apollo/client";
+import { ApolloClient, ApolloProvider, from, InMemoryCache } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
 import { onError } from "@apollo/client/link/error";
 import { createUploadLink } from "apollo-upload-client";
@@ -18,7 +13,6 @@ const { hostname } = window.location;
 
 const uploadLink = createUploadLink({
   uri: `http://${hostname}:5003/graphql/`,
-  credentials: "include",
 });
 
 const errorLink = onError(({ graphQLErrors, networkError }) => {
