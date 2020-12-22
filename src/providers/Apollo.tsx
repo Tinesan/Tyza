@@ -13,6 +13,9 @@ const { hostname } = window.location;
 
 const uploadLink = createUploadLink({
   uri: `http://${hostname}:5003/graphql/`,
+  fetchOptions: {
+    mode: "no-cors",
+  },
 });
 
 const errorLink = onError(({ graphQLErrors, networkError }) => {
