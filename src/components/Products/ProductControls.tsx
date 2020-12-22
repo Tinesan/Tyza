@@ -15,10 +15,11 @@ export const ProductControlsWrapper = styled.div`
   align-items: center;
 `;
 
-export const BasketWrapper = styled.div`
+export const BasketWrapper = styled.div<{ disabled: boolean }>`
   display: flex;
   width: 30px;
   height: 30px;
+  opacity: ${({ disabled }) => (disabled ? "0.5" : "1")};
 
   img {
     max-width: 100%;
@@ -39,18 +40,24 @@ const ProductControls = ({ id }: Props) => {
     setOrderCount(count);
   };
 
+  const canAddToBasket = !!orderCount;
+
   return (
     <ProductControlsWrapper className="justify-content-between">
       <Counter value={orderCount} onChange={onCounterChagne} />
       <Button
         text="В КОРЗИНУ"
         onClick={addToBasket}
-        disabled={!orderCount}
+        disabled={!canAddToBasket}
         size={ButtonSize.SMALL}
         className="d-none d-xl-block"
         color={ButtonColor.WHITE_WITH_BORDER}
       />
-      <BasketWrapper className="d-flex d-xl-none" onClick={addToBasket}>
+      <BasketWrapper
+        disabled={!canAddToBasket}
+        className="d-flex d-xl-none"
+        onClick={canAddToBasket ? () => addToBasket : undefined}
+      >
         <img src={BIcon} alt="BasketIcon" />
       </BasketWrapper>
     </ProductControlsWrapper>

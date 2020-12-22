@@ -21,6 +21,6 @@ export const H3 = styled.h3`
 `;
 
 export const H5 = styled.h5`
-  font-size: 18px;
+  font-size: 17px;
   font-weight: 800;
 `;
