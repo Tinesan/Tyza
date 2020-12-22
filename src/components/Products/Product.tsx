@@ -36,7 +36,7 @@ const Product = ({ product }: Props) => {
       <Styled.ProductPrice className="mb-2">
         {!stock ? "Нет в наличии" : `${price} руб.`}
       </Styled.ProductPrice>
-      <ProductControls id={id} />
+      {!!stock && <ProductControls id={id} />}
     </Styled.ProductWrapper>
   );
 };

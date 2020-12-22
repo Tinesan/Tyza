@@ -45,6 +45,7 @@ const ProductControls = ({ id }: Props) => {
       <Button
         text="В КОРЗИНУ"
         onClick={addToBasket}
+        disabled={!orderCount}
         size={ButtonSize.SMALL}
         className="d-none d-xl-block"
         color={ButtonColor.WHITE_WITH_BORDER}

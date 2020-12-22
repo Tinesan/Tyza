@@ -9,15 +9,17 @@ import { onError } from "@apollo/client/link/error";
 import { createUploadLink } from "apollo-upload-client";
 import React, { ReactNode, useContext } from "react";
 
+import { LOCATION_PROTOKOL } from "App";
+
 import { AuthContext } from "./AuthProvider";
 
 type Props = {
   children: ReactNode;
 };
-const { protocol, hostname } = window.location;
+const { hostname } = window.location;
 
 const uploadLink = createUploadLink({
-  uri: `${protocol}//${hostname}:5003/graphql/`,
+  uri: `${LOCATION_PROTOKOL}${hostname}:5003/graphql/`,
 });
 
 const errorLink = onError(({ graphQLErrors, networkError }) => {
