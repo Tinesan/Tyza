@@ -56,7 +56,7 @@ const ProductControls = ({ id }: Props) => {
       <BasketWrapper
         disabled={!canAddToBasket}
         className="d-flex d-xl-none"
-        onClick={canAddToBasket ? () => addToBasket : undefined}
+        onClick={canAddToBasket ? addToBasket : undefined}
       >
         <img src={BIcon} alt="BasketIcon" />
       </BasketWrapper>
