@@ -1,13 +1,14 @@
 import React, { useContext } from "react";
 import { Redirect, Route, Switch, useLocation } from "react-router-dom";
 
-import ModalRouter from "modals/ModalRouter";
-import AdminPage from "pages/AdminPage";
 import { AuthContext } from "providers/AuthProvider";
 
-import HomePage from "../pages/HomePage";
-import LoginPage from "../pages/LoginPage";
 import PrivateRoute from "./PrivateRoute";
+
+const HomePageLazy = React.lazy(() => import("../pages/HomePage"));
+const LoginPageLazy = React.lazy(() => import("../pages/LoginPage"));
+const AdminPageLazy = React.lazy(() => import("../pages/AdminPage"));
+const ModalRouterLazy = React.lazy(() => import("../modals/ModalRouter"));
 
 const AllRoutes = () => {
   const { authData } = useContext(AuthContext);
@@ -17,14 +18,14 @@ const AllRoutes = () => {
   return (
     <>
       <Switch>
-        <Route component={HomePage} exact path="/" />
-        <Route path="/login" exact component={LoginPage} />
+        <Route component={HomePageLazy} exact path="/" />
+        <Route path="/login" exact component={LoginPageLazy} />
         <PrivateRoute path="/admin" isAuth={isAuth}>
-          <AdminPage />
+          <AdminPageLazy />
         </PrivateRoute>
         <Route render={() => <Redirect to="/" />} />
       </Switch>
-      {isModal ? <Route path="/" component={ModalRouter} /> : null}
+      {isModal ? <Route path="/" component={ModalRouterLazy} /> : null}
     </>
   );
 };
