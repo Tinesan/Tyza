@@ -4,16 +4,12 @@ import { Redirect, Route } from "react-router-dom";
 type Props = {
   isAuth: boolean;
   path: string;
+  children: JSX.Element;
 };
 
-const AdminPageLazy = React.lazy(() => import("../pages/AdminPage"));
-
-const PrivateRoute = ({ isAuth, ...rest }: Props) => {
+const PrivateRoute = ({ isAuth, children, ...rest }: Props) => {
   return (
-    <Route
-      {...rest}
-      render={() => (!isAuth ? <AdminPageLazy /> : <Redirect to="/" />)}
-    />
+    <Route {...rest} render={() => (isAuth ? children : <Redirect to="/" />)} />
   );
 };
 export default PrivateRoute;

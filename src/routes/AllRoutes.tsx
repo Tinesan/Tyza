@@ -1,15 +1,15 @@
 import React, { Suspense, useContext } from "react";
+import { Spinner } from "react-bootstrap";
 import { Redirect, Route, Switch, useLocation } from "react-router-dom";
+import styled from "styled-components";
 
 import { AuthContext } from "providers/AuthProvider";
 
 import PrivateRoute from "./PrivateRoute";
-import { Spinner } from "react-bootstrap";
-import styled from "styled-components";
 
 const HomePageLazy = React.lazy(() => import("../pages/HomePage"));
 const LoginPageLazy = React.lazy(() => import("../pages/LoginPage"));
-
+const AdminPageLazy = React.lazy(() => import("../pages/AdminPage"));
 const ModalRouterLazy = React.lazy(() => import("../modals/ModalRouter"));
 
 const FallbackWrapper = styled.div`
@@ -35,7 +35,9 @@ const AllRoutes = () => {
       <Switch>
         <Route component={HomePageLazy} exact path="/" />
         <Route path="/login" exact component={LoginPageLazy} />
-        <PrivateRoute path="/admin" isAuth={isAuth} />
+        <PrivateRoute path="/admin" isAuth={isAuth}>
+          <AdminPageLazy />
+        </PrivateRoute>
         <Route render={() => <Redirect to="/" />} />
       </Switch>
       {isModal ? <Route path="/" component={ModalRouterLazy} /> : null}
