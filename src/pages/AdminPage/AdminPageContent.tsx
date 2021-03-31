@@ -3,7 +3,7 @@ import { Button, Card, Col, Container, Row } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 
-import Categories from "../../images/categories.png";
+import Categories from "../../images/categories.webp";
 
 const AdminPageWrapper = styled.section`
   padding-top: 40px;

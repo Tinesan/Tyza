@@ -1,8 +1,8 @@
 import { ListGroup } from "react-bootstrap";
 import styled from "styled-components";
 
-import Cat from "images/cat.png";
-import Dog from "images/dog.png";
+import Cat from "images/cat.webp";
+import Dog from "images/dog.webp";
 import { colors } from "ui/colors";
 import { device } from "ui/media";
 

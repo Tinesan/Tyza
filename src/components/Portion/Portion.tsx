@@ -3,7 +3,7 @@ import { Col, Container, Row } from "react-bootstrap";
 import { Element } from "react-scroll";
 import styled from "styled-components";
 
-import DogOnFoot from "images/dogOnFoot.png";
+import DogOnFoot from "images/dogOnFoot.webp";
 import { colors } from "ui/colors";
 import { device } from "ui/media";
 import { H2 } from "ui/Title";

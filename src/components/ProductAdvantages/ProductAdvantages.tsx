@@ -6,7 +6,7 @@ import LineWithCircleLB from "images/icons/lineWithCircleLB.svg";
 import LineWithCircleLT from "images/icons/lineWithCircleLT.svg";
 import LineWithCircleRB from "images/icons/lineWithCircleRB.svg";
 import LineWithCircleRT from "images/icons/lineWithCircleRT.svg";
-import ProductAdvantageBg from "images/productAdvantageBg.png";
+import ProductAdvantageBg from "images/productAdvantageBg.webp";
 import { colors } from "ui/colors";
 import { device } from "ui/media";
 import { H2 } from "ui/Title";
