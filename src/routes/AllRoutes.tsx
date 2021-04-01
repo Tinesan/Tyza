@@ -1,8 +1,8 @@
 import React, { Suspense, useContext } from "react";
-import { Spinner } from "react-bootstrap";
+
 import { Redirect, Route, Switch, useLocation } from "react-router-dom";
-import styled from "styled-components";
 import ModalPage from "../modals/ModalRouter";
+import Logo from "images/icons/logo.svg";
 
 import { AuthContext } from "providers/AuthProvider";
 
@@ -12,17 +12,10 @@ const HomePageLazy = React.lazy(() => import("../pages/HomePage"));
 const LoginPageLazy = React.lazy(() => import("../pages/LoginPage"));
 const AdminPageLazy = React.lazy(() => import("../pages/AdminPage"));
 
-const FallbackWrapper = styled.div`
-  display: flex;
-  flex-grow: 1;
-  align-items: center;
-  justify-content: center;
-`;
-
 const fallback = (
-  <FallbackWrapper>
-    <Spinner animation="grow" variant="primary" />
-  </FallbackWrapper>
+  <div id="float">
+    <img alt="logo" src={Logo} />
+  </div>
 );
 
 const AllRoutes = () => {

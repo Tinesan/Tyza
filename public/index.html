@@ -57,6 +57,36 @@
       rel="stylesheet"
     />
 
+    <style>
+      #float {
+        position: relative;
+        -webkit-animation: floatBubble 2s infinite normal;
+        animation: floatBubble 2s infinite normal;
+        transform: translate(-65px, 0);
+      }
+      @-webkit-keyframes floatBubble {
+        0% {
+          left: 53%;
+        }
+        50% {
+          left: 47%;
+        }
+        100% {
+          left: 53%;
+        }
+      }
+      @keyframes floatBubble {
+        0% {
+          left: 53%;
+        }
+        50% {
+          left: 47%;
+        }
+        100% {
+          left: 53%;
+        }
+      }
+    </style>
     <title>Натуральный корм для собак и кошек в Минске</title>
     <script>
       if (typeof window.__REACT_DEVTOOLS_GLOBAL_HOOK__ === "object") {
@@ -118,7 +148,11 @@
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root"></div>
+    <div id="root">
+      <div id="float">
+        <img alt="logo" src="./logo.svg" />
+      </div>
+    </div>
     <!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.
