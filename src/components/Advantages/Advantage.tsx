@@ -36,7 +36,7 @@ const Title = styled.h4`
   max-width: 150px;
 `;
 
-const Description = styled.p`
+const Description = styled.div`
   font-size: 14px;
   opacity: 0.5;
   margin: 0;

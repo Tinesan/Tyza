@@ -2,6 +2,7 @@ import React, { Suspense, useContext } from "react";
 import { Spinner } from "react-bootstrap";
 import { Redirect, Route, Switch, useLocation } from "react-router-dom";
 import styled from "styled-components";
+import ModalPage from "../modals/ModalRouter";
 
 import { AuthContext } from "providers/AuthProvider";
 
@@ -10,7 +11,6 @@ import PrivateRoute from "./PrivateRoute";
 const HomePageLazy = React.lazy(() => import("../pages/HomePage"));
 const LoginPageLazy = React.lazy(() => import("../pages/LoginPage"));
 const AdminPageLazy = React.lazy(() => import("../pages/AdminPage"));
-const ModalRouterLazy = React.lazy(() => import("../modals/ModalRouter"));
 
 const FallbackWrapper = styled.div`
   display: flex;
@@ -40,7 +40,7 @@ const AllRoutes = () => {
         </PrivateRoute>
         <Route render={() => <Redirect to="/" />} />
       </Switch>
-      {isModal ? <Route path="/" component={ModalRouterLazy} /> : null}
+      {isModal ? <Route path="/" component={ModalPage} /> : null}
     </Suspense>
   );
 };

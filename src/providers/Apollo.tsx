@@ -44,6 +44,7 @@ export const useAppApolloClient = () => {
   return new ApolloClient({
     link: from([errorLink, authLink, uploadLink]),
     cache: new InMemoryCache(),
+    connectToDevTools: process.env.NODE_ENV === "development",
   });
 };
 
