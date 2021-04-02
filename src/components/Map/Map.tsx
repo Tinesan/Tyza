@@ -1,7 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { Element } from "react-scroll";
-import { Placemark, Map as YMap, YMaps } from "react-yandex-maps";
 import styled from "styled-components";
 
 import MapPointer from "images/icons/mapPointer.svg";
@@ -49,18 +48,72 @@ const mapPlaces = [
       "д.Тарасово, ул. Олимпийская, 21А (продуктовый магазин «Star Market»)",
     coordinates: [53.922904, 27.374514],
   },
+  {
+    text: "г.Минсу, ул. Павла Шпилевского, 60 (зоомагазин «Хвастушки»)",
+    coordinates: [53.846545, 27.560223],
+  },
 ];
 
 const MapWrapper = styled.div`
   position: relative;
   height: 520px;
+  width: 100%;
 
   @media ${device.mobile} {
     height: 350px;
   }
 `;
 
+const loadYandexMap = (callback?: () => void) => {
+  const existingScript = document.getElementById("googleMaps");
+  if (!existingScript) {
+    const script = document.createElement("script");
+    script.src =
+      "https://api-maps.yandex.ru/2.1/?lang=ru_RU&amp;apikey=24886bfb-1145-4d92-9149-0816c030af7b";
+    script.id = "yandexMap";
+    document.body.appendChild(script);
+    script.onload = () => {
+      if (callback) callback();
+    };
+  }
+  if (existingScript && callback) callback();
+};
+
 const Map = () => {
+  useEffect(() => {
+    loadYandexMap(() => {
+      const ymaps = (window as MyWindow).ymaps;
+
+      ymaps.ready(function () {
+        const map = new ymaps.Map("yandex-map", {
+          zoom: 10,
+          center: [53.902284, 27.561831],
+          controls: ["zoomControl"],
+        });
+
+        if (map) {
+          ymaps.modules.require(["Placemark"], (Placemark: any) => {
+            mapPlaces.forEach(({ coordinates, text }) => {
+              const marker = new Placemark(
+                coordinates,
+                {
+                  hintContent: text,
+                  balloonContent: text,
+                },
+                {
+                  iconLayout: "default#image",
+                  iconImageHref: MapPointer,
+                  iconImageSize: [140, 50],
+                  iconImageOffset: [-70, -25],
+                }
+              );
+              map.geoObjects.add(marker);
+            });
+          });
+        }
+      });
+    });
+  }, []);
   return (
     <Element name="contacts">
       <Container>
@@ -72,38 +125,7 @@ const Map = () => {
           </Col>
         </Row>
       </Container>
-      <MapWrapper className="mt-3 mt-lg-5">
-        <YMaps query={{ lang: "ru_RU" }}>
-          <YMap
-            style={{
-              position: "absolute",
-              left: 0,
-              top: 0,
-              width: "100%",
-              height: "100%",
-            }}
-            defaultState={{ zoom: 10, center: [53.902284, 27.561831] }}
-          >
-            {mapPlaces.map(({ coordinates, text }) => (
-              <Placemark
-                options={{
-                  iconLayout: "default#image",
-                  iconImageHref: MapPointer,
-                  iconImageSize: [140, 50],
-                  iconImageOffset: [-70, -25],
-                }}
-                properties={{
-                  hintContent: text,
-                  balloonContent: text,
-                }}
-                key={text}
-                geometry={coordinates}
-                modules={["geoObject.addon.hint", "geoObject.addon.balloon"]}
-              />
-            ))}
-          </YMap>
-        </YMaps>
-      </MapWrapper>
+      <MapWrapper className="mt-3 mt-lg-5" id="yandex-map"></MapWrapper>
     </Element>
   );
 };
