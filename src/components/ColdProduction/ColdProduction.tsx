@@ -2,7 +2,7 @@ import React from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import styled from "styled-components";
 
-import ColdProd from "images/coldProd.webp";
+import ColdProd from "images/coldProd.png";
 import CurveLine from "images/icons/curveLine.svg";
 import { device } from "ui/media";
 import { H2 } from "ui/Title";
@@ -10,7 +10,7 @@ import { H2 } from "ui/Title";
 const ColdProductionWrapper = styled.section``;
 
 const ColdProductionBg = styled.div`
-  height: 220px;
+  height: 320px;
   background: url(${ColdProd}) no-repeat;
   background-size: contain;
 
