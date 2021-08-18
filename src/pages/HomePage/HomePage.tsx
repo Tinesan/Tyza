@@ -17,6 +17,8 @@ import Cooperation from "components/Сooperation";
 
 const HomePageWrapper = styled.div`
   position: relative;
+  display: flex;
+  flex-direction: column;
 `;
 
 const HomePage = () => {
@@ -24,7 +26,9 @@ const HomePage = () => {
     <HomePageWrapper>
       <Header />
       <Divider className="d-none d-md-block" size={80} />
-      <Advantages />
+      <div className="d-none d-md-block">
+        <Advantages />
+      </div>
       <Divider className="d-none d-md-block" size={100} />
       <ProductAdvantages />
       <Divider size={100} />
@@ -32,6 +36,9 @@ const HomePage = () => {
       <Divider className="d-none d-md-block" size={50} />
       <Products />
       <Divider className="d-none d-md-block" size={100} />
+      <div className="d-block d-md-none">
+        <Advantages />
+      </div>
       <Portion />
       <Divider size={40} />
       <Reviews />

@@ -8,7 +8,6 @@ import Truck from "images/icons/delivery-truck.svg";
 import Like from "images/icons/like.svg";
 import Store from "images/icons/store.svg";
 import { colors } from "ui/colors";
-import { device } from "ui/media";
 import { H2 } from "ui/Title";
 
 import Advantage from "./Advantage";
@@ -62,11 +61,7 @@ const ADVANTAGES: {
   },
 ];
 
-export const AdvantagesWrapper = styled.section`
-  @media ${device.mobile} {
-    display: none;
-  }
-`;
+export const AdvantagesWrapper = styled.section``;
 
 export const TitleWrapper = styled.div`
   margin-bottom: 40px;
@@ -93,7 +88,7 @@ const Advantages = () => {
                 key={key}
                 lg={3}
                 md={6}
-                className={inx < 2 ? "mb-md-3 mb-lg-0" : ""}
+                className={(inx < 2 ? "mb-md-3 mb-lg-0" : "") + " mb-3 mb-md-0"}
               >
                 <Advantage {...advantage} />
               </Col>
