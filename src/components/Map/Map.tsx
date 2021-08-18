@@ -83,7 +83,7 @@ const Map = () => {
       ymaps.ready(function () {
         const map = new ymaps.Map("yandex-map", {
           zoom: 10,
-          center: [53.902284, 27.561831],
+          center: [53.859284, 27.561831],
           controls: ["zoomControl"],
         });
 
