@@ -5,7 +5,7 @@ import { Row } from "react-bootstrap";
 import { ListGroup } from "react-bootstrap";
 import styled from "styled-components";
 
-import { LOCATION_PROTOKOL } from "App";
+
 import { ProductItemFragment } from "generated/graphql";
 import { AuthContext } from "providers/AuthProvider";
 
@@ -47,7 +47,7 @@ const ProductItem = ({
         <Col className="justify-content-end d-flex">
           <ProductImage className="mr-3">
             {image && (
-              <img src={`${LOCATION_PROTOKOL}${image}`} alt="productImage" />
+                <img src={`${image}`} alt="productImage" />
             )}
           </ProductImage>
           <Form.File

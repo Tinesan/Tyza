@@ -17,7 +17,7 @@ type Props = {
 const { hostname } = window.location;
 
 const uploadLink = createUploadLink({
-  uri: `https://${hostname}:5003/graphql/`,
+  uri: `/graphql/`,
 });
 
 const errorLink = onError(({ graphQLErrors, networkError }) => {

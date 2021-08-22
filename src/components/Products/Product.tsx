@@ -1,6 +1,6 @@
 import React from "react";
 
-import { LOCATION_PROTOKOL } from "App";
+
 import { ProductItemFragment } from "generated/graphql";
 import TestImage from "images/icons/logo.svg";
 import { H5 } from "ui/Title";
@@ -15,7 +15,7 @@ type Props = {
 const Product = ({ product }: Props) => {
   const { id, name, description, costPer, price, images, stock } = product;
   const image = images[images.length - 1]?.uri;
-  const imageUrl = image ? `${LOCATION_PROTOKOL}${image}` : TestImage;
+  const imageUrl = image ? `${image}` : TestImage;
 
   return (
     <Styled.ProductWrapper>

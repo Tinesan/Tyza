@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-import { LOCATION_PROTOKOL } from "App";
+
 import Counter from "components/Counter";
 import { BasketProduct } from "hooks/useBasketProduct";
 import DeleteIcon from "images/icons/deleteIcon.svg";
@@ -50,7 +50,7 @@ const DeleteIconWrapper = styled.div`
 const BasketItem = ({ data, onDelete, onChange }: Props) => {
   const { id, images, price, orderQuantity, name } = data;
   const image = images[images.length - 1]?.uri;
-  const imageUrl = image ? `${LOCATION_PROTOKOL}${image}` : TestImage;
+  const imageUrl = image ? `${image}` : TestImage;
   const totalPrice = +(price * orderQuantity).toFixed(2);
 
   return (
