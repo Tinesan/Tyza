@@ -12,6 +12,7 @@ export const colors: { [key in COLORS]: string } = {
   roseWhite: "#FFFCFC",
   ebb: "#ECE8E5",
   vividTangerine: "#FF8C85",
+  pearlBush: "#EBDFD7",
 };
 
 type COLORS =
@@ -26,5 +27,6 @@ type COLORS =
   | "mercury"
   | "roseWhite"
   | "dawnPink"
+  | "pearlBush"
   | "seashellPeach"
   | "vividTangerine";

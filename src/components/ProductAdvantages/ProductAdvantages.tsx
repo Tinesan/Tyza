@@ -2,20 +2,35 @@ import React from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import styled from "styled-components";
 
+import BottonLine from "images/icons/bottomLine.svg";
 import LineWithCircleLB from "images/icons/lineWithCircleLB.svg";
 import LineWithCircleLT from "images/icons/lineWithCircleLT.svg";
 import LineWithCircleRB from "images/icons/lineWithCircleRB.svg";
 import LineWithCircleRT from "images/icons/lineWithCircleRT.svg";
 import ProductAdvantageBg from "images/productAdvantageBg.webp";
-import { colors } from "ui/colors";
 import { device } from "ui/media";
 import { H2 } from "ui/Title";
 
 const ProductAdvantagesWrapper = styled.section`
+  position: relative;
   padding-bottom: 80px;
-  background: url(${ProductAdvantageBg}) no-repeat ${colors.dawnPink};
+  background: url(${ProductAdvantageBg}) no-repeat;
   background-position: 50% bottom;
   background-size: 400px auto;
+
+  &::before {
+    content: "";
+    display: block;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: -1;
+    height: 5px;
+    width: 100%;
+    background: url(${BottonLine});
+    background-position: 50% bottom;
+    background-size: 100% auto;
+  }
 
   @media ${device.tablet} {
     background-position: 100% bottom;

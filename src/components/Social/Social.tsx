@@ -40,7 +40,7 @@ const Social = ({ className }: Props) => {
         <a
           target="_blank"
           rel="noopener noreferrer"
-          href="https://www.instagram.com/pitaniedog/?r=nametag"
+          href="https://www.instagram.com/kotdapes.by/"
         >
           <img src={Instagram} alt="VK" />
         </a>

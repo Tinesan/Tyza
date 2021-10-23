@@ -2,6 +2,7 @@ import React, { useCallback } from "react";
 import styled from "styled-components";
 
 import { colors } from "ui/colors";
+import { device } from "ui/media";
 
 type Props = {
   value: number;
@@ -40,26 +41,29 @@ const CountButton = styled.button`
   &:disabled {
     opacity: 0.5;
   }
+
+  @media ${device.mobile} {
+    width: 24px;
+    height: 24px;
+    align-items: baseline;
+  }
 `;
 
 const CounterValue = styled.div`
   text-align: center;
 
   input {
-    width: 32px;
+    width: 26px;
     height: 20px;
     font-size: 16px;
-    margin: 0 3px;
     color: ${colors.coffee};
-    border: 1px solid ${colors.coffee};
-    border-radius: 10px;
-    padding: 0px 5px;
+    border: none;
     text-align: center;
     transition-duration: 0.3s;
+    background: transparent;
 
     &:focus {
       outline: none;
-      box-shadow: 0 0 3px rgba(120, 99, 84, 0.5);
     }
   }
 

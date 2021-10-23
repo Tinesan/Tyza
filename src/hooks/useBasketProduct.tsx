@@ -5,6 +5,23 @@ import { useContext, useMemo } from "react";
 
 export type BasketProduct = ProductItemFragment & { orderQuantity: number };
 
+function shuffle(array: ProductItemFragment[]): ProductItemFragment[] {
+  let currentIndex = array.length,
+    randomIndex;
+
+  while (currentIndex !== 0) {
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex--;
+
+    [array[currentIndex], array[randomIndex]] = [
+      array[randomIndex],
+      array[currentIndex],
+    ];
+  }
+
+  return array;
+}
+
 const useBasketProduct = () => {
   const { basketValues } = useContext(BasketContext);
   const { products } = useContext(DataContext);
@@ -26,7 +43,15 @@ const useBasketProduct = () => {
     return basketListData;
   }, [basketValues, products]);
 
-  return { basketProducts };
+  const suggestions: ProductItemFragment[] = useMemo(() => {
+    return shuffle(
+      products.filter(
+        ({ id, stock }) => stock && !basketProducts.find((bP) => bP.id === id)
+      )
+    );
+  }, [basketProducts, products]);
+
+  return { basketProducts, suggestions };
 };
 
 export default useBasketProduct;

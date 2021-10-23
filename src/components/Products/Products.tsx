@@ -7,6 +7,8 @@ import { DataContext } from "providers/DataProvider";
 import { H2 } from "ui/Title";
 
 import Product from "./Product";
+import styled from "styled-components";
+import { device } from "ui/media";
 
 type PoductsAndACategories = {
   categories: CategoryItemFragment[];
@@ -54,6 +56,22 @@ const transformProductsForClient = ({
   return productsWithCategoryName;
 };
 
+const StyledRow = styled(Row)`
+  margin-top: -23px;
+
+  @media ${device.mobile} {
+    margin-top: 0;
+  }
+`;
+
+const StyledCol = styled(Col)`
+  padding: 0 6px;
+
+  @media ${device.mobile} {
+    padding: 0;
+  }
+`;
+
 const Products = () => {
   const { products, categories } = useContext(DataContext);
   const productsWithCategoryName = transformProductsForClient({
@@ -70,26 +88,26 @@ const Products = () => {
               <Col>
                 <Row>
                   <Col>
-                    <H2 className="amatic coffee-color text-center">
+                    <H2 className="amatic coffee-color text-center mb-4 mb-xl-0">
                       {categoryName}
                     </H2>
                   </Col>
                 </Row>
-                <Row style={{ marginTop: "-23px" }}>
+                <StyledRow>
                   {products.map((product: ProductItemFragment, inx) => {
                     return (
-                      <Col
+                      <StyledCol
                         xs={6}
                         sm={4}
                         md={3}
-                        className="mt-5"
+                        className="mt-0 mt-xl-5"
                         key={product.id}
                       >
                         <Product product={product} />
-                      </Col>
+                      </StyledCol>
                     );
                   })}
-                </Row>
+                </StyledRow>
               </Col>
             </Row>
           );

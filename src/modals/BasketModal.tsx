@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import styled from "styled-components";
 
 import { BasketList } from "components/Basket";
@@ -12,6 +12,8 @@ import { device } from "ui/media";
 import { H3 } from "ui/Title";
 
 import useModal from "./hooks";
+import { Row, Col, Container } from "react-bootstrap";
+import Product from "components/Products/Product";
 
 type Props = {
   onClose: () => void;
@@ -28,6 +30,23 @@ const BasketListWrapper = styled.div`
   border-bottom: 2px solid ${colors.ebb};
   @media ${device.mobile} {
     padding-bottom: 0px;
+  }
+`;
+
+const Suggestions = styled(Container)`
+  display: flex;
+  flex-direction: column;
+  margin-top: 30px;
+`;
+
+const SuggestionsTitle = styled.h2`
+  font-size: 20px;
+  margin-bottom: 8px;
+  color: #737373;
+  font-weight: 600;
+
+  @media ${device.mobile} {
+    text-align: center;
   }
 `;
 
@@ -71,13 +90,28 @@ const ImageWrapper = styled.div`
   }
 `;
 
+const StyledCol = styled(Col)`
+  padding: 0 6px;
+
+  @media ${device.mobile} {
+    padding: 0;
+  }
+`;
+
+const StyledRow = styled(Row)`
+  margin-left: -21px;
+  margin-right: -21px;
+`;
+
 const BasketModal = ({ onClose }: Props) => {
   const { openModal } = useModal();
   const { totalPrice } = useContext(BasketContext);
-  const { basketProducts } = useBasketProduct();
+  const { basketProducts, suggestions } = useBasketProduct();
   const isBasketEmpty = !basketProducts.length;
   const isPriceMoreMinimum = totalPrice >= 25;
   const canCreateOrder = !isBasketEmpty && isPriceMoreMinimum;
+  const [currentSuggestions] = useState(suggestions);
+
   return (
     <BasketModalWrapper>
       <H3
@@ -118,6 +152,25 @@ const BasketModal = ({ onClose }: Props) => {
           />
         </ButtonWrapper>
       </ModalFooter>
+      <Suggestions>
+        <StyledRow>
+          <StyledCol>
+            <SuggestionsTitle>Добавьте к вашему заказу: </SuggestionsTitle>
+          </StyledCol>
+        </StyledRow>
+        <StyledRow>
+          {currentSuggestions.slice(0, 4).map((p, inx) => (
+            <StyledCol
+              className={inx === 3 ? "d-block d-md-none" : ""}
+              xs={6}
+              md={4}
+              key={p.id}
+            >
+              <Product short product={p} />
+            </StyledCol>
+          ))}
+        </StyledRow>
+      </Suggestions>
     </BasketModalWrapper>
   );
 };

@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 import { colors } from "ui/colors";
+import { device } from "ui/media";
 
 export const ProductTitle = styled.div`
   opacity: 0.55;
@@ -13,11 +14,19 @@ export const ProductWrapper = styled.div`
   width: 100%;
   height: 100%;
   overflow: hidden;
+  box-shadow: 1px 0 0 0 ${colors.pearlBush}, 0 1px 0 0 ${colors.pearlBush},
+    1px 1px 0 0 ${colors.pearlBush}, 1px 0 0 0 ${colors.pearlBush} inset,
+    0 1px 0 0 ${colors.pearlBush} inset;
+  padding: 15px 10px;
+  border-radius: 10px;
+  transition-duration: 0.3s;
 
   &:hover {
-    ${ProductTitle} {
-      opacity: 0.7;
-    }
+    background-color: rgba(235, 223, 215, 0.35);
+  }
+
+  @media ${device.mobile} {
+    border-radius: 0px;
   }
 `;
 

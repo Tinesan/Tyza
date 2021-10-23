@@ -30,16 +30,16 @@ const HomePage = () => {
         <Advantages />
       </div>
       <Divider className="d-none d-md-block" size={100} />
-      <ProductAdvantages />
-      <Divider size={100} />
       <ColdProduction />
       <Divider className="d-none d-md-block" size={50} />
       <Products />
       <Divider className="d-none d-md-block" size={100} />
       <div className="d-block d-md-none">
+        <Divider size={80} />
         <Advantages />
       </div>
       <Portion />
+      <ProductAdvantages />
       <Divider size={40} />
       <Reviews />
       <Divider size={80} />
