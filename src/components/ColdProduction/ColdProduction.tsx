@@ -32,7 +32,7 @@ const ColdProduction = () => {
   return (
     <ColdProductionWrapper>
       <Container>
-        <Row className="al clign-items-center">
+        <Row className="al align-items-center">
           <Col xs={12} lg={6}>
             <ColdProductionBg />
           </Col>
