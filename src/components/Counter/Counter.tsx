@@ -54,7 +54,6 @@ const CounterValue = styled.div`
 
   input {
     width: 26px;
-    height: 20px;
     font-size: 16px;
     color: ${colors.coffee};
     border: none;
