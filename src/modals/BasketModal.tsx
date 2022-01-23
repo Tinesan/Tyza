@@ -103,12 +103,16 @@ const StyledRow = styled(Row)`
   margin-right: -21px;
 `;
 
+export const DELIVERY_PRICE = 5;
+export const MIN_PRICE_FOR_ORDER = 30;
+export const PRICE_FOR_FREE_DELIVERY = 45;
+
 const BasketModal = ({ onClose }: Props) => {
   const { openModal } = useModal();
   const { totalPrice } = useContext(BasketContext);
   const { basketProducts, suggestions } = useBasketProduct();
   const isBasketEmpty = !basketProducts.length;
-  const isPriceMoreMinimum = totalPrice >= 25;
+  const isPriceMoreMinimum = totalPrice >= MIN_PRICE_FOR_ORDER;
   const canCreateOrder = !isBasketEmpty && isPriceMoreMinimum;
   const [currentSuggestions] = useState(suggestions);
 
@@ -134,7 +138,7 @@ const BasketModal = ({ onClose }: Props) => {
               <BasketResult />
             ) : (
               <span className="coffee-color">
-                Минимальная сумма заказа - 25 рублей
+                Минимальная сумма заказа - {MIN_PRICE_FOR_ORDER} рублей
               </span>
             )}
           </ResultWrapper>

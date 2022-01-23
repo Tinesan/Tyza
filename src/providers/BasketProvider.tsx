@@ -1,3 +1,4 @@
+import { DELIVERY_PRICE, PRICE_FOR_FREE_DELIVERY } from "modals/BasketModal";
 import React, { ReactNode, useContext, useMemo, useState } from "react";
 
 import { DataContext } from "./DataProvider";
@@ -58,10 +59,10 @@ const BasketProvider = ({ children }: Props) => {
   }, [basketValues, products]);
 
   const deliveryPrice: number = useMemo(() => {
-    if (totalPrice >= 40) {
+    if (totalPrice >= PRICE_FOR_FREE_DELIVERY) {
       return 0;
     } else {
-      return 4;
+      return DELIVERY_PRICE;
     }
   }, [totalPrice]);
 

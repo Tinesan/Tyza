@@ -11,6 +11,11 @@ import { colors } from "ui/colors";
 import { H2 } from "ui/Title";
 
 import Advantage from "./Advantage";
+import {
+  DELIVERY_PRICE,
+  MIN_PRICE_FOR_ORDER,
+  PRICE_FOR_FREE_DELIVERY,
+} from "modals/BasketModal";
 
 const UnderlinedText = styled.p`
   margin-bottom: 0;
@@ -51,8 +56,7 @@ const ADVANTAGES: {
   {
     icon: Truck,
     title: "Доставка по Минску",
-    description:
-      "При заказе от 40 руб. доставка осуществляется бесплатно. При заказе от 25 руб. стоимость доставки составляет 4 руб.",
+    description: `При заказе от ${PRICE_FOR_FREE_DELIVERY} руб. доставка осуществляется бесплатно. При заказе от ${MIN_PRICE_FOR_ORDER} руб. стоимость доставки составляет ${DELIVERY_PRICE} руб.`,
   },
   {
     icon: Store,

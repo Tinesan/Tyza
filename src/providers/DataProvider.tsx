@@ -1,6 +1,10 @@
 import React, { ReactNode, useMemo } from "react";
 
-import { CategoryItemFragment, ProductItemFragment, useCategoriesAndProductsQuery } from "generated/graphql";
+import {
+  CategoryItemFragment,
+  ProductItemFragment,
+  useCategoriesAndProductsQuery,
+} from "generated/graphql";
 
 type Props = {
   children: ReactNode;
@@ -32,7 +36,9 @@ export function sorterFunction<T extends { name: string }>(a: T, b: T) {
 
 const DataProvider = ({ children }: Props) => {
   const { data, refetch, loading } = useCategoriesAndProductsQuery();
-  const { products, categories } = useMemo(() => {
+  const { products, categories } = useMemo<
+    Pick<DataContext, "products" | "categories">
+  >(() => {
     if (data?.listCategory && data.listProduct) {
       const { listCategory, listProduct } = data;
       return {
