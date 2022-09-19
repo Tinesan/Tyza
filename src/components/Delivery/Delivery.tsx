@@ -42,7 +42,7 @@ const Delivery = () => {
   return (
     <DeliveryWrapper>
       <Container>
-        <Row className="align-items-center">
+        <Row className="align-items-center mb-4 pb-2">
           <Col md={9}>
             <div className="mb-3">
               <p className="mb-2 font-weight-bold">Доставка по городу Минск:</p>
@@ -61,6 +61,25 @@ const Delivery = () => {
           </Col>
           <Col className="d-none d-md-block" md={3}>
             <DeliveryBg />
+          </Col>
+        </Row>
+        <Row>
+          <Col md={10}>
+            <div>
+              <p className="mb-2 font-weight-bold">
+                Доставка по городам Барановичи, Белыничи, Березино, Бобруйск,
+                Дзержинск, Клецк, Кличев, Копыль, Ляховичи, Марьина горка,
+                Могилёв, Несвиж, Осиповичи, Слуцк, Старые дороги, Столбцы,
+                Фаниполь, Червень и населенным пунктам расположенным рядом:
+              </p>
+              <p className="mb-2">Миминальная сумма заказа 85 руб.</p>
+              <p className="mb-4 pb-2 font-weight-bold">
+                Дата и время доставки оговаривается с менеджером.
+              </p>
+              <p className="mb-0 font-weight-bold">
+                Доставка по всей РБ оговаривается с менеджером.
+              </p>
+            </div>
           </Col>
         </Row>
       </Container>

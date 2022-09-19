@@ -79,7 +79,7 @@ const Footer = () => {
               <H3 className="amatic  mb-2 mb-lg-4">Время работы</H3>
               <div>
                 <FooterText>Пн-Сб: 10.00–20.00</FooterText>
-                <FooterText>Вс: выходной</FooterText>
+                <FooterText>Вс: 10.00-18.00</FooterText>
               </div>
             </Col>
             <Col xs={12} className="mb-3 mb-lg-0" lg={4} xl="auto">

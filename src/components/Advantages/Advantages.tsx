@@ -27,7 +27,11 @@ const UnderlinedText = styled.p`
 
 const StoreDescription = (
   <>
-    <span>Возможность приобрести корм в ближайших от вас пунктах продаж.</span>
+    <span>
+      Возможность приобрести нашу продукцию в ближайших от вас пунктах продаж:
+      продовольственных магазинах,продуктовых рынках, зоомагазинах и
+      ветеринарных клиниках.
+    </span>
     <Link to="contacts" offset={-30} spy smooth duration={1000}>
       <UnderlinedText className="m-t-2">
         Все адреса пунктов продаж
@@ -39,7 +43,9 @@ const StoreDescription = (
 const ADVANTAGES: {
   icon: string;
   title: string;
+  secondTitle?: string;
   description: ReactNode;
+  secondDescription?: string;
 }[] = [
   {
     icon: Like,
@@ -57,6 +63,8 @@ const ADVANTAGES: {
     icon: Truck,
     title: "Доставка по Минску",
     description: `При заказе от ${PRICE_FOR_FREE_DELIVERY} руб. доставка осуществляется бесплатно. При заказе от ${MIN_PRICE_FOR_ORDER} руб. стоимость доставки составляет ${DELIVERY_PRICE} руб.`,
+    secondTitle: "Доставка по всей РБ",
+    secondDescription: "Дата и время оговариваются с менеджером.",
   },
   {
     icon: Store,

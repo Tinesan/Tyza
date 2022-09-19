@@ -35,16 +35,20 @@ const useModal = () => {
 
   const modalQueryParams = useMemo(() => {
     if (!search) return {};
-    const correactedSearch = search.substring(1);
-    const result = JSON.parse(
-      '{"' +
-        decodeURI(correactedSearch)
-          .replace(/"/g, '\\"')
-          .replace(/&/g, '","')
-          .replace(/=/g, '":"') +
-        '"}'
-    );
-    return result;
+    try {
+      const correactedSearch = search.substring(1);
+      const result = JSON.parse(
+        '{"' +
+          decodeURI(correactedSearch)
+            .replace(/"/g, '\\"')
+            .replace(/&/g, '","')
+            .replace(/=/g, '":"') +
+          '"}'
+      );
+      return result;
+    } catch (e) {
+      console.error(e);
+    }
   }, [search]);
 
   return { openModal, closeModal, modalQueryParams };

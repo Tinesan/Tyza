@@ -14,7 +14,6 @@ import { AuthContext } from "./AuthProvider";
 type Props = {
   children: ReactNode;
 };
-const { hostname } = window.location;
 
 const uploadLink = createUploadLink({
   uri: `/graphql/`,

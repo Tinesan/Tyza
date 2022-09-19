@@ -6,7 +6,9 @@ import { colors } from "ui/colors";
 type Props = {
   icon: string;
   title: string;
+  secondTitle?: string;
   description: ReactNode;
+  secondDescription?: string;
 };
 
 const AdvantageWrapper = styled.div`
@@ -33,7 +35,6 @@ const Title = styled.h4`
   font-weight: 600;
   line-height: 1.45;
   opacity: 0.55;
-  max-width: 150px;
 `;
 
 const Description = styled.div`
@@ -42,14 +43,24 @@ const Description = styled.div`
   margin: 0;
 `;
 
-const Advantage = ({ icon, title, description }: Props) => {
+const Advantage = ({
+  icon,
+  title,
+  secondTitle,
+  description,
+  secondDescription,
+}: Props) => {
   return (
     <AdvantageWrapper>
-      <IconWrapper className="mb-4">
-        <img src={icon} alt={title} />
-      </IconWrapper>
       <Title className="mb-3">{title}</Title>
       <Description className="mb-3">{description}</Description>
+      {secondTitle && <Title className="mb-3">{secondTitle}</Title>}
+      {secondDescription && (
+        <Description className="mb-2">{secondDescription}</Description>
+      )}
+      <IconWrapper className="mt-auto">
+        <img src={icon} alt={title} />
+      </IconWrapper>
     </AdvantageWrapper>
   );
 };
